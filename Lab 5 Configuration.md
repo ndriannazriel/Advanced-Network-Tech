@@ -39,6 +39,7 @@ transport input ssh
 ssh admin@142.99.2.1
 
 ## Reconfigure DSW4 After Changing
+ssh -i "gns3-key.pem" ubuntu@publicIp
 
 vtp mode client
 vtp domain ANDRIAN
