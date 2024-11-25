@@ -1,4 +1,6 @@
-## PEERING ISP WITH GROUP MEMBERS USING EBGP
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
+## Peering ISP with group members using ebgp
 
 ### ISP1 (MY ISP)
 router bgp 19
