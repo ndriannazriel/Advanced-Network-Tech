@@ -5,6 +5,10 @@
 http://20.18.140.203:8003/7d67327e-ac09-11ef-8db0-6045bd528045/gns3vm.ovpn
 ssh -i "GNS3ServerKey.pem" ndriannazriel04@20.27.221.185 (Azure)
 
+cd /tmp
+curl https://raw.githubusercontent.com/GNS3/gns3-server/master/scripts/remote-install.sh > gns3-remote-install.sh
+sudo bash gns3-remote-install.sh --with-openvpn --with-iou --with-i386-repository
+
 ## Peering ISP with group members using ebgp
 
 ### ISP1 (MY ISP)
