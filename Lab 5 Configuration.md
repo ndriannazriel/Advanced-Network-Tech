@@ -1,5 +1,6 @@
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
+ Download http://13.239.183.140:8003/19453960-ab52-11ef-a39b-7fda3edd6f95/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
 ## Peering ISP with group members using ebgp
 
 ### ISP1 (MY ISP)
@@ -39,7 +40,7 @@ transport input ssh
 ssh admin@142.99.2.1
 
 ## Reconfigure DSW4 After Changing
-ssh -i "gns3-key.pem" ubuntu@13.239.26.61
+ssh -i "GNS3Server_key.pem" ndriannazriel04@20.18.140.203 (Azure)
 
 vtp mode client
 vtp domain ANDRIAN
