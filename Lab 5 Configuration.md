@@ -98,6 +98,7 @@ int vlan 102
 ip helper-address (ip on the interface connecting to R2)
 
 ##### R2
+ip dhcp excluded-address 142.99.2.1 142.99.2.9
 ip dhcp pool vlan102
 network 142.99.2.0 255.255.255.128
 default-router 142.99.2.3 (VIP for VLAN102) - Tells devices in VLAN102 to use this as DG
@@ -105,7 +106,6 @@ default-router 142.99.2.3 (VIP for VLAN102) - Tells devices in VLAN102 to use th
 **Optional**
 dns-server 8.8.8.8
 domain-name example.com
-ip dhcp excluded-address 
 
 show ip dhcp binding
 
