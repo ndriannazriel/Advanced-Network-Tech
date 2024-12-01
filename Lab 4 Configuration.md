@@ -110,6 +110,9 @@ The 100.100.99.4/30 network can be ignored.
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067445000f2hdf4.png)
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067251000vgh91h.png)
 
+show ip route
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067769000dejgja.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067808000gjx18q.png)
 
 
 
