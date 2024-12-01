@@ -59,6 +59,8 @@ passive-interface g2/0
 **Verify**
 show ip nat translations
 show ip nat statistics
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173306718100009z3b3.png)
+
 
 ## Remove static route to ISP and configure eBGP
 
@@ -97,11 +99,21 @@ network 2001:100:100:99::/127
 network 2001:150:99::/48
 
 **VERIFY**
+show ip bgp 
 show ip bgp summary
+show bgp ipv6 unicast 
 show bgp ipv6 unicast summary
 show bgp ipv6 neighbors
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067387000m3uouj.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067409000sb781j.png)
 
- ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17330663210008xlkbm.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067445000f2hdf4.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067251000vgh91h.png)
+
+
+
+
+**Random Note**  ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17330663210008xlkbm.png)
 When you see the same network 100.100.99.0/30 listed twice in the BGP table—one entry with a Next Hop of 100.100.99.2 (learned from a BGP neighbor) and one more the empty one is locally originated(The route is also being advertised locally by the router itself)
 ==0.0.0.0 also means that this device is the one sending out bgp packets to the bgp neighbors==
 
