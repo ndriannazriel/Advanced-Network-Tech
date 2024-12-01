@@ -105,6 +105,7 @@ show bgp ipv6 unicast summary
 show bgp ipv6 neighbors
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067387000m3uouj.png)
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067409000sb781j.png)
+The 100.100.99.4/30 network can be ignored.
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067445000f2hdf4.png)
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067251000vgh91h.png)
