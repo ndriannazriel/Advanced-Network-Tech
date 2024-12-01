@@ -89,8 +89,7 @@ bgp router-id 2.2.2.2
 neighbor 100.100.99.1 remote-as 29
 network 100.100.99.0 mask 255.255.255.252
 network 150.99.0.0 mask 255.255.0.0
-
-router bgp 19
+==Ipv6==
 bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:100:100:99:: remote-as 29
