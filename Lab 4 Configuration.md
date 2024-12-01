@@ -1,4 +1,5 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733065059000drn94b.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733066082000m0jl3o.png)
 
 ## Add Net 105 (VLAN 105)
 ##### R3 
@@ -65,4 +66,42 @@ show ip nat statistics
 no ip route 150.100.0.0 255.255.0.0 100.100.99.2
 no ipv6 route 2001:150:100::/48 2001:100:100:99::1
 
+router bgp 29
+bgp router-id 1.1.1.1
+neighbor 100.100.99.2 remote-as 19
+network 142.99.0.0 mask 255.255.0.0
+network 100.100.99.0 mask 255.255.255.252
+==Ipv6==
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:100:100:99::1 remote-as 19
+neighbor 2001:100:100:99::1 activate
+network 2001:142:99::/48 
+network 2001:100:100:99::/127 
+
+==Make sure 150.99.0.0/16 Null route is configured first so that bgp knows that route exists(a route must first exist in the routing table for bgp to take place)==
+
+##### ISP
+router bgp 19
+bgp router-id 2.2.2.2 
+neighbor 100.100.99.1 remote-as 29
+network 100.100.99.0 mask 255.255.255.252
+network 150.99.0.0 mask 255.255.0.0
+
+router bgp 19
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:100:100:99:: remote-as 29
+neighbor 2001:100:100:99:: activate
+network 2001:100:100:99::/127
+network 2001:150:99::/48
+
+**VERIFY**
+show ip bgp summary
+show bgp ipv6 unicast summary
+show bgp ipv6 neighbors
+
+ ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17330663210008xlkbm.png)
+When you see the same network 100.100.99.0/30 listed twice in the BGP table—one entry with a Next Hop of 100.100.99.2 (learned from a BGP neighbor) and one more the empty one is locally originated(The route is also being advertised locally by the router itself)
+==0.0.0.0 also means that this device is the one sending out bgp packets to the bgp neighbors==
 
