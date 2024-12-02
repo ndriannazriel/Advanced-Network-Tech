@@ -72,6 +72,19 @@ network 142.99.100.1 0.0.0.0 area 0
 passive-interface g4/0
 default-information originate always - ==This basically installs a default route into every router that is connected through ospf.==
 
+int g2/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 1 md5 secret1
+int g3/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 2 md5 secret2
+int g1/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 3 md5 secret3
+
+ipv6 router ospf 1
+router-id 1.1.1.1
+
 ##### R2
 router ospf 1
 router-id 4.4.4.4
@@ -81,6 +94,18 @@ network 142.99.3.0 0.0.0.3 area 0
 network 142.99.100.2 0.0.0.0 area 0 - ==loopback address of R2==
 network 142.99.3.20 0.0.0.3 area 50 
 
+int Port-channel 1
+ip ospf authentication message-digest
+ip ospf message-digest-key 4 md5 secret4
+int g2/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 1 md5 secret1
+int g3/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 2 md5 secret2
+int g1/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 3 md5 secret3
 ##### R3
 router ospf 1
 router-id 3.3.3.3
@@ -88,6 +113,9 @@ network 142.99.3.20 0.0.0.3 area 50
 network 142.99.3.24 0.0.0.3 area 50
 passive-interface g3/0
 
+int Port-channel 1
+ip ospf authentication message-digest
+ip ospf message-digest-key 4 md5 secret4
 ##### DSW1
 router ospf 1
 router-id 2.2.2.2 
@@ -96,7 +124,16 @@ network 142.99.3.16 0.0.0.3 area 0
 network 142.99.2.128 0.0.0.127 area 0
 network 142.99.2.0 0.0.0.127 area 0
 network 142.99.0.0 0.0.1.0 area 0 
+passive-interface vlan 101
+passive-interface vlan 102
+passive-interface vlan 103
 
+int f0/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 3 md5 secret3
+int f0/1
+ip ospf authentication message-digest
+ip ospf message-digest-key 2 md5 secret2
 ##### DSW2
 router ospf 1
 router-id 1.1.1.1 
@@ -105,17 +142,30 @@ network 142.99.3.12 0.0.0.3 area 0
 network 142.99.2.128 0.0.0.127 area 0
 network 142.99.2.0 0.0.0.127 area 0
 network 142.99.0.0 0.0.1.0 area 0
+passive-interface vlan 101
+passive-interface vlan 102
+passive-interface vlan 103
 
+int f0/0
+ip ospf authentication message-digest
+ip ospf message-digest-key 3 md5 secret3
+int f0/1
+ip ospf authentication message-digest
+ip ospf message-digest-key 2 md5 secret2
 ##### ESW5
 router ospf 1
 router-id 6.6.6.6 
 network 142.99.4.0 0.0.0.63 area 50(VLAN 104)
 network 142.99.3.24 0.0.0.3 area 50
+passive-interface vlan 104
 
 **Verify**
 show ip ospf neighbor
 show ip ospf
 show ip ospf database
 show ip route
+show ip ospf int
+
+
 
 
