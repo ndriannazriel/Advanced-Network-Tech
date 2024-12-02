@@ -2,7 +2,7 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
 ## Setting Up the GNS3 Server
 Download http://20.27.221.185:8003/cfd2d128-ac0c-11ef-9d89-002248626b19/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
-ssh -i "GNS3ServerKey.pem" ndriannazriel04@20.27.221.185 (Azure)
+ssh -i "GNS3ServerKeyNew.pem" ndriannazriel04@20.210.105.88 (Azure)
 
 **Installation**
 cd /tmp
@@ -27,16 +27,16 @@ network 2001:100:100:99::/127
 network 2001:150:99::/48
 
 
-## Configure Local AAA
+## Configure Local AAA for SSHv2 on ISP
 
 ### Requirements 
 - Only users from VLAN 101 can initiate SSH sessions to the ISP router.
 - Users must authenticate using locally defined credentials.
 
-aaa new-model
-aaa authentication login SSH_LOGIN local
-
 username admin privilege 15 secret your_password
+
+aaa new-model
+aaa authentication login SSH_LOGIN local / aaa authentication login default local
 
 access-list 101 permit ip 142.99.2.0 0.0.0.127 any
 
@@ -48,7 +48,6 @@ transport input ssh
 ssh admin@142.99.2.1
 
 ## Reconfigure DSW4 After Changing
-
 
 vtp mode client
 vtp domain ANDRIAN
