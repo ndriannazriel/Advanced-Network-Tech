@@ -34,7 +34,11 @@ network 2001:150:99::/48
 - Only users from VLAN 101 can initiate SSH sessions to the ISP router.
 - Users must authenticate using locally defined credentials.
 
-username admin privilege 15 secret your_password
+ip domain-name andrian.com
+crypto key generate rsa
+How many bits in the modulus [512]: 2048
+ip ssh version 2
+
 username admin_ANDRIAN privilege 15 secret mypass
 
 aaa new-model
@@ -46,6 +50,9 @@ line vty 0 4
 access-class 101 in
 login authentication SSH_LOGIN
 transport input ssh
+
+**Verify**
+show ip ssh
 
 ssh admin@100.100.99.2
 
