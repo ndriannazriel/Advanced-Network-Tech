@@ -89,7 +89,7 @@ Apply this change to **all trunk interfaces** on switches DSW1 to DSW4 (10 inter
 vlan 99
 name NATIVE
 
-interface <>
+interface port-channel 1
 switchport trunk native vlan 99
 
 ## Enable Spanning Tree Port-Fast And BDPU Guard
@@ -111,7 +111,6 @@ show spanning-tree summary
 spanning-tree interface <> detail
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733155874000jpxsa3.png)
-
 
 ## Configure R2 as DHCP Server
 Ensure service dhcp is configured on dsw1 and dsw2
