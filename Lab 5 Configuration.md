@@ -2,6 +2,7 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
 
 ## Setting Up the GNS3 Server
+==On the day of exam, make sure the server is able to run. Update controller, delete vm and reinstall if need to.==
 http://20.210.105.88:8003/49d650ba-b0b5-11ef-a510-0022486800a8/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
 ssh -i "GNS3ServerKeyNew.pem" ndriannazriel04@20.210.105.88 (Azure)
 
@@ -94,12 +95,19 @@ switchport trunk native vlan 99
 ## Enable Spanning Tree Port-Fast And BDPU Guard
 
 ##### DSW3
-interface <>
-spanning-tree portfast
-spanning-tree bpduguard enable
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+==OR==
+spanning-tree portfast bpduguard ~~enable~~
 
-spanning-tree interface <> detail
+interface f1/2
+spanning-tree portfast
+
+interface f1/3
+spanning-tree portfast
+
 show spanning-tree summary
+spanning-tree interface <> detail
 
 ## Configure R2 as DHCP Server
 Ensure service dhcp is configured on dsw1 and dsw2
