@@ -1,7 +1,8 @@
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
+
 ## Setting Up the GNS3 Server
-Download http://20.27.221.185:8003/cfd2d128-ac0c-11ef-9d89-002248626b19/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
+http://20.210.105.88:8003/49d650ba-b0b5-11ef-a510-0022486800a8/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
 ssh -i "GNS3ServerKeyNew.pem" ndriannazriel04@20.210.105.88 (Azure)
 
 **Installation**
@@ -34,11 +35,12 @@ network 2001:150:99::/48
 - Users must authenticate using locally defined credentials.
 
 username admin privilege 15 secret your_password
+username admin_ANDRIAN privilege 15 secret mypass
 
 aaa new-model
 aaa authentication login SSH_LOGIN local / aaa authentication login default local
 
-access-list 101 permit ip 142.99.2.0 0.0.0.127 any
+access-list 101 permit ip 142.99.2.128 0.0.0.127 any
 
 line vty 0 4
 access-class 101 in
