@@ -47,7 +47,7 @@ access-class 101 in
 login authentication SSH_LOGIN
 transport input ssh
 
-ssh admin@142.99.2.1
+ssh admin@100.100.99.2
 
 ## Reconfigure DSW4 After Changing
 
