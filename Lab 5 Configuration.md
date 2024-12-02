@@ -106,8 +106,12 @@ spanning-tree portfast
 interface f1/3
 spanning-tree portfast
 
+**Verify**
 show spanning-tree summary
 spanning-tree interface <> detail
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733155874000jpxsa3.png)
+
 
 ## Configure R2 as DHCP Server
 Ensure service dhcp is configured on dsw1 and dsw2
