@@ -53,6 +53,9 @@ transport input ssh
 
 **Verify**
 show ip ssh
+show running-config | section aaa
+show access-lists 101
+show running-config | section line vty
 
 ssh admin@100.100.99.2
 
