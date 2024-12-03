@@ -46,6 +46,7 @@ network 2001:150:99::/48
 - Only users from VLAN 101 can initiate SSH sessions to the ISP router.
 - Users must authenticate using locally defined credentials.
 
+```
 ip domain-name andrian.com
 crypto key generate rsa
 How many bits in the modulus [512]: 2048
@@ -62,12 +63,14 @@ line vty 0 4
 access-class 101 in
 login authentication SSH_LOGIN
 transport input ssh
+```
 
 **Verify**
-show ip ssh
+```show ip ssh
 show running-config | section aaa
 show access-lists 101
 show running-config | section line vty
+```
 
 ssh admin@100.100.99.2
 
