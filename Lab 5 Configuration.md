@@ -4,7 +4,7 @@
 ## Setting Up the GNS3 Server
 ==On the day of exam, make sure the server is able to run. Update controller, delete vm and reinstall if need to.==
 http://20.210.105.88:8003/49d650ba-b0b5-11ef-a510-0022486800a8/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
-fssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)
+ssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)
 
 **Installation**
 custom - udp - 1194
