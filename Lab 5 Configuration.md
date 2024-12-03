@@ -66,7 +66,8 @@ transport input ssh
 ```
 
 **Verify**
-```show ip ssh
+```
+show ip ssh
 show running-config | section aaa
 show access-lists 101
 show running-config | section line vty
@@ -75,7 +76,7 @@ show running-config | section line vty
 ssh admin@100.100.99.2
 
 ## Reconfigure DSW4 After Changing
-
+```
 vtp mode client
 vtp domain ANDRIAN
 vtp password ANDRIAN
@@ -84,34 +85,42 @@ interface <>
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan all
+```
 
 ## Enable Port Security
 
 - Apply **only** on access port
 
 ##### DSW4
+```
 switchport port-security
 switchport port-security maximum 1
 switchport port-security violation shutdown/protect/restrict
 switchport port-security mac-address <MAC_ADDRESS>
 
 show port-security
+```
 
 ## Change Native Vlan 99
 Apply this change to **all trunk interfaces** on switches DSW1 to DSW4 (10 interfaces total).
 
+```
 vlan 99
 name NATIVE
 
 interface port-channel 1
 switchport trunk native vlan 99
+```
 
 ## Enable Spanning Tree Port-Fast And BDPU Guard
 
 ##### DSW3
+```
 spanning-tree portfast default
 spanning-tree portfast bpduguard default
+```
 ==OR==
+```
 spanning-tree portfast bpduguard ~~enable~~
 
 interface f1/2
@@ -119,56 +128,70 @@ spanning-tree portfast
 
 interface f1/3
 spanning-tree portfast
+```
 
 **Verify**
+```
 show spanning-tree summary
 spanning-tree interface <> detail
-
+```
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733155874000jpxsa3.png)
 
 ## Configure R2 as DHCP Server
 Ensure service dhcp is configured on dsw1 and dsw2
 
 **Configure IP helper address on DSW1 and DSW2**
+```
 int vlan 102
 ip helper-address (ip on the interface connecting to R2)
+```
 
 ##### R2
+```
 ip dhcp excluded-address 142.99.2.1 142.99.2.9
 ip dhcp pool VLAN102
 network 142.99.2.0 255.255.255.128
 default-router 142.99.2.3 (VIP for VLAN102) - Tells devices in VLAN102 to use this as DG
+```
 
 **Optional**
 dns-server 8.8.8.8
 domain-name example.com
 
+**Verify**
+```
 show ip dhcp binding
-
+```
 ## Configure IP DHCP Snooping and Dynamic ARP Inspection(DAI)
+**Mark trusted interfaces**
+Trusted interfaces are where DHCP servers or relay agents are connected. These interfaces are allowed to send DHCP server messages. *On Trunk Ports.*
 
 ##### DSW4 
 **DHCP Snooping**
+```
 ip dhcp snooping
 ip dhcp snooping vlan 102
 ip dhcp snooping vlan 103
 
-**Mark trusted interfaces**
-Trusted interfaces are where DHCP servers or relay agents are connected. These interfaces are allowed to send DHCP server messages. *On Trunk Ports.*
-
 int f1/0, f1/1 
 ip dhcp inspection trust
-
+```
+**Verify**
+```
 show ip dhcp snooping
 show ip dhcp snooping binding
-
+```
 **DAI**
+```
 ip arp inspection vlan 101
 ip arp inspection vlan 102
 ip arp inspection vlan 103
 
 int f1/0, f1/1
 ip arp inspection trust
-
+```
+**Verify**
+```
 show ip arp inspection
 show ip arp inspection vlan <vlan-id>
+```
