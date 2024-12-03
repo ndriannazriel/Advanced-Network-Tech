@@ -4,7 +4,7 @@
 ## Setting Up the GNS3 Server
 ==On the day of exam, make sure the server is able to run. Update controller, delete vm and reinstall if need to.==
 http://20.210.105.88:8003/49d650ba-b0b5-11ef-a510-0022486800a8/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
-ssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)
+fssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)
 
 **Installation**
 custom - udp - 1194
@@ -24,6 +24,7 @@ Troubleshooting in case the same problems come up.
 ## Peering ISP with group members using ebgp
 
 ##### ISP1 (MY ISP)
+``` 
 router bgp 19
 bgp router-id 2.2.2.2 
 neighbor 100.100.99.1 remote-as 29
@@ -37,7 +38,7 @@ neighbor 2001:100:100:99:: remote-as 29
 neighbor 2001:100:100:99:: activate
 network 2001:100:100:99::/127
 network 2001:150:99::/48
-
+```
 
 ## Configure Local AAA for SSHv2 on ISP
 
