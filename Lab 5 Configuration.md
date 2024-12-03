@@ -4,12 +4,22 @@
 ## Setting Up the GNS3 Server
 ==On the day of exam, make sure the server is able to run. Update controller, delete vm and reinstall if need to.==
 http://20.210.105.88:8003/49d650ba-b0b5-11ef-a510-0022486800a8/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
-ssh -i "GNS3ServerKeyNew.pem" ndriannazriel04@20.210.105.88 (Azure)
+ssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)
 
 **Installation**
+custom - udp - 1194
+custom - tcp - 8003
+
 cd /tmp
 curl https://raw.githubusercontent.com/GNS3/gns3-server/master/scripts/remote-install.sh > gns3-remote-install.sh
 sudo bash gns3-remote-install.sh --with-openvpn --with-iou --with-i386-repository
+
+Troubleshooting in case the same problems come up.
+"Cannot connect to compute 'Gns3Server' with request POST /projects"
+==For this, that means that the server/vm has a problem so try restarting it or if worst comes to worst, create a whole new vm.==
+"The image vios_l2-adventerprisek9-m.vmdk.SSA.152-4.0.55.E is missing"
+==For this, delete the image and add back.==
+
 
 ## Peering ISP with group members using ebgp
 
