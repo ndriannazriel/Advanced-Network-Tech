@@ -1,6 +1,7 @@
 OSPF is a link-state routing protocol that uses the concept of areas. A network administrator can divide the routing domain into distinct areas that help control routing update traffic.
 
 ### OSPF Packets
+```
 Routers running OSPF exchange messages to convey routing information using five types of packets. These packets, as shown in the figure, are as follows:
 
 - Hello packet
@@ -10,6 +11,7 @@ Routers running OSPF exchange messages to convey routing information using five 
 - Link-state acknowledgment packet
 
 These packets are used to discover neighboring routers and also to exchange routing information to maintain accurate information about the network.
+```
 
 ### OSPF Databases
 OSPF messages are used to create and maintain three OSPF databases, as follows:
