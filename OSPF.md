@@ -34,6 +34,26 @@ To maintain routing information, OSPF routers complete a generic link-state rout
 4. Execute the SPF Algorithm
 5. Choose the Best Route
 
+### OSPF/Link State Packets
+Link-state packets are the tools used by OSPF to help determine the fastest available route for a packet.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733379753000p3sd8a.png)
+The OSPF Type 1 packet is the Hello packet. Hello packets are used to do the following:
+
+- Discover OSPF neighbors and establish neighbor adjacencies.
+- Advertise parameters on which two routers must agree to become neighbors.
+- Elect the Designated Router (DR) and Backup Designated Router (BDR) on multiaccess networks like Ethernet. Point-to-point links do not require DR or BDR.
+
+Routers initially exchange Type 2 DBD packets, which is an abbreviated list of the LSDB of the sending router. It is used by receiving routers to check against the local LSDB.
+
+A Type 3 LSR packet is used by the receiving routers to request more information about an entry in the DBD.
+
+The Type 4 LSU packet is used to reply to an LSR packet.
+
+A Type 5 packet is used to acknowledge the receipt of a Type 4 LSU.
+
+LSUs are also used to forward OSPF routing updates, such as link changes. Specifically, an LSU packet can contain 11 different types of OSPFv2 LSAs, with some of the more common ones shown in the figure. OSPFv3 renamed several of these LSAs and also contains two additional LSAs.
+
+**Note:** The difference between the LSU and LSA terms can sometimes be confusing because these terms are often used interchangeably. However, an LSU contains one or more LSAs.
 ### Multi Area OSPF
 With multiarea OSPF, one large routing domain can be divided into smaller areas, to support hierarchical routing. Routing still occurs between the areas (interarea routing), while many of the processor intensive routing operations, such as recalculating the database, are kept within an area.
 
