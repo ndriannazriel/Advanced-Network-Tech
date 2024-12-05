@@ -61,3 +61,7 @@ For instance, any time a router receives new information about a topology change
 
 **Note:** Routers in other areas receive updates regarding topology changes, but these routers only update the routing table, not rerun the SPF algorithm.
 
+--------------------------------------------------------------------------
+## OSPF Configuration
+
+
