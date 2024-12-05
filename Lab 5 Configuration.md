@@ -5,6 +5,10 @@
 Download http://35.240.240.97:8003/25b4853a-b312-11ef-b954-3bcc513fa6ad/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
 ~~ssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)~~
 
+**Prerequisites**
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17334099070005rgpmn.png)
+For more info, visit https://cloud.google.com/compute/docs/instances/nested-virtualization/overview
+
 **Installation**
 cd /tmp
 curl https://raw.githubusercontent.com/GNS3/gns3-server/master/scripts/remote-install.sh > gns3-remote-install.sh
