@@ -27,6 +27,8 @@ Troubleshooting in case the same problems come up.
 "The image vios_l2-adventerprisek9-m.vmdk.SSA.152-4.0.55.E is missing"
 ==For this, delete the image and add back.==
 
+The problem here is if the vios image is in the lab and I off both the VM and OpenVPN, losing connection to the gns3 server, then once I reopen again, I notice that I can't open it and will get both of the messages above indicating something went wrong.
+
 ## Peering ISP with group members using ebgp
 
 ##### ISP1 (MY ISP)
