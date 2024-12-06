@@ -26,3 +26,68 @@ The filtering parameters that can be configured after the pipe include:
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173341628700089gdia.png)
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733416308000jutcgk.png)
+
+### Packet Forwarding Mechanisms
+As mentioned previously, the primary responsibility of the packet forwarding function is to encapsulate packets in the appropriate data link frame type for the outgoing interface. The more efficiently a router can perform this task, the faster packets can be forwarded by the router. Routers support the following three packet forwarding mechanisms:
+
+- Process switching
+- Fast switching
+- Cisco Express Forwarding (CEF)
+
+A common analogy used to describe these three different packet-forwarding mechanisms is as follows:
+
+- Process switching solves a problem by doing math long hand, even if it is the identical problem that was just solved.
+- Fast switching solves a problem by doing math long hand one time and remembering the answer for subsequent identical problems.
+- CEF solves every possible problem ahead of time in a spreadsheet.
+
+### Static Route and Dynamic Route
+Static routes are commonly used in the following scenarios:
+
+- As a default route forwarding packets to a service provider
+- For routes outside the routing domain and not learned by the dynamic routing protocol
+- When the network administrator wants to explicitly define the path for a specific network
+- For routing between stub networks
+
+Static routes are useful for smaller networks with only one path to an outside network. They also provide security in a larger network for certain types of traffic, or links to other networks that need more control.
+
+Dynamic routing protocols are commonly used in the following scenarios:
+
+- In networks consisting of more than just a few routers
+- When a change in the network topology requires the network to automatically determine another path
+- For scalability. As the network grows, the dynamic routing protocol automatically learns about any new networks.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733475476000ep35m6.png)
+
+The table classifies the current routing protocols. Interior Gateway Protocols (IGPs) are routing protocols used to exchange routing information within a routing domain administered by a single organization. There is only one EGP and it is BGP. BGP is used to exchange routing information between different organizations, known as autonomous systems (AS). BGP is used by ISPs to route packets over the internet. Distance vector, link-state, and path vector routing protocols refer to the **type of routing algorithm** used to determine best path.
+
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733475678000wif2qd.png)
+
+### Determination of route in the routing table(Summary)
+### 1. **Longest Prefix Match (Most Specific Route)**
+
+- The route with the most specific subnet mask (longest prefix) is chosen.  
+    Example:
+    - Destination: `192.168.1.1`
+    - Routes available:
+        - `192.168.1.0/24`
+        - `192.168.1.0/25`
+    - **Chosen**: `192.168.1.0/25` because `/25` is more specific.
+### 2. **Administrative Distance (AD)**
+
+- If multiple routes to the same destination exist (same prefix length) but are learned from different sources, the route with the **lowest AD** is selected.  
+    Example:
+    - Static route (AD = 1)
+    - OSPF route (AD = 110)
+    - **Chosen**: Static route.
+### 3. **Metric**
+
+- If multiple routes to the same destination exist (same prefix length and AD) within the same protocol, the route with the **lowest metric** is chosen.  
+    Example:
+    - OSPF route via path A (Cost = 10)
+    - OSPF route via path B (Cost = 5)
+    - **Chosen**: Path B (Cost = 5).
+### 4. **Load Balancing**
+
+- If multiple routes have the **same prefix length, AD, and metric**, load balancing occurs (if supported by the routing protocol and enabled).  
+    Example: Equal-cost multipath (ECMP) in OSPF or EIGRP.
