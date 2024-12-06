@@ -34,11 +34,14 @@ As mentioned previously, the primary responsibility of the packet forwarding fun
 - Fast switching
 - Cisco Express Forwarding (CEF)
 
-A common analogy used to describe these three different packet-forwarding mechanisms is as follows:
-
-- Process switching solves a problem by doing math long hand, even if it is the identical problem that was just solved.
-- Fast switching solves a problem by doing math long hand one time and remembering the answer for subsequent identical problems.
-- CEF solves every possible problem ahead of time in a spreadsheet.
+- **Fast switching:**  
+    Uses a route cache to store recently used routes but does not rely on the FIB and adjacency tables like CEF.
+    
+- **Process switching:**  
+    The slowest method, where the CPU handles every packet individually.
+    
+- **Flow process:**  
+    Not a valid packet-forwarding method.
 
 ### Static Route and Dynamic Route
 Static routes are commonly used in the following scenarios:
@@ -90,4 +93,4 @@ The table classifies the current routing protocols. Interior Gateway Protocols (
 ### 4. **Load Balancing**
 
 - If multiple routes have the **same prefix length, AD, and metric**, load balancing occurs (if supported by the routing protocol and enabled).  
-    Example: Equal-cost multipath (ECMP) in OSPF or EIGRP.
+	    Example: Equal-cost multipath (ECMP) in OSPF or EIGRP.
