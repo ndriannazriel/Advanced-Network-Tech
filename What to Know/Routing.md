@@ -97,3 +97,23 @@ The table classifies the current routing protocols. Interior Gateway Protocols (
 
 S 10.2.0.0 [1/0] via 172.16.2.2.
 [1/0] This means it has an AD of 1 and metric value of 0. *Static routes have AD of 1*
+
+
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733488066000c0mu9j.png)
+
+loopback address with /48 prefix length
+Null ipv6 route with /48 prefix length
+A route with a **directly connected interface** (like a loopback address) always takes precedence over static or other types of routes.
+
+### Floating Static Routes
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733487608000vp966n.png)
+By default, static routes have an administrative distance of 1, making them preferable to routes learned from dynamic routing protocols. For example, the administrative distances of some common interior gateway dynamic routing protocols are:
+
+- EIGRP = 90
+- OSPF = 110
+- IS-IS = 115
+
+
+
+
