@@ -10,3 +10,6 @@ Configuration
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17334571120004et96v.png)
 Figure 2.
 
+1. Assign IP to the router's interface
+2. Assign IP to the PC
+3. Ensure connectivity
