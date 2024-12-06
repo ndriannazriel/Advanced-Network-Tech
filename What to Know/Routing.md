@@ -94,3 +94,6 @@ The table classifies the current routing protocols. Interior Gateway Protocols (
 
 - If multiple routes have the **same prefix length, AD, and metric**, load balancing occurs (if supported by the routing protocol and enabled).  
 	    Example: Equal-cost multipath (ECMP) in OSPF or EIGRP.
+
+S 10.2.0.0 [1/0] via 172.16.2.2.
+[1/0] This means it has an AD of 1 and metric value of 0. *Static routes have AD of 1*
