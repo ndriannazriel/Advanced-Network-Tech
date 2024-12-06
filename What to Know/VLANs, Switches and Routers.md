@@ -21,3 +21,31 @@ To prepare a switch for remote management access, the switch must have a switch 
 
 
 #### When to use SVI and when to use inter-vlan routing?
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733467301000pi283s.png)
+
+- Layer 2 switches support SVIs strictly only for management, not for routing.
+- To route between VLANs, you need a **Layer 3 device**.
+
+An SVI on a Layer 2 switch is limited to:
+
+- Providing a management IP for the switch itself (e.g., SSH or Telnet access).
+- Communicating with devices within the same VLAN.
+
+Why?
+Because switches operate at a data link layer and have no way for routing. That's why SVIs on L2 switches are created for the purpose of management only through SSH.
+
+If want to route between VLANs but you don't have a layer 3 switch, use router on a stick.
+
+## Inter Vlan Routing (Router on a stick)
+**On router**
+```
+interface GigabitEthernet0/0.10
+   encapsulation dot1q 10
+   ip address 192.168.10.1 255.255.255.0
+interface GigabitEthernet0/0.20
+   encapsulation dot1q 20
+   ip address 192.168.20.1 255.255.255.0
+```
+1. Configure sub interfaces on router as above
+2. Enable trunking on ports connected to the switch
+
