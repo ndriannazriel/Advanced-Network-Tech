@@ -49,3 +49,19 @@ interface GigabitEthernet0/0.20
 1. Configure sub interfaces on router as above
 2. Enable trunking on ports connected to the switch
 
+## Configuring SSH
+```
+show ip ssh
+ip domain-name example.com
+crypto key generate rsa
+username admin secret ccna
+
+line vty 0 15
+transport input ssh
+login local
+exit
+
+ip ssh version 2
+```
+
+
