@@ -48,6 +48,22 @@ spanning-tree vlan 102 priority 24576
 ```
 
 ## Configuring Basic Connectivity
+| Device Name | Interface | Ipv4         | SubMask         | Ipv6                  | DG  |     |
+| ----------- | --------- | ------------ | --------------- | --------------------- | --- | --- |
+| DSW1        | VLAN101   | 142.99.2.129 | 255.255.255.128 | 2001:142:99:101::1/64 |     |     |
+|             | VLAN102   | 142.99.2.1   | 255.255.255.128 | 2001:142:99:102::1/64 |     |     |
+|             | VLAN103   | 142.99.0.1   | 255.255.254.0   | 2001:142:99:103::1/64 |     |     |
+| DSW2        | VLAN101   |              |                 |                       |     |     |
+|             | VLAN102   |              |                 |                       |     |     |
+|             | VLAN103   |              |                 |                       |     |     |
+| DSW3        |           |              |                 |                       |     |     |
+| DSW4        |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
+|             |           |              |                 |                       |     |     |
 
 ##### DSW1
 ```
@@ -98,11 +114,21 @@ int <>
 switchport trunk encap dot1q
 switchport mode trunk
 switchport trunk allowed vlan all
+
+int
+switchport mode access
+switchport access vlan 
 ```
 
 ##### DSW4
 ```
+int <>
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
 
+int switchport mode access
+switchport access vlan
 ```
 
 
