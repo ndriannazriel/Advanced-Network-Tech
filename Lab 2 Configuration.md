@@ -19,4 +19,20 @@
 |             |           |              |                 |                        |              |                       |      |
 |             |           |              |                 |                        |              |                       |      |
 
-## Configure EtherChannel
+## Configure EtherChannel with Tracking
+```
+interface range fa1/0 , fa1/3
+channel-group 1 mode active
+switchport mode trunk
+
+port-channel load-balance src-ip    
+```
+
+**Verify**
+```
+show running-config interface port-channel <channel-number>
+show etherchannel load-balance
+show etherchannel summary
+show etherchannel 1 detail
+```
+
