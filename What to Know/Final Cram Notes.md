@@ -13,6 +13,8 @@ What need to cover
 2. HSRP + floating routes (Reconfigure lab 2 without floating static route) + tracking
 3. DHCP + ip helper address
 4. EtherChannel + load balance scheme
+5. bgp + peering
+6. ospf
 
 
 
