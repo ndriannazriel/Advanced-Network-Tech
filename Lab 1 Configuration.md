@@ -39,3 +39,46 @@ spanning-tree vlan 103 priority 24576
 ```
 spanning-tree vlan 102 priority 24576
 ```
+
+## Configuring Basic Connectivity
+
+##### DSW1
+```
+
+```
+
+##### DSW2
+```
+
+```
+
+##### DSW3
+```
+
+```
+
+##### DSW4
+```
+
+```
+
+
+##### PC1
+```
+
+```
+
+##### PC2
+```
+
+```
+
+##### PC3
+```
+
+```
+
+##### PC4
+```
+
+```
