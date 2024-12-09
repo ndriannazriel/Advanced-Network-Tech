@@ -12,7 +12,9 @@ vlan 102
 name VLAN102
 vlan 103
 name VLAN103
+```
 
+```
 VTP mode
 vtp mode server
 vtp domain ANDRIAN
