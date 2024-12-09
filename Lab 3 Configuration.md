@@ -19,13 +19,27 @@ ip 2001:142:99:104::2/64
 ==Because this is a layer 3 link (Between R2 and R3), the way to configure EtherChannel is a little bit different.==
 
 ##### R2
+```
 int port-channel 1
 ip add 142.99.3.21 255.255.255.252
-channel-group 1 - recheck malam ni balik
+
+int range <>
+channel-group 1 
+no shut
+```
 ##### R3
+```
 int port-channel 1
 ip add 142.99.3.22 255.255.255.252
+
+int range <>
 channel-group 1
+no shut
+```
+Verify
+```
+show int port-channel 1
+```
 
 ## Configure Routing Between R1 and ISP
 ##### R1
