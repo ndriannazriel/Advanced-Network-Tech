@@ -1,11 +1,18 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733746637000phtu3y.png)
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733747790000t2ts3t.png)
 
-## Enable VTP
+## Create VLANs and Enable VTP
 
 DSW1 and DSW2 in server mode whilst others are VTP clients.
 
 ```
+vlan 101
+name VLAN101
+vlan 102
+name VLAN102
+vlan 103
+name VLAN103
+
 VTP mode
 vtp mode server
 vtp domain ANDRIAN
@@ -44,17 +51,53 @@ spanning-tree vlan 102 priority 24576
 
 ##### DSW1
 ```
+int <>
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+
+int vlan 101
+ip add 142.99.2.129 255.255.255.128 
+ipv6 add 2001:142:99:101::1/64
+
+int vlan 102
+ip add 142.99.2.1 255.255.255.128
+ipv6 add 2001:142:99:102::1/64
+
+int vlan 103
+ip add 142.99.0.1 255.255.254.0
+ipv6 add 2001:142:99:103::1/64
+
 
 ```
 
 ##### DSW2
 ```
+int <>
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+
+int vlan 101
+ip add 142.99.2.130 255.255.255.128 
+ipv6 add 2001:142:99:101::2/64
+
+int vlan 102
+ip add 142.99.2.2 255.255.255.128
+ipv6 add 2001:142:99:102::2/64
+
+int vlan 103
+ip add 142.99.0.2 255.255.254.0
+ipv6 add 2001:142:99:103::2/64
 
 ```
 
 ##### DSW3
 ```
-
+int <>
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
 ```
 
 ##### DSW4
