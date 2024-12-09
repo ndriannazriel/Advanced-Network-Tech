@@ -64,4 +64,22 @@ For instance, any time a router receives new information about a topology change
 --------------------------------------------------------------------------
 ## OSPF Configuration
 
+Ipv4
+```
+
+```
+
+OSPFv3
+```
+ipv6 unicast-routing
+
+interface GigabitEthernet0/1
+ipv6 address 2001:db8:1::1/64   
+no shutdown                     
+ipv6 ospf 1 area 0
+
+router ospfv3 1
+router-id 1.1.1.1
+```
+
 
