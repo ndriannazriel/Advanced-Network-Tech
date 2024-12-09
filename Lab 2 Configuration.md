@@ -19,13 +19,37 @@
 |             |           |              |                 |                        |              |                       |      |
 |             |           |              |                 |                        |              |                       |      |
 
-## Configure EtherChannel with Tracking
-```
-interface range fa1/0 , fa1/3
-channel-group 1 mode active
-switchport mode trunk
+## Configure L2 EtherChannel with Tracking
 
+##### DSW1 and DSW2
+```
+interface range fa1/0 , fa1/1
+channel-group 1 mode on
+switchport mode trunk
+no shut
+
+interface Port-channel 1
+switchport mode trunk
+```
+
+When changing the etherchannel's load balance setting, you are required to reset the etherchannel configuration.
+```
 port-channel load-balance src-ip    
+```
+
+Remove, recreate and readd members
+```
+interface range fa1/0 , fa1/1      
+no channel-group 1                   
+exit
+no interface port-channel 1   
+
+below no need to do i think
+interface Port-channel 1
+port-channel load-balance src-ip
+
+interface range fa1/0, fa1/1
+channel-group 1 mode on
 ```
 
 **Verify**
