@@ -137,3 +137,10 @@ standby 6 ipv6 FE80::3
 standby 6 priority 90
 standby 6 preempt
 ```
+
+## Configure Static and Floating Routes
+
+##### R1
+```
+
+```
