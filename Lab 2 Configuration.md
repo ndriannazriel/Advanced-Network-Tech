@@ -106,5 +106,34 @@ standby 6 track 2 decrement 30
 
 ##### DSW2
 ```
+track 1 int fa0/0 line-protocol
+track 2 int fa0/1 line-protocol
 
+standby 1 ip 142.99.2.131 
+standby 1 priority 90
+standby 1 preempt
+
+standby 4 ipv6 FE80::1 
+standby 4 priority 90
+standby 4 preempt
+
+standby 2 ip 142.99.2.3 
+standby 2 priority 110
+standby 2 preempt
+standby 2 track 1 decrement 30
+standby 2 track 2 decrement 30
+
+standby 5 ipv6 FE80::2 
+standby 5 priority 110
+standby 5 preempt
+standby 5 track 1 decrement 30
+standby 5 track 2 decrement 30
+
+standby 3 ip 142.99.0.3
+standby 3 priority 90
+standby 3 preempt
+
+standby 6 ipv6 FE80::3 
+standby 6 priority 90
+standby 6 preempt
 ```
