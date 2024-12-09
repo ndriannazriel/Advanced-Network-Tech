@@ -66,7 +66,14 @@ For instance, any time a router receives new information about a topology change
 
 Ipv4
 ```
+router ospf 1
+router-id 1.1.1.1
 
+int g0/1
+ip add
+no shut
+
+ip ospf 1 area 0
 ```
 
 OSPFv3
