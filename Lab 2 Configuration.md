@@ -210,3 +210,14 @@ ipv6 route 2001:142:99:103::/64 2001:142:99:6::1 200
 ```
 
 ## Configure Loopback and Routes to get there
+
+##### DSW1
+```
+
+```
+
+##### DSW2
+```
+
+```
+
