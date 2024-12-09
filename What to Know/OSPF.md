@@ -68,6 +68,7 @@ Ipv4
 ```
 router ospf 1
 router-id 1.1.1.1
+passive-interface
 
 int g0/1
 ip add
@@ -87,6 +88,7 @@ ipv6 ospf 1 area 0
 
 router ospfv3 1
 router-id 1.1.1.1
+passive-interface
 ```
 
 
