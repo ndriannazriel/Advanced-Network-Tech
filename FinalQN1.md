@@ -50,6 +50,14 @@ router bgp 19
 bgp router-id 1.1.1.1
 neighbor 101.100.133.71 remote-as 17
 network 101.100.133.0 mask 255.255.255.0
+network 133.99.0.0 mask 255.255.0.0
+
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:101:71:99:: remote-as 17
+neighbor 2001:100:100:99:: activate
+network 2001:100:100:99::/127
+network 2001:150:99::/48
 
 ip route 133.99.0.0 255.255.0.0 Null0
 ipv6 route 2001:133:99::/48 Null0
