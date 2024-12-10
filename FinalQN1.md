@@ -111,4 +111,6 @@ ip route 133.99.99.99 255.255.255.255 g0/2
 ipv6 route 2001:133:99:99::9/128 2001:133:99:2::
 ```
 
+For creating ipv6 routes, use the next hop ip instead of the ip address.
+In IPv6, routing requires either a next-hop IPv6 address or the interface to have a directly connected neighbor reachable through Neighbor Discovery Protocol (NDP).
 
