@@ -86,17 +86,36 @@ network 133.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
-neighbor 2001:101:71:99:: remote-as 17
-neighbor 2001:100:71:99:: activate
+neighbor 2001:101:100:133::71 remote-as 17
+neighbor 2001:101:100:133::71 activate
 network 2001:101:100:133::/64
 network 2001:133:99::/48
+
+show running-config | section router bgp
+```
+Aqeel punya
+```
+router bgp 17
+bgp router-id 2.2.2.2
+neighbor 101.100.133.99 remote-as 19
+network 101.100.133.0 mask 255.255.255.0
+network 133.99.0.0 mask 255.255.0.0
+
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:101:100:133::99 remote-as 19
+neighbor 2001:101:100:133::99 activate
+network 2001:101:100:133::/64
+network 2001:133:71::/48
+
+show running-config | section router bgp
 ```
 
 ```
 ip route 133.99.0.0 255.255.0.0 Null0
 ipv6 route 2001:133:99::/48 Null0
 ```
-
+% Specify remote-as or peer-group commands first
 ## Configure Static routes on R2 and R1
 
 ##### R2
