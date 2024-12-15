@@ -99,7 +99,7 @@ router bgp 17
 bgp router-id 2.2.2.2
 neighbor 101.100.133.99 remote-as 19
 network 101.100.133.0 mask 255.255.255.0
-network 133.99.0.0 mask 255.255.0.0
+network 133.71.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
