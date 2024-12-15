@@ -114,8 +114,10 @@ show running-config | section router bgp
 ```
 ip route 133.99.0.0 255.255.0.0 Null0
 ipv6 route 2001:133:99::/48 Null0
+
+sh bgp ipv6 unicast
 ```
-% Specify remote-as or peer-group commands first
+Don't forget to add the Null route because the route needs to be in the routing table for bgp to work.
 ## Configure Static routes on R2 and R1
 
 ##### R2
