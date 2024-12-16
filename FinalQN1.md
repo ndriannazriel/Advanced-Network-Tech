@@ -6,12 +6,12 @@
 |              |           |                |                 |                         |     |         |      |
 |              |           |                |                 |                         |     |         |      |
 |              |           |                |                 |                         |     |         |      |
-| R2           | g1/0      | 133.9.1.2      | 255.255.255.252 | 2001:133;99:1::1/127    |     |         |      |
+| R2           | g1/0      | 133.9.1.2      | 255.255.255.252 | 2001:133:99:1::1/127    |     |         |      |
 |              | g2/0      | 133.99.1.5     | 255.255.255.252 | 2001:133:99:2::0/127    |     |         |      |
 |              |           |                |                 |                         |     |         |      |
-| R1(Physical) | g0/2      | 133.99.1.6     | 255.255.255.252 | 2001:133:99:2::1/127    |     |         |      |
+| R1(Physical) | g0/1      | 133.99.1.6     | 255.255.255.252 | 2001:133:99:2::1/127    |     |         |      |
 |              | l0        | 133.99.99.100  | 255.255.255.255 |                         |     |         |      |
-|              | g0/1      | 101.100.133.99 | 255.255.255.0   | 2001:101:100:133::99/64 |     |         |      |
+|              | g0/2      | 101.100.133.99 | 255.255.255.0   | 2001:101:100:133::99/64 |     |         |      |
 |              |           |                |                 |                         |     |         |      |
 ## Create loopback
 ##### R3
@@ -80,13 +80,13 @@ Verify
 ```
 router bgp 19
 bgp router-id 1.1.1.1
-neighbor 101.100.133.71 remote-as 17
+neighbor 101.100.133.95 remote-as 159
 network 133.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
-neighbor 2001:101:100:133::71 remote-as 17
-neighbor 2001:101:100:133::71 activate
+neighbor 2001:101:100:133::95 remote-as 159
+neighbor 2001:101:100:133::95 activate
 network 2001:133:99::/48
 
 show running-config | section router bgp
@@ -94,9 +94,9 @@ show running-config | section router bgp
 network 101.100.133.0 mask 255.255.255.0
 network 2001:101:100:133::/64
 ```
-Aqeel punya
+Haiqal punya
 ```
-router bgp 17
+router bgp 
 bgp router-id 2.2.2.2
 neighbor 101.100.133.99 remote-as 19
 network 133.71.0.0 mask 255.255.0.0
@@ -147,4 +147,7 @@ If you want to configure so that it doesn't need to use the source ip of the loo
 
 For creating ipv6 routes, use the next hop ip instead of the ip address.
 In IPv6, routing requires either a next-hop IPv6 address or the interface to have a directly connected neighbor reachable through Neighbor Discovery Protocol (NDP).
+R1
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342060000ub03iy.png)
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342097000cb1pio.png)
