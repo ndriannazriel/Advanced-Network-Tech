@@ -139,6 +139,7 @@ For example:
 ping 133.99.99.99 source 133.71.99.99
 ```
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734309160000af22gt.png)
+
 If you want to configure so that it doesn't need to use the source ip of the loopback, configure a static route for the next link.
 
 
