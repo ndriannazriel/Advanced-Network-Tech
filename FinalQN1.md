@@ -81,34 +81,36 @@ Verify
 router bgp 19
 bgp router-id 1.1.1.1
 neighbor 101.100.133.71 remote-as 17
-network 101.100.133.0 mask 255.255.255.0
 network 133.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:101:100:133::71 remote-as 17
 neighbor 2001:101:100:133::71 activate
-network 2001:101:100:133::/64
 network 2001:133:99::/48
 
 show running-config | section router bgp
+
+network 101.100.133.0 mask 255.255.255.0
+network 2001:101:100:133::/64
 ```
 Aqeel punya
 ```
 router bgp 17
 bgp router-id 2.2.2.2
 neighbor 101.100.133.99 remote-as 19
-network 101.100.133.0 mask 255.255.255.0
 network 133.71.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:101:100:133::99 remote-as 19
 neighbor 2001:101:100:133::99 activate
-network 2001:101:100:133::/64
 network 2001:133:71::/48
 
 show running-config | section router bgp
+
+network 101.100.133.0 mask 255.255.255.0
+network 2001:101:100:133::/64
 ```
 
 ```
@@ -131,6 +133,16 @@ ipv6 route 2001:133:71::/48 2001:133:99:2::1
 ip route 133.99.99.99 255.255.255.255 g0/2
 ipv6 route 2001:133:99:99::9/128 2001:133:99:2::
 ```
+Because of the route being configured as a /32, the only way to ping from one loopback to another loopback is to use the source ip of the loopback itself. 
+For example:
+```
+ping 133.99.99.99 source 133.71.99.99
+```
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734309160000af22gt.png)
+If you want to configure so that it doesn't need to use the source ip of the loopback, configure a static route for the next link.
+
+
+
 
 For creating ipv6 routes, use the next hop ip instead of the ip address.
 In IPv6, routing requires either a next-hop IPv6 address or the interface to have a directly connected neighbor reachable through Neighbor Discovery Protocol (NDP).
