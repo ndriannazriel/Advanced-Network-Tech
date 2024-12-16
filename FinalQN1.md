@@ -187,6 +187,14 @@ ipv6 route ::/0 2001:133:99:2::1
 
 ##### R1
 ```
+ip route 133.99.99.99 255.255.255.255 g2/0
+ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
+
+ip route 133.99.1.0 255.255.255.252 g2/0
+ipv6 route 2001:133:99:1::/127 2001:133:99:2::
+```
+##### R1(Physical)
+```
 ip route 133.99.99.99 255.255.255.255 g0/2
 ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
 
@@ -221,7 +229,7 @@ no sh
 ##### R5
 ```
 int g1/0
-ip add 133.99.1.2 255.255.255.252 
+ip add 133.95.1.2 255.255.255.252 
 ipv6 add 2001:133:95:1::1/127
 no sh
 
@@ -245,14 +253,14 @@ no sh
 ```
 
 ## Create loopback
-##### R3
+##### R6
 ```
 int l0
 ip add 133.95.99.99 255.255.255.255
 ipv6 add 2001:133:95:99::99/128
 ```
 
-##### R1
+##### R4
 ```
 int l0
 ip add 133.95.99.100 255.255.255.255
@@ -260,7 +268,7 @@ ip add 133.95.99.100 255.255.255.255
 
 ## Configure OSPF
 
-##### R3
+##### R6
 ```
 ip routing
 ipv6 unicast-routing
@@ -285,7 +293,7 @@ ipv6 ospf network point-to-point
 ipv6 ospf 1 area 0
 ```
 
-##### R2(Default Gateway)
+##### R5(Default Gateway)
 ```
 ip routing
 ipv6 unicast-routing
@@ -314,20 +322,7 @@ show ip route ospf
 ```
 
 ## Configure eBGP
-##### R1
-```
-router bgp 19
-bgp router-id 1.1.1.1
-neighbor 101.100.133.95 remote-as 159
-network 133.99.0.0 mask 255.255.0.0
-
-bgp log-neighbor-changes
-address-family ipv6
-neighbor 2001:101:100:133::95 remote-as 159
-neighbor 2001:101:100:133::95 activate
-network 2001:133:99::/48
-```
-R1 Haiqal
+##### R4
 ```
 router bgp 159
 bgp router-id 2.2.2.2
@@ -342,8 +337,8 @@ network 2001:133:95::/48
 ```
 Configure Null Route
 ```
-ip route 133.99.0.0 255.255.0.0 Null0
-ipv6 route 2001:133:99::/48 Null0
+ip route 133.95.0.0 255.255.0.0 Null0
+ipv6 route 2001:133:95::/48 Null0
 ```
 Don't forget to add the Null route because the route needs to be in the routing table for bgp to work.
 
@@ -357,24 +352,24 @@ network 101.100.133.0 mask 255.255.255.0
 network 2001:101:100:133::/64
 ```
 
-## Configure Static routes on R2 and R1
+## Configure Static routes on R5 and R4
 
-##### R2
+##### R5
 ```
 ip route 133.95.0.0 255.255.0.0 g2/0
 ipv6 route 2001:133:95::/48 2001:133:99:2::1
 
 ip route 0.0.0.0 0.0.0.0 g2/0
-ipv6 route ::/0 2001:133:99:2::1
+ipv6 route ::/0 2001:133:95:2::1
 ```
 
-##### R1
+##### R4
 ```
-ip route 133.99.99.99 255.255.255.255 g0/2
-ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
+ip route 133.95.99.99 255.255.255.255 g2/0
+ipv6 route 2001:133:95:99::99/128 2001:133:95:2::
 
-ip route 133.99.1.0 255.255.255.252 g0/2
-ipv6 route 2001:133:99:1::/127 2001:133:99:2::
+ip route 133.95.1.0 255.255.255.252 g2/0
+ipv6 route 2001:133:95:1::/127 2001:133:95:2::
 ```
 
 R1
