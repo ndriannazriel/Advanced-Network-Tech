@@ -44,7 +44,11 @@ ip ospf 1 area 0
 ```
 
 ```
-int 
+int l0
+ipv6 ospf network point-to-point
+ipv6 ospf 1 area 0
+
+int g1/0
 ipv6 ospf network point-to-point
 ipv6 ospf 1 area 0
 ```
@@ -57,12 +61,12 @@ router ospf 1
 router-id 2.2.2.2
 default-information originate always
 
-int 
+int g1/0
 ip ospf 1 area 0
 ```
 
 ```
-int 
+int g1/0
 ipv6 ospf network point-to-point
 ipv6 ospf 1 area 0
 
@@ -71,8 +75,10 @@ default-information originate always
 ```
 
 Verify
-
-
+```
+show ospf neighbors
+show ip route ospf
+```
 
 
 ## Configure eBGP
@@ -88,50 +94,55 @@ address-family ipv6
 neighbor 2001:101:100:133::95 remote-as 159
 neighbor 2001:101:100:133::95 activate
 network 2001:133:99::/48
-
-show running-config | section router bgp
-
-network 101.100.133.0 mask 255.255.255.0
-network 2001:101:100:133::/64
 ```
-Haiqal punya
+R1 Haiqal
 ```
-router bgp 
+router bgp 159
 bgp router-id 2.2.2.2
 neighbor 101.100.133.99 remote-as 19
-network 133.71.0.0 mask 255.255.0.0
+network 133.95.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:101:100:133::99 remote-as 19
 neighbor 2001:101:100:133::99 activate
-network 2001:133:71::/48
+network 2001:133:95::/48
+```
+Configure Null Route
+```
+ip route 133.99.0.0 255.255.0.0 Null0
+ipv6 route 2001:133:99::/48 Null0
+```
+Don't forget to add the Null route because the route needs to be in the routing table for bgp to work.
 
+Verify
+```
 show running-config | section router bgp
+show ip bgp
+show bgp ipv6 unicast
 
 network 101.100.133.0 mask 255.255.255.0
 network 2001:101:100:133::/64
 ```
 
-```
-ip route 133.99.0.0 255.255.0.0 Null0
-ipv6 route 2001:133:99::/48 Null0
-
-sh bgp ipv6 unicast
-```
-Don't forget to add the Null route because the route needs to be in the routing table for bgp to work.
 ## Configure Static routes on R2 and R1
 
 ##### R2
 ```
-ip route 133.71.0.0 255.255.0.0 g2/0
-ipv6 route 2001:133:71::/48 2001:133:99:2::1
+ip route 133.95.0.0 255.255.0.0 g2/0
+ipv6 route 2001:133:95::/48 2001:133:99:2::1
+
+ip route 0.0.0.0 0.0.0.0 g2/0
+ipv6 route ::/0 2001:133:99:2::1
 ```
 
 ##### R1
 ```
 ip route 133.99.99.99 255.255.255.255 g0/2
 ipv6 route 2001:133:99:99::9/128 2001:133:99:2::
+
+ip route 133.99.1.0 255.255.255.252 g0/2
+ipv6 route 2001:133:99:1::/127 2001:133:99:2::
 ```
 Because of the route being configured as a /32, the only way to ping from one loopback to another loopback is to use the source ip of the loopback itself. 
 For example:
@@ -151,3 +162,4 @@ R1
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342060000ub03iy.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342097000cb1pio.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342174000pzfwid.png)
