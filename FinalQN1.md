@@ -13,6 +13,7 @@
 |              | l0        | 133.99.99.100  | 255.255.255.255 |                         |     |         |      |
 |              | g0/2      | 101.100.133.99 | 255.255.255.0   | 2001:101:100:133::99/64 |     |         |      |
 |              |           |                |                 |                         |     |         |      |
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734401545000n5d73y.png)
 
 ## Interface Configuration
 ##### R3
@@ -216,7 +217,7 @@ In IPv6, routing requires either a next-hop IPv6 address or the interface to hav
 
 
 --------------------------------------------------------------------------
-Config Haiqal
+## Config Haiqal
 ## Interface Configuration
 ##### R6
 ```
@@ -372,8 +373,4 @@ ip route 133.95.1.0 255.255.255.252 g2/0
 ipv6 route 2001:133:95:1::/127 2001:133:95:2::
 ```
 
-R1
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342060000ub03iy.png)
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342097000cb1pio.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734342174000pzfwid.png)
