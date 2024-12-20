@@ -14,6 +14,9 @@ cd /tmp
 curl https://raw.githubusercontent.com/GNS3/gns3-server/master/scripts/remote-install.sh > gns3-remote-install.sh
 sudo bash gns3-remote-install.sh --with-openvpn --with-iou --with-i386-repository
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734698233000kaggqy.png)
+
+
 Firewall Rule / Security Rule to use
 custom - udp - 1194
 custom - tcp - 8003

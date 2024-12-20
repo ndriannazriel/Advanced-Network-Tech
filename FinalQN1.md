@@ -130,7 +130,7 @@ show ospf neighbors
 show ip route ospf
 ```
 
-
+buang static route
 ## Configure eBGP
 ##### R1
 ```
@@ -196,10 +196,10 @@ ipv6 route 2001:133:99:1::/127 2001:133:99:2::
 ```
 ##### R1(Physical)
 ```
-ip route 133.99.99.99 255.255.255.255 g0/2
+ip route 133.99.99.99 255.255.255.255 g0/1
 ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
 
-ip route 133.99.1.0 255.255.255.252 g0/2
+ip route 133.99.1.0 255.255.255.252 g0/1
 ipv6 route 2001:133:99:1::/127 2001:133:99:2::
 ```
 Because of the route being configured as a /32, the only way to ping from one loopback to another loopback is to use the source ip of the loopback itself. 
@@ -374,3 +374,6 @@ ipv6 route 2001:133:95:1::/127 2001:133:95:2::
 ```
 
 
+R2
+no ip route 0.0.0.0 0.0.0.0 g2/0
+ip route 133.95.0.0 255.255.0.0 g2/0
