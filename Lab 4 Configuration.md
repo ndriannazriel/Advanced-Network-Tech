@@ -28,10 +28,16 @@ switchport access vlan 105
 ```
 
 ##### PC6
+```
 ip 192.168.0.2 255.255.255.128 192.168.0.1
+```
 
 ## Configure IPv4 PAT 
-Need to use acl - allow the internal network to be translated 192.168.0.0/25
+Need to use acl - allow the internal network to be translated (192.168.0.0/25)
+
+
+ACL1 allows traffic from the subnet **192.168.0.0/26** (IP range: 192.168.0.0–192.168.0.63) to be used for NAT.
+ACL2 allows traffic from the subnet **192.168.0.64/26** (IP range: 192.168.0.64–192.168.0.127) to be used for NAT.
 
 ##### R3
 ```
@@ -43,7 +49,7 @@ ip nat inside source list 1 pool PAT-POOL1 overload
 ip nat inside source list 2 pool PAT-POOL2 overload
 ```
 
-==Since OSPF can't be used to advertise this network directly, create a loopback address and instead advertise this network to the rest of the internal network making routing possible.==
+Since OSPF can't be used to advertise this network directly, I created a loopback address and instead advertise this network to the rest of the internal network making routing possible.
 
 ```
 interface Loopback1
