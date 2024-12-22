@@ -111,7 +111,7 @@ neighbor 100.100.99.1 remote-as 29
 network 100.100.99.0 mask 255.255.255.252
 network 150.99.0.0 mask 255.255.0.0
 ```
-==Ipv6==
+
 ```
 bgp log-neighbor-changes
 address-family ipv6
