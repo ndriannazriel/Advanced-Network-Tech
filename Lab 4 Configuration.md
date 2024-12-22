@@ -38,6 +38,7 @@ Need to use acl - allow the internal network to be translated (192.168.0.0/25)
 
 ACL1 allows traffic from the subnet **192.168.0.0/26** (IP range: 192.168.0.0–192.168.0.63) to be used for NAT.
 ACL2 allows traffic from the subnet **192.168.0.64/26** (IP range: 192.168.0.64–192.168.0.127) to be used for NAT.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734847859000uytfk6.png)
 
 ##### R3
 ```
@@ -76,7 +77,6 @@ show ip nat translations
 show ip nat statistics
 ```
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173306718100009z3b3.png)
-
 
 ## Remove static route to ISP and configure eBGP
 
