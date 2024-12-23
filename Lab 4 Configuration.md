@@ -1,5 +1,5 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733065059000drn94b.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733066082000m0jl3o.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947990000yi6oqi.png)
 
 ## Add Net 105 (VLAN 105)
 ##### R3 
@@ -75,8 +75,11 @@ passive-interface g2/0
 ```
 show ip nat translations
 show ip nat statistics
+sh ip access-lists
 ```
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173306718100009z3b3.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947590000p9zmoo.png)
 
 ## Remove static route to ISP and configure eBGP
 
@@ -89,6 +92,7 @@ router bgp 29
 bgp router-id 1.1.1.1
 neighbor 100.100.99.2 remote-as 19
 network 142.99.0.0 mask 255.255.0.0
+
 network 100.100.99.0 mask 255.255.255.252
 ```
 
@@ -97,7 +101,8 @@ bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:100:100:99::1 remote-as 19
 neighbor 2001:100:100:99::1 activate
-network 2001:142:99::/48 
+network 2001:142:99::/48
+
 network 2001:100:100:99::/127 
 ```
 
@@ -108,8 +113,9 @@ Make sure 150.99.0.0/16 Null route is configured first so that bgp knows that ro
 router bgp 19
 bgp router-id 2.2.2.2 
 neighbor 100.100.99.1 remote-as 29
-network 100.100.99.0 mask 255.255.255.252
 network 150.99.0.0 mask 255.255.0.0
+
+network 100.100.99.0 mask 255.255.255.252
 ```
 
 ```
@@ -117,8 +123,9 @@ bgp log-neighbor-changes
 address-family ipv6
 neighbor 2001:100:100:99:: remote-as 29
 neighbor 2001:100:100:99:: activate
-network 2001:100:100:99::/127
 network 2001:150:99::/48
+
+network 2001:100:100:99::/127
 ```
 
 **VERIFY**
@@ -129,16 +136,16 @@ show bgp ipv6 unicast
 show bgp ipv6 unicast summary
 show bgp ipv6 neighbors
 ```
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067387000m3uouj.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067409000sb781j.png)
-The 100.100.99.4/30 network can be ignored.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947723000j8wg9n.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947750000qh07mv.png)
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067445000f2hdf4.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067251000vgh91h.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947803000diit29.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17349477760002y65pi.png)
+
 
 show ip route
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067769000dejgja.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733067808000gjx18q.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734947876000v4t1jj.png)
+
 
 
 

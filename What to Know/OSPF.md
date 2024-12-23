@@ -92,3 +92,20 @@ passive-interface
 ```
 
 
+--------------------------------------------------------------------------
+## Network Point-to-Point 
+
+In a **point-to-point OSPF network** like **R1 ↔ R2 ↔ R3 ↔ R4**, a Designated Router (DR) and Backup Designated Router (BDR) are not required.
+
+This is because ;
+OSPF forms a **full adjacency** directly between the two routers without needing a central coordinator (DR/BDR).
+A DR/BDR is used in **multi-access networks** (e.g., Ethernet LAN) to reduce OSPF overhead by limiting the number of adjacencies.
+DR/BDR functionality is critical for managing OSPF communication over **broadcast** networks, where routers communicate via multicast.
+In a point-to-point link, OSPF packets are sent directly to the neighbor, bypassing the need for multicast coordination by a DR.
+
+A DR/BDR is unnecessary in point-to-point networks because:
+
+- OSPF adjacency is limited to two routers per link.
+- OSPF communication is direct, not multicast.
+- The topology inherently prevents adjacency overload.
+
