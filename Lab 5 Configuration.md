@@ -130,25 +130,25 @@ Apply this change to **all trunk interfaces** on switches DSW1 to DSW4 (10 inter
 vlan 99
 name NATIVE
 
-interface port-channel 1, <> , <>
+interface port-channel 1, f1/1 , f1/2
 switchport trunk native vlan 99
 ```
 
 ##### DSW2
 ```
-interface port-channel 1, <> , <>
+interface port-channel 1, f1/1 , f1/2
 switchport trunk native vlan 99
 ```
 
 ##### DSW3
 ```
-int range <> , <>
+int range f1/0 , f1/1
 switchport trunk native vlan 99
 ```
 
 ##### DSW4
 ```
-int range <> , <>
+int range f1/0 , f1/1
 switchport trunk native vlan 99
 ```
 
