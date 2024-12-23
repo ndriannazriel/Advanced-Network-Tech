@@ -11,3 +11,26 @@ In this case:
 - Rule **30** is evaluated last.
 
 In summary, the sequence number represents the **position of the rule** within the access list and the lower the sequence number, the higher priority.
+
+
+
+### Numbered ACLs VS Named ACLs
+
+#### Numbered ACLs
+```
+access-list 101 permit ip 142.99.2.128 0.0.0.127 any
+access-list 101 deny tcp any any eq 23
+
+access-class 101 in
+```
+
+#### Named ACLs
+```
+ip access-list standard SSH_ACCESS
+permit 142.99.2.128 0.0.0.127
+deny tcp any any eq telnet
+
+access-class SSH_ACCESS in
+```
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734966486000nmsrew.png)

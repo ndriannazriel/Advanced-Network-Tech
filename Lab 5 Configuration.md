@@ -58,21 +58,19 @@ network 2001:150:99::/48
 - Users must authenticate using locally defined credentials.
 
 ```
+aaa new-model
+username ANDRIAN secret mypass 
+
 ip domain-name andrian.com
 crypto key generate rsa
 How many bits in the modulus [512]: 2048
+
 ip ssh version 2
-
-username admin_ANDRIAN privilege 15 secret mypass
-
-aaa new-model
-aaa authentication login SSH_LOGIN local / aaa authentication login default local
 
 access-list 101 permit ip 142.99.2.128 0.0.0.127 any
 
 line vty 0 4
 access-class 101 in
-login authentication SSH_LOGIN
 transport input ssh
 ```
 
@@ -88,6 +86,10 @@ ssh admin@100.100.99.2
 
 ## Reconfigure DSW4 After Changing
 ```
+int range <>
+no nego auto
+duplex full
+
 vtp mode client
 vtp domain ANDRIAN
 vtp password ANDRIAN
@@ -96,6 +98,14 @@ interface <>
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan all
+
+int range <>
+sw mode acc
+
+int <>
+sw access vlan 102
+int <>
+sw access vlan 103
 ```
 
 ## Enable Port Security
@@ -107,7 +117,7 @@ switchport trunk allowed vlan all
 switchport port-security
 switchport port-security maximum 1
 switchport port-security violation shutdown/protect/restrict
-switchport port-security mac-address <MAC_ADDRESS>
+switchport port-security mac-address <MAC_ADDRESS> / sticky
 
 show port-security
 ```
@@ -115,14 +125,38 @@ show port-security
 ## Change Native Vlan 99
 Apply this change to **all trunk interfaces** on switches DSW1 to DSW4 (10 interfaces total).
 
+##### DSW1 (VTP server)
 ```
 vlan 99
 name NATIVE
 
-interface port-channel 1
+interface port-channel 1, <> , <>
 switchport trunk native vlan 99
 ```
 
+##### DSW2
+```
+interface port-channel 1, <> , <>
+switchport trunk native vlan 99
+```
+
+##### DSW3
+```
+int range <> , <>
+switchport trunk native vlan 99
+```
+
+##### DSW4
+```
+int range <> , <>
+switchport trunk native vlan 99
+```
+
+##### Verify
+```
+sh ip int br
+sh int trunk
+```
 ## Enable Spanning Tree Port-Fast And BDPU Guard
 
 ##### DSW3
@@ -130,9 +164,10 @@ switchport trunk native vlan 99
 spanning-tree portfast default
 spanning-tree portfast bpduguard default
 ```
-==OR==
+
+Use this one below instead.
 ```
-spanning-tree portfast bpduguard ~~enable~~
+spanning-tree portfast bpduguard 
 
 interface f1/2
 spanning-tree portfast
@@ -153,6 +188,7 @@ Ensure service dhcp is configured on dsw1 and dsw2
 
 **Configure IP helper address on DSW1 and DSW2**
 ```
+service dhcp
 int vlan 102
 ip helper-address (ip on the interface connecting to R2)
 ```
@@ -166,12 +202,15 @@ default-router 142.99.2.3 (VIP for VLAN102) - Tells devices in VLAN102 to use th
 ```
 
 **Optional**
+```
 dns-server 8.8.8.8
-domain-name example.com
+domain-name andrian.com
+```
 
 **Verify**
 ```
 show ip dhcp binding
+sh ip dhcp pool
 show ip helper address
 ```
 ## Configure IP DHCP Snooping and Dynamic ARP Inspection(DAI)
@@ -195,7 +234,6 @@ show ip dhcp snooping binding
 ```
 **DAI**
 ```
-ip arp inspection vlan 101
 ip arp inspection vlan 102
 ip arp inspection vlan 103
 
