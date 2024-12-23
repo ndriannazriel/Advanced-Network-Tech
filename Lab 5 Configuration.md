@@ -25,16 +25,16 @@ After setting up your VM, KVM(Nested virtualization) is not enabled by default. 
 https://github.com/infotechca/gns3-on-gcp/blob/main/README.md
 
 Troubleshooting in case the same problems come up.
-"Cannot connect to compute 'Gns3Server' with request POST /projects"
-==For this, that means that the server/vm has a problem so try restarting it or if worst comes to worst, create a whole new vm.==
-"The image vios_l2-adventerprisek9-m.vmdk.SSA.152-4.0.55.E is missing"
-==For this, delete the image and add back.==
+**"Cannot connect to compute 'Gns3Server' with request POST /projects"**
+For this, that means that the server/vm has a problem so try restarting it or if worst comes to worst, create a whole new vm.
+**"The image vios_l2-adventerprisek9-m.vmdk.SSA.152-4.0.55.E is missing"**
+For this, delete the image and add back.
 
 The problem here is if the vios image is in the lab and I off both the VM and OpenVPN, losing connection to the gns3 server, then once I reopen again, I notice that I can't open it and will get both of the messages above indicating something went wrong.
 
 ## Peering ISP with group members using ebgp
 
-##### ISP1 (MY ISP)
+##### ISP1 (MY PHYSICAL ISP)
 ``` 
 router bgp 19
 bgp router-id 2.2.2.2 
@@ -94,17 +94,17 @@ vtp mode client
 vtp domain ANDRIAN
 vtp password ANDRIAN
 
-interface <>
+interface f1/0 - 1
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan all
 
-int range <>
+int range f1/2 , f1/3
 sw mode acc
 
-int <>
+int f1/3
 sw access vlan 102
-int <>
+int f1/2
 sw access vlan 103
 ```
 
