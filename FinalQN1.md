@@ -1,3 +1,5 @@
+NOTE : REDO THIS EXERCISE USING THE OTHER WAY
+
 | Device Name  | Interface | Ipv4           | SubMask         | Ipv6                    | DG  | DG Ipv6 | VLAN |
 | ------------ | --------- | -------------- | --------------- | ----------------------- | --- | ------- | ---- |
 | R3           | loopback  | 133.99.99.99   | 255.255.255.255 | 2001:133:99:99::99/128  |     |         |      |
