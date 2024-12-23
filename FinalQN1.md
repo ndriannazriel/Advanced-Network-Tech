@@ -1,4 +1,5 @@
 NOTE : REDO THIS EXERCISE USING THE OTHER WAY
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734969217000ircczm.png)
 
 | Device Name  | Interface | Ipv4           | SubMask         | Ipv6                    | DG  | DG Ipv6 | VLAN |
 | ------------ | --------- | -------------- | --------------- | ----------------------- | --- | ------- | ---- |
