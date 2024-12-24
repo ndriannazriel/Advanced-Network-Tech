@@ -217,15 +217,22 @@ spanning-tree interface <> br
 Ensure service dhcp is configured on dsw1 and dsw2
 
 **Configure IP helper address on DSW1 and DSW2**
+##### DSW1
 ```
 service dhcp
 int vlan 102
-ip helper-address (ip on the interface connecting to R2)
+ip helper-address 142.99.3.1 redundancy
 ```
 
+##### DSW2
+```
+service dhcp
+int vlan 102
+ip helper-address 142.99.3.14 redundancy
+```
 ##### R2
 ```
-ip dhcp excluded-address 142.99.2.1 142.99.2.9
+ip dhcp excluded-address 142.99.2.1 142.99.2.10
 ip dhcp pool VLAN102
 network 142.99.2.0 255.255.255.128
 default-router 142.99.2.3 (VIP for VLAN102) - Tells devices in VLAN102 to use this as DG
