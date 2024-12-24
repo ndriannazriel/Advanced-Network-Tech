@@ -82,7 +82,9 @@ show access-lists 101
 show running-config | section line vty
 ```
 
-ssh admin@100.100.99.2
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735031025000xfq7jc.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350310520009oviec.png)
 
 ## Reconfigure DSW4 After Changing
 ```
@@ -93,6 +95,7 @@ duplex full
 int g0/1
 no nego auto
 duplex full
+exi
 
 vtp mode client
 vtp domain ANDRIAN
@@ -115,6 +118,7 @@ int g0/3
 sw access vlan 102
 int g0/2
 sw access vlan 103
+
 ```
 
 ##### Verify
@@ -126,6 +130,7 @@ sh ip int br
 ## Enable Port Security
 
 - Apply **only** on access port
+
 switchport port-security maximum 1
 switchport port-security violation shutdown/protect/restrict
 switchport port-security mac-address <MAC_ADDRESS> / sticky
@@ -142,7 +147,14 @@ switchport port-security
 switchport port-security maximum 1
 switchport port-security violation restrict
 switchport port-security mac-address sticky
+
 ```
+
+int g0/2
+no switchport port-security
+no switchport port-security maximum 1
+no switchport port-security violation restrict
+no switchport port-security mac-address sticky
 
 ##### Verify
 ```
@@ -185,6 +197,15 @@ switchport trunk native vlan 99
 sh ip int br
 sh int trunk
 ```
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030797000pk26ll.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030886000emls7h.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030934000k5zdur.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350307610003q4fqc.png)
+
+
 ## Enable Spanning Tree Port-Fast And BDPU Guard
 
 ##### DSW3
@@ -228,7 +249,7 @@ ip helper-address 142.99.3.1 redundancy hsrp-Vl102-2
 ```
 service dhcp
 int vlan 102
-ip helper-address 142.99.3.14 redundancy 2 hsrp-Vl102-2
+ip helper-address 142.99.3.14 redundancy hsrp-Vl102-2
 ```
 ##### R2
 ```
@@ -250,6 +271,16 @@ show ip dhcp binding
 sh ip dhcp pool
 show ip helper address
 ```
+PC3(VLAN 102)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735029937000jxmmuh.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030024000qumx86.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030075000tf4bdx.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350301320007q3k8m.png)
+
+
 ## Configure IP DHCP Snooping and Dynamic ARP Inspection(DAI)
 **Mark trusted interfaces**
 Trusted interfaces are where DHCP servers or relay agents are connected. These interfaces are allowed to send DHCP server messages. *On Trunk Ports.*
@@ -261,24 +292,28 @@ ip dhcp snooping
 ip dhcp snooping vlan 102
 ip dhcp snooping vlan 103
 
-int f1/0, f1/1 
-ip dhcp inspection trust
-```
-**Verify**
-```
-show ip dhcp snooping
-show ip dhcp snooping binding
+int range g0/0, g0/1 
+ip dhcp snooping trust
+
 ```
 **DAI**
 ```
 ip arp inspection vlan 102
 ip arp inspection vlan 103
 
-int f1/0, f1/1
+int range g0/0 , g0/1
 ip arp inspection trust
+
 ```
 **Verify**
 ```
+show ip dhcp snooping
+show ip dhcp snooping binding
 show ip arp inspection
 show ip arp inspection vlan <vlan-id>
+
 ```
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350305780003hwj9h.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030644000t1kz7w.png)

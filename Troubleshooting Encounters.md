@@ -21,3 +21,10 @@ Even after doing no shut, protocol is still labeled as down.
 
 Cause : Gns3 retarded
 Solution : Shut no shut
+
+--------------------------------------------------------------------------
+Problem : HSRP states flapping
+Cause : CPU usage of the gns3 server is too high. Due to the high traffic coming from viosl2, the switch that are running HSRP will cause it to malfunction.
+Solution : Only on 1 distribution layer switch so that HSRP isn't enabled. 
+
+Now you can on
