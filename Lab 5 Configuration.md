@@ -221,14 +221,14 @@ Ensure service dhcp is configured on dsw1 and dsw2
 ```
 service dhcp
 int vlan 102
-ip helper-address 142.99.3.1 redundancy 2
+ip helper-address 142.99.3.1 redundancy hsrp-Vl102-2
 ```
 
 ##### DSW2
 ```
 service dhcp
 int vlan 102
-ip helper-address 142.99.3.14 redundancy 2
+ip helper-address 142.99.3.14 redundancy 2 hsrp-Vl102-2
 ```
 ##### R2
 ```
