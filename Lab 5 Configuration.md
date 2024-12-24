@@ -86,7 +86,11 @@ ssh admin@100.100.99.2
 
 ## Reconfigure DSW4 After Changing
 ```
-int range <>
+int g0/0
+no nego auto
+duplex full
+
+int g0/1
 no nego auto
 duplex full
 
@@ -94,33 +98,57 @@ vtp mode client
 vtp domain ANDRIAN
 vtp password ANDRIAN
 
-interface f1/0 - 1
+interface g0/0 
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan all
 
-int range f1/2 , f1/3
+interface g0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+
+int range g0/2 , g0/3
 sw mode acc
 
-int f1/3
+int g0/3
 sw access vlan 102
-int f1/2
+int g0/2
 sw access vlan 103
+```
+
+##### Verify
+```
+sh vlan
+sh ip int br
 ```
 
 ## Enable Port Security
 
 - Apply **only** on access port
-
-##### DSW4
-```
-switchport port-security
 switchport port-security maximum 1
 switchport port-security violation shutdown/protect/restrict
 switchport port-security mac-address <MAC_ADDRESS> / sticky
+##### DSW4
+```
+int g0/3
+switchport port-security
+switchport port-security maximum 1
+switchport port-security violation restrict
+switchport port-security mac-address sticky
 
+int g0/2
+switchport port-security
+switchport port-security maximum 1
+switchport port-security violation restrict
+switchport port-security mac-address sticky
+```
+
+##### Verify
+```
 show port-security
 ```
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17349995680006j7k6c.png)
 
 ## Change Native Vlan 99
 Apply this change to **all trunk interfaces** on switches DSW1 to DSW4 (10 interfaces total).
@@ -148,7 +176,7 @@ switchport trunk native vlan 99
 
 ##### DSW4
 ```
-int range f1/0 , f1/1
+int range g0/0 , g0/1
 switchport trunk native vlan 99
 ```
 
@@ -179,9 +207,11 @@ spanning-tree portfast
 **Verify**
 ```
 show spanning-tree summary
-spanning-tree interface <> detail
+spanning-tree interface <> br
 ```
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733155874000jpxsa3.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734999824000lwxxdf.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734999869000rgq2n7.png)
 
 ## Configure R2 as DHCP Server
 Ensure service dhcp is configured on dsw1 and dsw2
