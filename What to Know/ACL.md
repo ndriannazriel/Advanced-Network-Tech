@@ -49,6 +49,12 @@ A network is summarized based on how many bits remain the **same** for all IPs i
 - In this case, the first **20 bits** (16 bits for the first two octets and 4 bits for the third octet) are the same for all IPs from 192.168.16.0 to 192.168.31.255.
 - Therefore, the range can be summarized as **192.168.16.0/20**.
 
+##### Host and any keyword
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735053060000alrr8t.png)
+
+**host** - This keyword substitutes for the 0.0.0.0 mask. This mask states that all IPv4 address bits must match to filter just one host address.
+**any** - This keyword substitutes for the 255.255.255.255 mask. This mask says to ignore the entire IPv4 address or to accept any addresses.
+
 
 --------------------------------------------------------------------------
 ### Numbered ACLs VS Named ACLs
@@ -63,14 +69,45 @@ access-class 101 in
 
 #### Named ACLs
 ```
-ip access-list standard SSH_ACCESS
+ip access-list extended SSH_ACCESS
 permit 142.99.2.128 0.0.0.127
 deny tcp any any eq telnet
 
 access-class SSH_ACCESS in
 ```
 
+```
+show ip protocols | include Service
+```
+
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734966486000nmsrew.png)
+
+--------------------------------------------------------------------------
+## Where to Place ACLs
+
+The figure illustrates where standard and extended ACLs should be located in an enterprise network. Assume the objective to **prevent traffic originating in the 192.168.10.0/24 network from reaching the 192.168.30.0/24 network.**
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735137569000d6l2nc.png)
+Extended ACLs should be located as close as possible to the source of the traffic to be filtered. This way, undesirable traffic is denied close to the source network without crossing the network infrastructure.
+
+Standard ACLs should be located as close to the destination as possible. If a standard ACL was placed at the source of the traffic, the "permit" or "deny" will occur based on the given source address no matter where the traffic is destined.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17351382650006f0t6q.png)
+
+##### Placement of Standard ACLs
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735138434000ukar8i.png)
+Following the basic placement guidelines, the administrator would place a standard ACL on router R3. There are two possible interfaces on R3 to apply the standard ACL:
+
+- **R3 S0/1/1 interface** **(inbound)** - The standard ACL can be applied inbound on the R3 S0/1/1 interface to deny traffic from.10 network. However, it would also filter.10 traffic to the 192.168.31.0/24 (.31 in this example) network. Therefore, the standard ACL should not be applied to this interface.
+- **R3 G0/0 interface** **(outbound)** - The standard ACL can be applied outbound on the R3 G0/0/0 interface. This will not affect other networks that are reachable by R3. Packets from.10 network will still be able to reach the.31 network. **This is the best interface to place the standard ACL to meet the traffic requirements.**
+
+##### Placement of Extended ACLs
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17351386130001w7w7s.png)
+
+There are 3 ways to do this.
+1) Put an extended ACL on R3 BUT then the unwanted traffic would travel across the network affecting the overall network efficiency.
+2) Put at S0/1/0 R1(outbound) BUT this solution will process all packets leaving R1 including packets from 192.168.10.0/24. If possible, avoid making the router do more work/processing.
+3) Put at G0/0/1 R1(inbound) only packets from the 192.168.11.0/24 network are subject to ACL processing on R1. Because the filter is to be limited to only those packets leaving the 192.168.11.0/24 network, applying the extended ACL to G0/1 is the **best solution.**
 
 
 
@@ -87,3 +124,6 @@ In this case:
 - Rule **30** is evaluated last.
 
 In summary, the sequence number represents the **position of the rule** within the access list and the lower the sequence number, the higher priority.
+
+--------------------------------------------------------------------------
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17351367360005a193x.png)
