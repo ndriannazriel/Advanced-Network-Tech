@@ -36,8 +36,8 @@ Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Intern
 ##### R3
 ```
 ip access-list extended DMZ_Internet_Access
-permit 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
-permit 192.168.0.0 0.0.0.127 150.99.0.1 0.0.0.0
+permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
+permit ip 192.168.0.0 0.0.0.127 150.99.0.1 0.0.0.0
 
 int g2/0
 access-class DMZ_Internet_Access in
@@ -57,7 +57,7 @@ Inbound because same reason as before.
 ##### R1
 ```
 ip access-list extended DMZ_FROM_EXTERNAL
-permit any 142.99.4.0 0.0.0.63
+permit ip any 142.99.4.0 0.0.0.63
 
 int g4/0
 access-class DMZ_FROM_EXTERNAL in
@@ -75,10 +75,36 @@ Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
 Outbound
 ##### R3
 ```
-ip access-list standard DENY_FROM_INTERNAL
+ip access-list standard BLOCK_FROM_INTERNAL
 deny 142.99.0.0 0.0.255.255
 
 int g2/0
 access-class DENY_FROM_INTERNAL out
 ```
 
+### iv) DMZ can't initialize access to anywhere
+
+Source : DMZ
+Destination : Any network besides DMZ
+
+First question, do you use standard ACL or extended ACL?
+Extended
+
+Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
+Outbound
+
+##### R3
+```
+ip access-list extended BLOCK_DMZ_OUTBOUND
+deny ip 142.99.4.0 0.0.0.63 any
+
+int g3/0
+access-class BLOCK_DMZ_OUTBOUND out
+```
+
+### v) Enable Infrastructure Protection ACL on R1
+
+##### R1
+```
+
+```
