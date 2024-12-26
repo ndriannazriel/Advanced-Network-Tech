@@ -1,6 +1,9 @@
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1732526463000wtzsqk.png)
 
+MY TOPOLOGY
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735205025000fz10wc.png)
+
 ## Setting Up the GNS3 Server
 Download http://35.240.240.97:8003/25b4853a-b312-11ef-b954-3bcc513fa6ad/gns3vm.ovpn to setup your OpenVPN client after rebooting the server
 ~~ssh -i "GNS3ServerNdrian_key.pem" ndriannazriel04@20.243.132.11 (Azure)~~
@@ -72,6 +75,17 @@ access-list 10 permit 142.99.2.128 0.0.0.127
 line vty 0 4
 access-class 10 in
 transport input ssh
+```
+
+##### R4(SSH router)
+```
+int g1/0
+ip add 142.99.2.141
+no sh
+
+ip route 100.100.99.0 255.255.255.252 g1/0
+
+ssh -l ANDRIAN 100.100.99.2
 ```
 
 **Verify**
