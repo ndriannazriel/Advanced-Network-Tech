@@ -10,8 +10,9 @@ network 192.168.0.0 255.255.255.0
 default-router 192.168.0.1
 ```
 
+##### ESW7
 ```
-ip helper-address 
+ip helper-address 192.168.1.1
 ```
 
 ## Configure ACLs
