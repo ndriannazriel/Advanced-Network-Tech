@@ -46,7 +46,30 @@ access-class DMZ_Internet_Access in
 
 ### ii) All external traffic can only access DMZ
 
+Source : External traffic e.g 142.71.0.0/16
+Destination : DMZ
+
+First question, do you use standard ACL or extended ACL?
+Use extended ACL because a standard ACL can't filter traffic based on the destination ip.
+
+Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
+Inbound because same reason as before.
 ##### R1
 ```
+ip access-list extended DMZ_FROM_EXTERNAL
+permit any 142.99.4.0 0.0.0.63
 
+int g4/0
+access-class DMZ_FROM_EXTERNAL in
 ```
+
+### iii) Internal network access all network except Net105
+
+Source : All
+Destination : Net105
+
+First question, do you use standard ACL or extended ACL?
+
+
+Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
+
