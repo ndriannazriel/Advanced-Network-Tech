@@ -16,7 +16,7 @@ ip helper-address
 
 ## Configure ACLs
 
-### Net105 only have access to DMZ and Internet
+### i) Net105 only have access to DMZ and Internet
 
 Source : Net105 (192.168.0.0/25)
 Destination : DMZ and Internet
@@ -36,5 +36,17 @@ Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Intern
 ##### R3
 ```
 ip access-list extended DMZ_Internet_Access
-permit 14
+permit 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
+permit 192.168.0.0 0.0.0.127 150.99.0.1 0.0.0.0
+
+int g2/0
+access-class DMZ_Internet_Access in
+```
+
+
+### ii) All external traffic can only access DMZ
+
+##### R1
+```
+
 ```
