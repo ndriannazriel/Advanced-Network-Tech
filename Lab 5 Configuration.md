@@ -67,10 +67,10 @@ How many bits in the modulus [512]: 2048
 
 ip ssh version 2
 
-access-list 101 permit ip 142.99.2.128 0.0.0.127 any
+access-list 10 permit 142.99.2.128 0.0.0.127 
 
 line vty 0 4
-access-class 101 in
+access-class 10 in
 transport input ssh
 ```
 
@@ -78,13 +78,14 @@ transport input ssh
 ```
 show ip ssh
 show running-config | section aaa
-show access-lists 101
+show access-lists 10
 show running-config | section line vty
 ```
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17352047300005wcx09.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735031025000xfq7jc.png)
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350310520009oviec.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735202850000340a3r.png)
 
 ## Reconfigure DSW4 After Changing
 ```
@@ -317,3 +318,8 @@ show ip arp inspection vlan <vlan-id>
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17350305780003hwj9h.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735030644000t1kz7w.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735202311000798zdt.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173520222500070r2de.png)
+
