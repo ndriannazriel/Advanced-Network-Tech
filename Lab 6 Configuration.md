@@ -69,7 +69,16 @@ Source : All
 Destination : Net105
 
 First question, do you use standard ACL or extended ACL?
-
+Standard
 
 Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
+Outbound
+##### R3
+```
+ip access-list standard DENY_FROM_INTERNAL
+deny 142.99.0.0 0.0.255.255
+
+int g2/0
+access-class DENY_FROM_INTERNAL out
+```
 
