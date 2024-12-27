@@ -74,13 +74,21 @@ Standard
 
 Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
 Outbound
-##### R3
+##### R3(Wrong)
 ```
 ip access-list standard BLOCK_FROM_INTERNAL
 deny 142.99.0.0 0.0.255.255
 
 int g2/0
-access-class DENY_FROM_INTERNAL out
+ip access-group BLOCK_FROM_INTERNAL out
+```
+##### R3(Correct) - skip for now
+```
+ip access-list standard BLOCK_FROM_INTERNAL
+permit 192.168.0.0 0.0.0.127
+
+int port-channel 1
+ip access-group BLOCK_FROM_INTERNAL out
 ```
 
 ### iv) DMZ can't initialize access to anywhere
@@ -97,15 +105,32 @@ Outbound
 ##### R3
 ```
 ip access-list extended BLOCK_DMZ_OUTBOUND
+permit icmp any any echo-reply 
+permit ospf any any
 deny ip 142.99.4.0 0.0.0.63 any
+permit ip any any
 
 int g3/0
-access-class BLOCK_DMZ_OUTBOUND out
+ip access-group BLOCK_DMZ_OUTBOUND in
 ```
 
+Note : I don't understand the permit ip any any ace YET.
 ### v) Enable Infrastructure Protection ACL on R1
+
+What is Infrastructure Protection ACL?
+The singular purpose of the infrastructure protection ACL is to restrict on a granular level what protocols and sources can access critical infrastructure equipment.
+
+**Edge filtering via infrastructure ACLs**
+ACLs can be applied to the edge of the network. In the case of a service provider (SP), this is the edge of the AS. This ACL explicitly filters traffic destined for infrastructure address space. Deployment of edge infrastructure ACLs requires that you clearly define your infrastructure space and the required/authorized protocols that access this space. The ACL is applied at ingress to your network on all externally facing connections, such as peering connections, customer connections, and so forth.
+
+Define infrastructure
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735313675000xip4e3.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735313718000j8bywp.png)
 
 ##### R1
 ```
 
 ```
+
+
