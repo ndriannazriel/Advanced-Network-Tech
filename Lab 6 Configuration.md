@@ -73,7 +73,7 @@ First question, do you use standard ACL or extended ACL?
 Standard
 
 Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
-Outbound
+Outbound. Why not inbound? That's because I have already configured the ACL in i) in the "in" direction. 2 ACLs of the same direction cannot be on the same interface.
 ##### R3(Wrong)
 ```
 ip access-list standard BLOCK_FROM_INTERNAL
@@ -130,6 +130,30 @@ Define infrastructure
 
 ##### R1
 ```
+ip access-list extended DMZ_FROM_EXTERNAL
+!--- Deny special-use address sources. 
+deny ip host 0.0.0.0 any
+deny ip 127.0.0.0 0.255.255.255 any
+deny ip 192.0.2.0 0.0.0.255 any
+deny ip 224.0.0.0 31.255.255.255 any
+
+!--- Filter RFC 1918 space.
+deny ip 10.0.0.0 0.255.255.255 any
+deny ip 172.16.0.0 0.15.255.255 any
+deny ip 192.168.0.0 0.0.255.255 any
+
+!--- Deny your space as source from entering your AS. !--- Deploy only at the AS edge
+deny ip 142.99.0.0 0.0.255.255 any
+
+!--- Permit BGP.
+permit tcp host bgp_peer host router_ip eq bgp
+permit tcp host bgp_peer eq bgp host router_ip
+
+!--- Deny access to internal infrastructure addresses.
+deny ip any 142.99.0.0 0.0.255.255
+
+!--- Permit transit traffic.
+permit ip any any
 
 ```
 
