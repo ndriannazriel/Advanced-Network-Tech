@@ -144,8 +144,8 @@ deny ip 192.168.0.0 0.0.255.255 any
 deny ip 142.99.0.0 0.0.255.255 any
 
 !--- Permit BGP.
-permit tcp host bgp_peer host router_ip eq bgp
-permit tcp host bgp_peer eq bgp host router_ip
+permit tcp host 100.100.99.2 host 100.100.99.1 eq bgp
+permit tcp host 100.100.99.2 eq bgp host 100.100.99.1
 
 !--- Deny access to internal infrastructure addresses.
 deny ip any 142.99.0.0 0.0.255.255
