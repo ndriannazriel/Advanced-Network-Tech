@@ -155,4 +155,22 @@ permit ip any any
 
 ```
 
+##### R1(IPv6)
+```
+!--- Configure the access-list.
+ipv6 access-list iacl
+
+!--- Deny your space as source from entering your AS. !--- Deploy only at the AS edge.
+deny ipv6 YOUR_CIDR_BLOCK_IP any
+
+!--- Permit multiprotocol BGP.
+permit tcp host bgp_peer_ipv6 host router_ipv6 eq bgp
+permit tcp host bgp_peer_ipv6 eq bgp host router_ipv6
+
+!--- Deny access to internal infrastructure addresses.
+deny ipv6 any INTERNAL_INFRASTRUCTURE_ADDRESSES_IPV6
+
+!--- Permit transit traffic.
+permit ipv6 any any
+```
 
