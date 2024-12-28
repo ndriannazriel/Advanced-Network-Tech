@@ -33,7 +33,6 @@ Inbound because if configured at OUTBOUND, the packets would reach the egress in
 
 Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Internet only.
 
-
 ##### R3
 ```
 ip access-list extended DMZ_Internet_Access
@@ -41,9 +40,8 @@ permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
 permit ip 192.168.0.0 0.0.0.127 150.99.0.1 0.0.0.0
 
 int g2/0
-access-class DMZ_Internet_Access in
+ip access-group DMZ_Internet_Access in
 ```
-
 
 ### ii) All external traffic can only access DMZ
 
@@ -61,7 +59,7 @@ ip access-list extended DMZ_FROM_EXTERNAL
 permit ip any 142.99.4.0 0.0.0.63
 
 int g4/0
-access-class DMZ_FROM_EXTERNAL in
+ip access-group DMZ_FROM_EXTERNAL in
 ```
 
 ### iii) Internal network access all network except Net105
@@ -70,11 +68,11 @@ Source : All
 Destination : Net105
 
 First question, do you use standard ACL or extended ACL?
-Standard
+Standard.
 
 Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
-Outbound. Why not inbound? That's because I have already configured the ACL in i) in the "in" direction. 2 ACLs of the same direction cannot be on the same interface.
-##### R3(Wrong)
+Outbound. 
+##### R3.1(Use this and send to JY)
 ```
 ip access-list standard BLOCK_FROM_INTERNAL
 deny 142.99.0.0 0.0.255.255
@@ -82,7 +80,7 @@ deny 142.99.0.0 0.0.255.255
 int g2/0
 ip access-group BLOCK_FROM_INTERNAL out
 ```
-##### R3(Correct) - skip for now
+##### R3.2
 ```
 ip access-list standard BLOCK_FROM_INTERNAL
 permit 192.168.0.0 0.0.0.127
@@ -91,7 +89,7 @@ int port-channel 1
 ip access-group BLOCK_FROM_INTERNAL out
 ```
 
-### iv) DMZ can't initialize access to anywhere
+### iv) DMZ can't initialize access to anywhere 
 
 Source : DMZ
 Destination : Any network besides DMZ

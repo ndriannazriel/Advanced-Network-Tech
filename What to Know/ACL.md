@@ -99,7 +99,7 @@ Standard ACLs should be located as close to the destination as possible. If a st
 Following the basic placement guidelines, the administrator would place a standard ACL on router R3. There are two possible interfaces on R3 to apply the standard ACL:
 
 - **R3 S0/1/1 interface** **(inbound)** - The standard ACL can be applied inbound on the R3 S0/1/1 interface to deny traffic from.10 network. However, it would also filter.10 traffic to the 192.168.31.0/24 (.31 in this example) network. Therefore, the standard ACL should not be applied to this interface.
-- **R3 G0/0 interface** **(outbound)** - The standard ACL can be applied outbound on the R3 G0/0/0 interface. This will not affect other networks that are reachable by R3. Packets from.10 network will still be able to reach the.31 network. **This is the best interface to place the standard ACL to meet the traffic requirements.**
+- **R3 G0/0/0 interface** **(outbound)** - The standard ACL can be applied outbound on the R3 G0/0/0 interface. This will not affect other networks that are reachable by R3. Packets from.10 network will still be able to reach the.31 network. **This is the best interface to place the standard ACL to meet the traffic requirements.**
 
 ##### Placement of Extended ACLs
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17351386130001w7w7s.png)
