@@ -79,7 +79,7 @@ int g2/0
 ip access-group INTERNAL_BLOCK out
 ```
 I can't place this here because if I were to do that, then PC from Net105 won't get the ping back because on the way back, it would need to go through this check and if it originates from for example 142.99.4.2(Net104/DMZ), then the packet would be dropped resulting in the ping not coming back.
-##### R3.2(Correct)
+##### R3.2(Use this)
 ```
 ip access-list extended INTERNAL_BLOCK
 permit ip 192.168.0.0 0.0.0.127 any
@@ -167,7 +167,7 @@ permit ip any any
 ##### R1(IPv6)
 ```
 !--- Configure the access-list.
-ipv6 access-list iacl
+ipv6 access-list INFRASTRUCTURE_ACL_R1_IPV6
 
 !--- Deny your space as source from entering your AS. !--- Deploy only at the AS edge.
 deny ipv6 2001:142:99::/48 any
