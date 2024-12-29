@@ -12,8 +12,11 @@ default-router 192.168.0.1
 
 ##### ESW7
 ```
+service dhcp
 ip helper-address 192.168.1.1
 ```
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735483155000xhvkq2.png)
 
 ## Configure ACLs
 
@@ -24,7 +27,7 @@ Destination : DMZ and Internet
 
 -Only blocking IPv4
 -Ipv6 acl not needed
--Only configure on R3
+-No need to worry about ospf packets
 
 Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Internet only.
 
@@ -32,7 +35,7 @@ Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Intern
 ```
 ip access-list extended DMZ_Internet_Access
 permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
-permit ip 192.168.0.0 0.0.0.127 150.99.0.1 0.0.0.0
+permit ip 192.168.0.0 0.0.0.127 any
 
 int g2/0
 ip access-group DMZ_Internet_Access in
@@ -43,11 +46,6 @@ ip access-group DMZ_Internet_Access in
 Source : External traffic e.g 142.71.0.0/16
 Destination : DMZ
 
-First question, do you use standard ACL or extended ACL?
-Use extended ACL because a standard ACL can't filter traffic based on the destination ip.
-
-Next question to ask yourself is use INBOUND or OUTBOUND ACLs?
-Inbound because same reason as before.
 ##### R1
 ```
 ip access-list extended INFRASTRUCTURE_ACL_R1
@@ -70,28 +68,34 @@ Source : All
 Destination : Net105
 
 -IPv6 not needed because net105 is a ipv4 network.
+-No need to worry about ospf packets
 
-##### R3.1(Use this and send to JY)
+##### R3.1
 ```
-ip access-list standard BLOCK_FROM_INTERNAL
+ip access-list standard INTERNAL_BLOCK
 deny 142.99.0.0 0.0.255.255
 
 int g2/0
-ip access-group BLOCK_FROM_INTERNAL out
+ip access-group INTERNAL_BLOCK out
 ```
-##### R3.2
+I can't place this here because if I were to do that, then PC from Net105 won't get the ping back because on the way back, it would need to go through this check and if it originates from for example 142.99.4.2(Net104/DMZ), then the packet would be dropped resulting in the ping not coming back.
+##### R3.2(Correct)
 ```
-ip access-list standard BLOCK_FROM_INTERNAL
-permit 192.168.0.0 0.0.0.127
+ip access-list extended INTERNAL_BLOCK
+permit ip 192.168.0.0 0.0.0.127 any
+permit icmp any any echo-reply
 
-int port-channel 1
-ip access-group BLOCK_FROM_INTERNAL out
+int g2/0
+ip access-group INTERNAL_BLOCK out
 ```
 
 ### iv) DMZ can't initialize access to anywhere 
 
 Source : DMZ
 Destination : Any network besides DMZ
+
+-Consider both Ipv4 and Ipv6
+-OSPF packets need to be taken into account
 
 Goal : DMZ can't ping anywhere outside itself but outside can ping it.
 
@@ -110,7 +114,7 @@ ip access-group BLOCK_DMZ_OUTBOUND in
 ```
 ipv6 access-list BLOCK_DMZ_OUTBOUND_IPV6
 permit icmp any any echo-reply 
-permit ospfv3 any any
+permit 89 FE80::/10 any
 deny ipv6 2001:142:99:104::/64 any
 permit ipv6 any any
 
@@ -169,8 +173,8 @@ ipv6 access-list iacl
 deny ipv6 2001:142:99::/48 any
 
 !--- Permit multiprotocol BGP.
-permit tcp host 2001:100:100:99::2 host 2001:100:100:99::2 eq bgp
-permit tcp host 2001:100:100:99::2 eq bgp host 2001:100:100:99::2
+permit tcp host 2001:100:100:99::2 host 2001:100:100:99::1 eq bgp
+permit tcp host 2001:100:100:99::2 eq bgp host 2001:100:100:99::1
 
 !--- Deny access to internal infrastructure addresses.
 deny ipv6 any 2001:142:99::/48
