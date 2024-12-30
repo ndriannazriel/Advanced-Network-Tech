@@ -131,10 +131,6 @@ The singular purpose of the infrastructure protection ACL is to restrict on a gr
 ACLs can be applied to the edge of the network. In the case of a service provider (SP), this is the edge of the AS. This ACL explicitly filters traffic destined for infrastructure address space. Deployment of edge infrastructure ACLs requires that you clearly define your infrastructure space and the required/authorized protocols that access this space. The ACL is applied at ingress to your network on all externally facing connections, such as peering connections, customer connections, and so forth.
 
 Define infrastructure at the edge which in this case is our R1.
-
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735313675000xip4e3.png)
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735313718000j8bywp.png)
-
 ##### R1
 ```
 ip access-list extended INFRASTRUCTURE_ACL_R1
