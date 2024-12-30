@@ -135,7 +135,10 @@ Define infrastructure at the edge which in this case is our R1.
 ##### R1
 ```
 ip access-list extended INFRASTRUCTURE_ACL_R1
-!--- Deny special-use address sources. 
+permit icmp any any echo-reply
+
+!--- Deny special-use address sources. 142.99.3.25 is the interface to DMZ
+deny ip any host 142.99.3.25
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
 deny ip 192.0.2.0 0.0.0.255 any
@@ -156,7 +159,7 @@ permit tcp host 100.100.99.2 eq bgp host 100.100.99.1
 !--- Deny access to internal infrastructure addresses.
 deny ip any 142.99.0.0 0.0.255.255
 
-!--- Permit transit traffic.(Remove this??)
+!--- Permit transit traffic.(Remove this)
 permit ip any any
 
 ```
@@ -165,8 +168,10 @@ permit ip any any
 ```
 !--- Configure the access-list.
 ipv6 access-list INFRASTRUCTURE_ACL_R1_IPV6
+permit icmp any any echo-reply
 
 !--- Deny your space as source from entering your AS. !--- Deploy only at the AS edge.
+deny ipv6 any host 2001:142:99:9::1
 deny ipv6 2001:142:99::/48 any
 
 !--- Permit multiprotocol BGP.
@@ -176,7 +181,7 @@ permit tcp host 2001:100:100:99::2 eq bgp host 2001:100:100:99::1
 !--- Deny access to internal infrastructure addresses.
 deny ipv6 any 2001:142:99::/48
 
-!--- Permit transit traffic.
+!--- Permit transit traffic.(Remove)
 permit ipv6 any any
 ```
 
@@ -188,6 +193,6 @@ permit ipv6 any any
 
 **![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17354866950005g0w49.png)
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735486735000ray4mm.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735550247000aolvdo.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17354867650000oofkv.png)
