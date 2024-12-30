@@ -46,7 +46,7 @@ ip access-group DMZ_Internet_Access in
 
 ### ii) All external traffic can only access DMZ
 
-Source : External traffic e.g 142.71.0.0/16
+Source : External traffic e.g 142.99.0.0/16
 Destination : DMZ
 
 ##### R1
