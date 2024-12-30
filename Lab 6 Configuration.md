@@ -37,6 +37,8 @@ ip access-list extended DMZ_Internet_Access
 permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
 deny ip 192.168.0.0 0.0.0.127 142.99.0.0 0.0.255.255
 permit ip 192.168.0.0 0.0.0.127 any
+permit udp any any eq 53
+permit tcp any any eq 53
 
 int g2/0
 ip access-group DMZ_Internet_Access in
@@ -187,7 +189,7 @@ permit ipv6 any any
 
 ## Verify ACLs Configured
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735545765000hw6wmm.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735550561000hiaa96.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735486641000tiy28p.png)
 
