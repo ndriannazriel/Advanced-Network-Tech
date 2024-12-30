@@ -37,8 +37,10 @@ ip access-list extended DMZ_Internet_Access
 permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
 deny ip 192.168.0.0 0.0.0.127 142.99.0.0 0.0.255.255
 permit ip 192.168.0.0 0.0.0.127 any
-permit udp any any eq 53
-permit tcp any any eq 53
+permit udp any any eq 67
+permit udp any any eq 68
+deny tcp any any
+deny udp any any
 
 int g2/0
 ip access-group DMZ_Internet_Access in
@@ -139,8 +141,9 @@ Define infrastructure at the edge which in this case is our R1.
 ip access-list extended INFRASTRUCTURE_ACL_R1
 permit icmp any any echo-reply
 
-!--- Deny special-use address sources. 142.99.3.25 is the interface to DMZ
-deny ip any host 142.99.3.25
+!--- Deny special-use address sources. 142.99.4.1 is the interface to DMZ
+deny ip any host 142.99.4.1
+permit ip any 142.99.4.0 0.0.0.63
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
 deny ip 192.0.2.0 0.0.0.255 any
@@ -173,7 +176,8 @@ ipv6 access-list INFRASTRUCTURE_ACL_R1_IPV6
 permit icmp any any echo-reply
 
 !--- Deny your space as source from entering your AS. !--- Deploy only at the AS edge.
-deny ipv6 any host 2001:142:99:9::1
+deny ipv6 any host 2001:142:99:104::1
+permit ipv6 any 2001:142:99:104::/64
 deny ipv6 2001:142:99::/48 any
 
 !--- Permit multiprotocol BGP.
@@ -189,12 +193,10 @@ permit ipv6 any any
 
 ## Verify ACLs Configured
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735550561000hiaa96.png)
-
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735486641000tiy28p.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735558229000gq8m0a.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17354866950005g0w49.png)
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735550247000aolvdo.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735558113000k7n32n.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17354867650000oofkv.png)
