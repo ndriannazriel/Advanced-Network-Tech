@@ -35,6 +35,7 @@ Goal : Configure Extended ACL at R3 inbound permitting traffic to DMZ and Intern
 ```
 ip access-list extended DMZ_Internet_Access
 permit ip 192.168.0.0 0.0.0.127 142.99.4.0 0.0.0.63
+deny ip 192.168.0.0 0.0.0.127 142.99.0.0 0.0.255.255
 permit ip 192.168.0.0 0.0.0.127 any
 
 int g2/0
@@ -155,7 +156,7 @@ permit tcp host 100.100.99.2 eq bgp host 100.100.99.1
 !--- Deny access to internal infrastructure addresses.
 deny ip any 142.99.0.0 0.0.255.255
 
-!--- Permit transit traffic.
+!--- Permit transit traffic.(Remove this??)
 permit ip any any
 
 ```
@@ -181,7 +182,7 @@ permit ipv6 any any
 
 ## Verify ACLs Configured
 
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735486617000z4i5h3.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735545765000hw6wmm.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735486641000tiy28p.png)
 
