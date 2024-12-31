@@ -92,8 +92,6 @@ router bgp 29
 bgp router-id 1.1.1.1
 neighbor 100.100.99.2 remote-as 19
 network 142.99.0.0 mask 255.255.0.0
-
-network 100.100.99.0 mask 255.255.255.252
 ```
 
 ```
@@ -103,7 +101,6 @@ neighbor 2001:100:100:99::1 remote-as 19
 neighbor 2001:100:100:99::1 activate
 network 2001:142:99::/48
 
-network 2001:100:100:99::/127 
 ```
 
 Make sure 150.99.0.0/16 Null route is configured first so that bgp knows that route exists(a route must first exist in the routing table for bgp to take place)

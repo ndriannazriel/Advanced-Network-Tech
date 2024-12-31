@@ -8,6 +8,7 @@ Whats new here?
 
 ##### R1
 ```
+!---Right side
 int 
 ip add
 ipv6 add
@@ -16,11 +17,26 @@ no sh
 !---Configure OSPF Ipv4
 int 
 ip ospf 1 area 60
+ipv6 ospf network point-to-point
 ipv6 ospf 1 area 60
+
+!---Remove Null Route
+no ip route 142.99.0.0 255.255.0.0 Null0
+
+!---Configure so that R1 is no longer the default gateway
+router ospf 1
+no default-information originate always
+
+ipv6 router ospf 1 
+no default-information originate always
 ```
 
 ##### R-GW
 ```
+!---Basic stuff
+ip routing
+ip unicast-routing
+
 !---Left side
 int 
 ip add
@@ -33,23 +49,38 @@ ip add 100.100.99.1 255.255.255.252
 ipv6 add 2001:100:100:99::/127
 no sh
 
-!---Configure OSPF Ipv4
+!---Configure Null route
+ip route 142.99.0.0 255.255.0.0 Null0
+
+!---Configure OSPF Ipv4 & Ipv6
 router ospf 1 
 router-id 
 
 int 
 ip ospf 1 area 60
+ipv6 ospf network point-to-point
 ipv6 ospf 1 area 60
+
+!---Configure RGW as NEW default gateway of the network
+router ospf 1
+default-information originate always
+
+ipv6 router ospf 1
+default-information originate always
 
 !---Configure eBGP
 router bgp 29
+bgp router-id 9.9.9.9
+neighbor 100.100.99.2 remote-as 19
+network 142.99.0.0 mask 255.255.0.0
 
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:100:100:99::1 remote-as 19
+neighbor 2001:100:100:99::1 activate
+network 2001:142:99::/48
 ```
 
-##### ISP
-```
-
-```
 ## Shift R1 ACL to R-GW
 
 ##### R-GW
