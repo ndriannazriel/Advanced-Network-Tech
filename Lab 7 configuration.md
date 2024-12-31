@@ -106,3 +106,10 @@ deny ip any 142.99.0.0 0.0.255.255
 ## Configuring ISP for peering purposes
 
 As stated in the instruction, the option of not having enough interfaces to connect all members of the team is a problem. So to fix this problem, we create subinterfaces.
+
+Let's analyze the situation. First, there a total of 5 members in one group. Each have to connect to the ISP router but the thing is a router can't have that many interfaces. Remember back inter vlan routing. With inter vlan routing, a single interface is all it takes to make it routable between vlans with the help of sub-interfaces. So using the same concept of router on the stick technique, this should solve the problem.
+
+##### ISP
+```
+
+```
