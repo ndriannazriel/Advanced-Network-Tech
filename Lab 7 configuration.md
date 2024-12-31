@@ -102,3 +102,7 @@ permit tcp host 100.100.99.2 eq bgp host 100.100.99.1
 deny ip any 142.99.0.0 0.0.255.255
 
 ```
+
+## Configuring ISP for peering purposes
+
+As stated in the instruction, the option of not having enough interfaces to connect all members of the team is a problem. So to fix this problem, we create subinterfaces.
