@@ -113,3 +113,23 @@ Let's analyze the situation. First, there a total of 5 members in one group. Eac
 ```
 
 ```
+
+## Configure GRE interconnecting Net105
+
+Since we are going from Net105 to another Net105 of another internal network, that will be our source.
+
+##### R3
+```
+int tunnel 1
+ip add 172.16.0.1 255.255.255.252
+tunnel source <ip add>
+tunnel dest <ip add>
+```
+
+##### Verify
+```
+sh int tunnel 1
+```
+
+
+## Configure IPSEC VPN
