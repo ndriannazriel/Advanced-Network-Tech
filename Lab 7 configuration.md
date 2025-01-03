@@ -172,6 +172,13 @@ neighbor 2001:100:100:99:: activate
 
 Since we are going from Net105 to another Net105 of another internal network, that will be our source.
 
+##### RGW
+```
+ip access-list extended INFRASTRUCTURE_ACL_RGW
+permit udp any any eq 500
+permit esp any any
+```
+ACL is needed to allow only specific hosts into my Net105
 ##### R3
 ```
 int tunnel 1
