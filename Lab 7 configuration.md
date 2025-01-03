@@ -9,13 +9,13 @@ Whats new here?
 ##### R1
 ```
 !---Right side
-int 
-ip add
-ipv6 add
+int g4/0
+ip add 142.99.3.29 255.255.255.252
+ipv6 add 2001:142:99:10::/127
 no sh
 
 !---Configure OSPF Ipv4
-int 
+int g4/0
 ip ospf 1 area 60
 ipv6 ospf network point-to-point
 ipv6 ospf 1 area 60
@@ -39,8 +39,8 @@ ip unicast-routing
 
 !---Left side
 int 
-ip add
-ipv6 add
+ip add 142.99.3.30 255.255.255.252
+ipv6 add 2001:142:99:10::1/127
 no sh
 
 !---Right side
@@ -54,7 +54,7 @@ ip route 142.99.0.0 255.255.0.0 Null0
 
 !---Configure OSPF Ipv4 & Ipv6
 router ospf 1 
-router-id 
+router-id 10.10.10.10
 
 int 
 ip ospf 1 area 60
@@ -83,6 +83,12 @@ network 2001:142:99::/48
 
 ## Shift R1 ACL to R-GW
 
+##### R1
+```
+no ip access-list extended INFRASTRUCTURE_ACL_R1
+no ipv6 access-list INFRASTRUCTURE_ACL_R1_IPV6
+```
+
 ##### R-GW
 ```
 ip access-list extended INFRASTRUCTURE_ACL_RGW
@@ -101,6 +107,14 @@ permit tcp host 100.100.99.2 host 100.100.99.1 eq bgp
 permit tcp host 100.100.99.2 eq bgp host 100.100.99.1
 deny ip any 142.99.0.0 0.0.255.255
 
+ipv6 access-list INFRASTRUCTURE_ACL_RGW_IPV6
+permit icmp any any echo-reply
+eny ipv6 any host 2001:142:99:104::1
+permit ipv6 any 2001:142:99:104::/64
+deny ipv6 2001:142:99::/48 any
+permit tcp host 2001:100:100:99::2 host 2001:100:100:99::1 eq bgp
+permit tcp host 2001:100:100:99::2 eq bgp host 2001:100:100:99::1
+deny ipv6 any 2001:142:99::/48
 ```
 
 ## Configuring ISP for peering purposes
