@@ -51,6 +51,7 @@ no sh
 
 !---Configure Null route
 ip route 142.99.0.0 255.255.0.0 Null0
+ipv6 route 2001:142:99::/48 Null0
 
 !---Configure OSPF Ipv4 & Ipv6
 router ospf 1 
@@ -75,8 +76,8 @@ neighbor 100.100.99.2 remote-as 184
 network 142.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
-address-family ipv6
 neighbor 2001:100:100:99::1 remote-as 184
+address-family ipv6
 neighbor 2001:100:100:99::1 activate
 network 2001:142:99::/48
 ```
@@ -145,7 +146,7 @@ no sh
 !---Configure Subinterfaces
 int g0/0.10
 encapsulation dot1q 10
-ip add 100.100.99.1 255.255.255.252
+ip add 100.100.99.2 255.255.255.252
 ipv6 add 2001:100:100:99::1/127
 no sh
 
@@ -155,8 +156,8 @@ neighbor 100.100.99.1 remote-as 29
 
 bgp log-neighbor-changes
 address-family ipv6
-neighbor 2001:100:100:99::1 remote-as 29
-neighbor 2001:100:100:99::1 activate
+neighbor 2001:100:100:99:: remote-as 29
+neighbor 2001:100:100:99:: activate
 ```
 
 ## Configure GRE interconnecting Net105
