@@ -220,6 +220,7 @@ match address RGW->DMZ
 ##### Verify
 ```
 sh crypto ipsec sa
+sh crypto isakmp sa
 ```
 
 
