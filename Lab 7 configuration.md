@@ -204,3 +204,9 @@ set transform-set mytset
 match address RGW->DMZ
 ```
 
+##### Verify
+```
+sh crypto ipsec sa
+```
+
+
