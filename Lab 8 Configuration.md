@@ -55,7 +55,10 @@ conf t
 
 snmp-server group SNMPv3-GROUP v3 priv snmp-server user SNMPv3-USER SNMPv3-GROUP v3 auth md5 AuthPassword priv aes 128 PrivPassword
 ```
-
+- `SNMPv3-GROUP` with your group name.
+- `SNMPv3-USER` with the username.
+- `AuthPassword` with a strong authentication password.
+- `PrivPassword` with a strong encryption password.
 ##### R1
 ```
 
