@@ -98,7 +98,9 @@ deny ip any host 142.99.4.1
 permit ip any 142.99.4.0 0.0.0.63
 permit udp any any eq 500
 permit esp any any
-permit gre host 142.x.x.x host 142.99.3.22 (allow packet from peer to enter)
+
+permit gre host 142.x.x.x host 142.99.3.22 
+
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
 deny ip 192.0.2.0 0.0.0.255 any
@@ -113,7 +115,7 @@ deny ip any 142.99.0.0 0.0.255.255
 
 ipv6 access-list INFRASTRUCTURE_ACL_RGW_IPV6
 permit icmp any any echo-reply
-eny ipv6 any host 2001:142:99:104::1
+deny ipv6 any host 2001:142:99:104::1
 permit ipv6 any 2001:142:99:104::/64
 deny ipv6 2001:142:99::/48 any
 permit tcp host 2001:100:100:99::2 host 2001:100:100:99::1 eq bgp
