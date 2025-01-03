@@ -22,23 +22,25 @@ You should be able to see the other RGW physical routers(Other members) when thi
 
 ## Configure RGW to sync the time
 
+**Enable NTP Master**: Use the `ntp master` command to set the router as the NTP master. Specify the stratum level (lower values are more authoritative; commonly 1 or 2 is used).
+
 ##### RGW
 ```
-
+ntp master 2
 ```
 
 ##### R1
 ```
-
+ntp server 142.99.3.30
 ```
 
 ##### R2
 ```
-
+ntp server 142.99.3.30
 ```
 
 ##### R3
 ```
-
+ntp server 142.99.3.30
 ```
 
