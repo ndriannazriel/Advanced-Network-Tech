@@ -224,3 +224,58 @@ sh crypto isakmp sa
 ```
 
 
+## RECONFIGURE NET 105
+
+##### R3
+```
+no access-list 1 permit 192.168.0.0 0.0.0.63
+no access-list 2 permit 192.168.0.64 0.0.0.63
+
+access-list 1 permit 192.168.99.0 0.0.0.63
+access-list 2 permit 192.168.99.64 0.0.0.63
+ip nat pool PAT-POOL1 142.99.5.1 142.99.5.1 netmask 255.255.255.252
+ip nat pool PAT-POOL2 142.99.5.2 142.99.5.2 netmask 255.255.255.252
+ip nat inside source list 1 pool PAT-POOL1 overload
+ip nat inside source list 2 pool PAT-POOL2 overload
+
+no ip dhcp excluded-address 192.168.0.1 192.168.0.10
+no ip dhcp pool POOL_NET105
+no network 192.168.0.0 255.255.255.0
+no default-router 192.168.0.1
+
+ip dhcp excluded-address 192.168.99.1 192.168.99.10
+ip dhcp pool POOL_NET105
+network 192.168.99.0 255.255.255.0
+default-router 192.168.99.1
+
+!---RECONFIGURE ACLS
+no ip access-list extended DMZ_Internet_Access
+
+ip access-list extended DMZ_Internet_Access
+permit ip 192.168.99.0 0.0.0.127 142.99.4.0 0.0.0.63
+deny ip 192.168.99.0 0.0.0.127 142.99.0.0 0.0.255.255
+permit ip 192.168.99.0 0.0.0.127 any
+permit udp any any eq 67
+permit udp any any eq 68
+deny tcp any any
+deny udp any any
+
+no ip access-list extended INTERNAL_BLOCK
+
+ip access-list extended INTERNAL_BLOCK
+permit ip 192.168.99.0 0.0.0.127 any
+permit icmp any any echo-reply
+```
+
+##### ESW7
+```
+int vlan 105
+no ip add
+ip add 192.168.99.1 255.255.255.128
+no shut
+```
+
+##### PC6
+```
+ip 192.168.99.2 255.255.255.128 192.168.99.1
+```

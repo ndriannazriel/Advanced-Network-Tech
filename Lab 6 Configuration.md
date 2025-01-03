@@ -200,3 +200,4 @@ permit ipv6 any any
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1735558113000k7n32n.png)
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17354867650000oofkv.png)
+

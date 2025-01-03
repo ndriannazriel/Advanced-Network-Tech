@@ -27,9 +27,32 @@ switchport mode access
 switchport access vlan 105
 ```
 
+##### ESW7 NEW
+```
+int f0/0
+ip add 192.168.1.2 255.255.255.252
+no shut
+
+vlan 105
+name VLAN105
+
+int vlan 105
+ip add 192.168.99.1 255.255.255.128
+no shut
+
+int f1/1
+switchport mode access
+switchport access vlan 105
+```
+
 ##### PC6
 ```
 ip 192.168.0.2 255.255.255.128 192.168.0.1
+```
+
+##### PC6 NEW
+```
+ip 192.168.99.2 255.255.255.128 192.168.99.1
 ```
 
 ## Configure IPv4 PAT 
