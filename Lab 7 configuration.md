@@ -98,7 +98,7 @@ deny ip any host 142.99.4.1
 permit ip any 142.99.4.0 0.0.0.63
 permit udp any any eq 500
 permit esp any any
-permit gre host 142.71.3.22 host 142.99.3.22 (allow packet from peer to enter)
+permit gre host 142.x.x.x host 142.99.3.22 (allow packet from peer to enter)
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
 deny ip 192.0.2.0 0.0.0.255 any
@@ -176,8 +176,8 @@ Since we are going from Net105 to another Net105 of another internal network, th
 ```
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
-tunnel source <my Po1 ip address>
-tunnel dest <dest Po1 ip address>
+tunnel source <my Po1 ip address> 142.99.3.22
+tunnel dest <dest Po1 ip address> 142.x.x.x
 ```
 
 ##### Verify
