@@ -168,8 +168,8 @@ Since we are going from Net105 to another Net105 of another internal network, th
 ```
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
-tunnel source <ip add>
-tunnel dest <ip add>
+tunnel source <my R3 ip add>
+tunnel dest <x R3 ip add>
 ```
 
 ##### Verify
@@ -179,3 +179,25 @@ sh int tunnel 1
 
 
 ## Configure IPSEC VPN
+
+##### RGW
+```
+!---Configure ACL permitting VLAN103 to DMZ
+ip access-list extended RGW->DMZ
+permit ip 142.99.0.11 0.0.1.255 <DMZ NETWORK IP OF X>
+
+crypto isakmp policy 1
+encryption aes
+hash sha256
+authentication pre-share
+group 2
+lifetime 86400
+
+crypto isakmp key 0 mypass address 100.100.x.1
+crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+
+crypto map CRYPTOMAP 10 ipsec-isakmp
+set peer 100.100.x.1
+set transform-set mytset
+match address RGW->DMZ
+```
