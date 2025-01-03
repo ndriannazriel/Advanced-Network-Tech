@@ -96,6 +96,8 @@ ip access-list extended INFRASTRUCTURE_ACL_RGW
 permit icmp any any echo-reply
 deny ip any host 142.99.4.1
 permit ip any 142.99.4.0 0.0.0.63
+permit udp any any eq 500
+permit esp any any
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
 deny ip 192.0.2.0 0.0.0.255 any
@@ -183,7 +185,7 @@ sh int tunnel 1
 ##### RGW
 ```
 !---Configure ACL permitting VLAN103 to DMZ
-ip access-list extended RGW->DMZ
+ip access-list extended RGW->DMZ-AQEEL
 permit ip 142.99.0.11 0.0.1.255 <DMZ NETWORK IP OF X>
 
 crypto isakmp policy 1
@@ -201,3 +203,4 @@ set peer 100.100.x.1
 set transform-set mytset
 match address RGW->DMZ
 ```
+
