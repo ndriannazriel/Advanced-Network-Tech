@@ -38,13 +38,13 @@ ip routing
 ip unicast-routing
 
 !---Left side
-int 
+int g0/1
 ip add 142.99.3.30 255.255.255.252
 ipv6 add 2001:142:99:10::1/127
 no sh
 
 !---Right side
-int 
+int g0/2
 ip add 100.100.99.1 255.255.255.252
 ipv6 add 2001:100:100:99::/127
 no sh
@@ -56,7 +56,7 @@ ip route 142.99.0.0 255.255.0.0 Null0
 router ospf 1 
 router-id 10.10.10.10
 
-int 
+int g0/1
 ip ospf 1 area 60
 ipv6 ospf network point-to-point
 ipv6 ospf 1 area 60
@@ -71,12 +71,12 @@ default-information originate always
 !---Configure eBGP
 router bgp 29
 bgp router-id 9.9.9.9
-neighbor 100.100.99.2 remote-as 19
+neighbor 100.100.99.2 remote-as 184
 network 142.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
 address-family ipv6
-neighbor 2001:100:100:99::1 remote-as 19
+neighbor 2001:100:100:99::1 remote-as 184
 neighbor 2001:100:100:99::1 activate
 network 2001:142:99::/48
 ```
@@ -123,9 +123,40 @@ As stated in the instruction, the option of not having enough interfaces to conn
 
 Let's analyze the situation. First, there a total of 5 members in one group. Each have to connect to the ISP router but the thing is a router can't have that many interfaces. Remember back inter vlan routing. With inter vlan routing, a single interface is all it takes to make it routable between vlans with the help of sub-interfaces. So using the same concept of router on the stick technique, this should solve the problem.
 
+##### Switch
+```
+!---Create VLANs
+conf t
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+...
+
+!---Assign access ports
+int g0/5
+sw mode access 
+sw acc vlan 10
+no sh
+
+```
 ##### ISP
 ```
+!---Configure Subinterfaces
+int g0/0.10
+encapsulation dot1q 10
+ip add 100.100.99.1 255.255.255.252
+ipv6 add 2001:100:100:99::1/127
+no sh
 
+!---Configure BGP
+router bgp 184
+neighbor 100.100.99.1 remote-as 29
+
+bgp log-neighbor-changes
+address-family ipv6
+neighbor 2001:100:100:99::1 remote-as 29
+neighbor 2001:100:100:99::1 activate
 ```
 
 ## Configure GRE interconnecting Net105
