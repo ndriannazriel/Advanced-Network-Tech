@@ -44,3 +44,19 @@ ntp server 142.99.3.30
 ntp server 142.99.3.30
 ```
 
+## Configure SNMPv3 
+
+
+
+##### RGW
+```
+!---Create SNMPv3 user
+conf t
+
+snmp-server group SNMPv3-GROUP v3 priv snmp-server user SNMPv3-USER SNMPv3-GROUP v3 auth md5 AuthPassword priv aes 128 PrivPassword
+```
+
+##### R1
+```
+
+```
