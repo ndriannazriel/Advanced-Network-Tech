@@ -205,16 +205,16 @@ sh int tunnel 1
 ```
 !---Configure ACL permitting VLAN103 to DMZ
 ip access-list extended RGW->DMZ
-permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63
+permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 (VLAN103 to DMZ)
+permit ip 142.99.4.0 0.0.1.255 142.70.0.0 0.0.1.255 (DMZ to VLAN103)
 
 crypto isakmp policy 1
 encryption aes
 hash sha256
 authentication pre-share
 group 2
-lifetime 86400
 
-crypto isakmp key 0 mypass address 100.100.x.1
+crypto isakmp key 0 mypass address 100.100.70.1
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
