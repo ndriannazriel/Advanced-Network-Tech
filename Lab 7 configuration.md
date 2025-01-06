@@ -185,8 +185,8 @@ ACL is needed to allow only specific hosts into my Net105
 ```
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
-tunnel source <my Po1 ip address> 142.99.3.22
-tunnel dest <dest Po1 ip address> 142.x.x.x
+tunnel source 142.99.3.22
+tunnel dest 142.70.3.25
 ```
 
 ##### Verify
@@ -214,7 +214,7 @@ crypto isakmp key 0 mypass address 100.100.x.1
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
-set peer 100.100.x.1
+set peer 100.100.70.1
 set transform-set mytset
 match address RGW->DMZ
 ```
