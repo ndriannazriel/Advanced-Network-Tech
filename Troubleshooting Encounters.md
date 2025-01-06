@@ -33,3 +33,8 @@ Now you can on
 Problem : Can't see OSPF routes even though it's loaded to full and default information originate is also not visible.
 
 Solution : Remove network point-to-point. Also just in case check the passive interfaces.
+
+--------------------------------------------------------------------------
+Problem : "Local server not available"
+
+Solution : Gns3 retarded. Just keep restarting the app or even restart your laptop if you have to.
