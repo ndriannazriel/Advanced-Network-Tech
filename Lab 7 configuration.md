@@ -200,13 +200,14 @@ sh int tunnel 1
 
 
 ## Configure IPSEC VPN
-
+(VLAN103 to DMZ)
+(DMZ to VLAN103)
 ##### RGW
 ```
 !---Configure ACL permitting VLAN103 to DMZ
 ip access-list extended RGW->DMZ
-permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 (VLAN103 to DMZ)
-permit ip 142.99.4.0 0.0.1.255 142.70.0.0 0.0.1.255 (DMZ to VLAN103)
+permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 
+permit ip 142.99.4.0 0.0.1.255 142.70.0.0 0.0.1.255 
 
 crypto isakmp policy 1
 encryption aes
@@ -221,6 +222,10 @@ crypto map CRYPTOMAP 10 ipsec-isakmp
 set peer 100.100.70.1
 set transform-set mytset
 match address RGW->DMZ
+
+int g0/2
+cryto map CRYPTOMAP
+
 ```
 
 ##### Verify
