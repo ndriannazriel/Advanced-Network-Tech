@@ -28,3 +28,8 @@ Cause : CPU usage of the gns3 server is too high. Due to the high traffic coming
 Solution : Only on 1 distribution layer switch so that HSRP isn't enabled. 
 
 Now you can on
+
+--------------------------------------------------------------------------
+Problem : Can't see OSPF routes even though it's loaded to full and default information originate is also not visible.
+
+Solution : Remove network point-to-point. Also just in case check the passive interfaces.
