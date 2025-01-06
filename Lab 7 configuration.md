@@ -200,8 +200,8 @@ sh int tunnel 1
 ##### RGW
 ```
 !---Configure ACL permitting VLAN103 to DMZ
-ip access-list extended RGW->DMZ-AQEEL
-permit ip 142.99.0.11 0.0.1.255 <DMZ NETWORK IP OF X>
+ip access-list extended RGW->DMZ
+permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63
 
 crypto isakmp policy 1
 encryption aes
