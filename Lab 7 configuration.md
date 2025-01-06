@@ -59,7 +59,6 @@ router-id 10.10.10.10
 
 int g0/1
 ip ospf 1 area 60
-ipv6 ospf network point-to-point
 ipv6 ospf 1 area 60
 
 !---Configure RGW as NEW default gateway of the network
@@ -82,6 +81,8 @@ neighbor 2001:100:100:99::1 activate
 network 2001:142:99::/48
 ```
 
+-Buang point to point 
+-make sure no passive interface
 ## Shift R1 ACL to R-GW
 
 ##### R1
@@ -183,6 +184,9 @@ permit esp any any
 ACL is needed to allow only specific hosts into my Net105
 ##### R3
 ```
+ip access-list extended INTERNAL_BLOCK
+permit ip 192.168.0.0 0.0.0.127 any
+
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
 tunnel source 142.99.3.22
