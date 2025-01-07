@@ -15,6 +15,10 @@ ip add 142.99.3.34 255.255.255.252
 
 ```
 
+1. Add this ip to the lab PC
+2. Try pinging the RGW interface
+3. open PRTG administration tool and check if the ip "142.99.3.34" is there.
+4. Open PRTG Network Monitor and add the new device. Use ip address of g0/0 of RGW as the ip.
 ## Configure LLDP on switches
 
 ##### PHYSICAL SWITCH
