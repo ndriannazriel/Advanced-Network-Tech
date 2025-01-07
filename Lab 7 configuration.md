@@ -207,6 +207,7 @@ sh int tunnel 1
 ```
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736211931000ap2s2l.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736226989000jpg4m3.png)
 
 ## Configure IPSEC VPN
 (VLAN103 to DMZ)
