@@ -16,6 +16,8 @@ NOTE : REDO THIS EXERCISE USING THE OTHER WAY
 |              | l0        | 133.99.99.100  | 255.255.255.255 |                         |     |         |      |
 |              | g0/2      | 101.100.133.99 | 255.255.255.0   | 2001:101:100:133::99/64 |     |         |      |
 |              |           |                |                 |                         |     |         |      |
+
+
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734401545000n5d73y.png)
 
 ## Interface Configuration
