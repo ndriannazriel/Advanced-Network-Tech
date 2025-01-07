@@ -1,5 +1,20 @@
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173589032000079054k.png)
 
+## ADD SOME THINGS
+
+##### RGW
+```
+int g0/0
+ip add 142.99.3.33 255.255.255.252
+no sh
+```
+
+##### Lab PC
+```
+ip add 142.99.3.34 255.255.255.252
+
+```
+
 ## Configure LLDP on switches
 
 ##### PHYSICAL SWITCH

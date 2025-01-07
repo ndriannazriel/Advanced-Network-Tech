@@ -234,32 +234,31 @@ set peer 100.100.70.1
 set transform-set mytset
 match address RGW->DMZ
 
-int g0/2
-cryto map CRYPTOMAP
-
-ipv6 access-list extended RGW->DMZ_IPv6
+!--_Configure Ipv6
+ipv6 access-list RGW->DMZ_IPv6
 permit ipv6 2001:142:99:103::/64 2001:142:70:104::/64
 permit ipv6 2001:142:99:104::/64 2001:142:70:103::/64
 permit ipv6 2001:142:99:101::/64 2001:142:70:104::/64
 permit ipv6 2001:142:99:104::/64 2001:142:70:101::/64
 
 crypto isakmp policy 1
- encryption aes
- hash sha256
- authentication pre-share
- group 2
+encryption aes
+hash sha256
+authentication pre-share
+group 2
+exi
 
-
-crypto isakmp key 0 mypass address 2001:100:100:70::1
+crypto isakmp key 0 mypass address ipv6 2001:100:100:70::1/127
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
-crypto map CRYPTOMAP_IPV6 10 ipsec-isakmp
- set peer 2001:100:100:70::1
- set transform-set mytset
- match address RGW->DMZ_IPv6
+crypto map ipv6 CRYPTOMAP_IPV6-2 10 ipsec-isakmp
+set peer 2001:100:100:70::1
+set transform-set mytset
+match address RGW->DMZ_IPv6
 
 interface g0/2
-crypto map CRYPTOMAP_IPV6
+ipv6 crypto map CRYPTOMAP_IPV6-2
+cryto map CRYPTOMAP
 ipv6 enable
 
 ```
