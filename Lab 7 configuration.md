@@ -238,10 +238,10 @@ int g0/2
 cryto map CRYPTOMAP
 
 ipv6 access-list extended RGW->DMZ_IPv6
-permit ip 2001:142:99:103::/64 2001:142:70:104::/64
-permit ip 2001:142:99:104::/64 2001:142:70:103::/64
-permit ip 2001:142:99:101::/64 2001:142:70:104::/64
-permit ip 2001:142:99:104::/64 2001:142:70:101::/64
+permit ipv6 2001:142:99:103::/64 2001:142:70:104::/64
+permit ipv6 2001:142:99:104::/64 2001:142:70:103::/64
+permit ipv6 2001:142:99:101::/64 2001:142:70:104::/64
+permit ipv6 2001:142:99:104::/64 2001:142:70:101::/64
 
 crypto isakmp policy 1
  encryption aes
@@ -249,13 +249,10 @@ crypto isakmp policy 1
  authentication pre-share
  group 2
 
-! Set pre-shared key for ISAKMP (IPv6 peer address)
-crypto isakmp key 0 mypass address 2001:100:100:70::1
 
-! Define IPSec transform set
+crypto isakmp key 0 mypass address 2001:100:100:70::1
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
-! Create IPv6 crypto map and associate it with ACL
 crypto map CRYPTOMAP_IPV6 10 ipsec-isakmp
  set peer 2001:100:100:70::1
  set transform-set mytset
