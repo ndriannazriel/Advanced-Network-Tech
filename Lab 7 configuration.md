@@ -73,16 +73,24 @@ router bgp 29
 bgp router-id 9.9.9.9
 neighbor 100.100.99.2 remote-as 184
 network 142.99.0.0 mask 255.255.0.0
+network 100.100.99.0 mask 255.255.255.252
 
 bgp log-neighbor-changes
 neighbor 2001:100:100:99::1 remote-as 184
 address-family ipv6
 neighbor 2001:100:100:99::1 activate
 network 2001:142:99::/48
+network 2001:100:100:99::/127
 ```
 
 -Buang point to point 
 -make sure no passive interface
+
+##### R3
+```
+S    192.168.0.0/16 [1/0] via 172.16.0.2
+S    192.168.99.0/24 [1/0] via 192.168.1.2
+```
 ## Shift R1 ACL to R-GW
 
 ##### R1
@@ -100,7 +108,7 @@ permit ip any 142.99.4.0 0.0.0.63
 permit udp any any eq 500
 permit esp any any
 
-permit gre host 142.x.x.x host 142.99.3.22 
+permit gre host 142.70.4.5 host 142.99.3.22 
 
 deny ip host 0.0.0.0 any
 deny ip 127.0.0.0 0.255.255.255 any
@@ -198,6 +206,7 @@ tunnel dest 142.70.3.25
 sh int tunnel 1
 ```
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736211931000ap2s2l.png)
 
 ## Configure IPSEC VPN
 (VLAN103 to DMZ)
@@ -207,7 +216,7 @@ sh int tunnel 1
 !---Configure ACL permitting VLAN103 to DMZ
 ip access-list extended RGW->DMZ
 permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 
-permit ip 142.99.4.0 0.0.1.255 142.70.0.0 0.0.1.255 
+permit ip 142.99.4.0 0.0.0.63 142.70.0.0 0.0.1.255 
 
 crypto isakmp policy 1
 encryption aes
@@ -278,6 +287,8 @@ permit ip 192.168.99.0 0.0.0.127 any
 permit icmp any any echo-reply
 ```
 
+!---Buang this for testing because of looping
+S    192.168.0.0/16 [1/0] via 192.168.1.2
 ##### ESW7
 ```
 int vlan 105
