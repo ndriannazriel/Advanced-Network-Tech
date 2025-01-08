@@ -139,5 +139,14 @@ We use loopbacks to provide additional interfaces for a variety of purposes. In 
 
 Routers can be connected to the same switch to form a multiaccess network, as shown in the figure. Ethernet LANs are the most common example of broadcast multiaccess networks. In broadcast networks, all devices on the network see all broadcast and multicast frames.
 
+DROTHERs use the multiaccess address 224.0.0.6 (all designated routers) to send OSPF packets to the DR and BDR. Only the DR and BDR listen for 224.0.0.6.
+
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736309495000iymoji.png)
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736310033000ktyqvs.png)
+
+In the multiaccess topology shown in the figure, there are three routers interconnected over a common Ethernet multiaccess network, 192.168.1.0/24. Each router is configured with the indicated IPv4 address on the Gigabit Ethernet 0/0/0 interface.
+
+Because the routers are connected over a common multiaccess network, OSPF has automatically elected a DR and BDR. In this example, R3 has been elected as the DR because its router ID is 3.3.3.3, which is the highest in this network. R2 is the BDR because it has the second highest router ID in the network.
+
+To check if the router is a DROTHER,DR or a BDR, use the command `sh ip ospf int g0/0/0`
