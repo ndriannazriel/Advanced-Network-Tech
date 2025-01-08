@@ -79,6 +79,7 @@ For instance, any time a router receives new information about a topology change
 Some things to note:
 A 32-bit host route would not get advertised as a route to other OSPF routers.
 When configuring ospf, make sure to choose either using the network command or the ip ospf command to avoid overlap or unnecessary redundancy.
+Configuring a **passive interface** in OSPF stops OSPF **Hello packets** from being sent on that interface, preventing neighbor relationships from forming. However, the network on that interface is still advertised in OSPF.
 
 OSPFv2
 ```
@@ -100,9 +101,12 @@ passive-interface
 
 interface GigabitEthernet0/1                     
 ipv6 ospf 1 area 0
-
 ```
-
+##### Verify
+```
+!---It'll show where you configured passive interfaces on the router
+show ip protocols
+```
 --------------------------------------------------------------------------
 ## Network Point-to-Point 
 
