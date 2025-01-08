@@ -110,7 +110,11 @@ show ip protocols
 --------------------------------------------------------------------------
 ## Network Point-to-Point 
 
-By default, Cisco routers elect a DR and BDR on Ethernet interfaces, even if there is only one other device on the link. You can verify this with the **show ip ospf interface** command
+By default, Cisco routers elect a DR and BDR on Ethernet interfaces, even if there is only one other device on the link. You can verify this with the **show ip ospf interface** command.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736305178000zt0p5b.png)
+
+The DR/ BDR election process is unnecessary as there can only be two routers on the point-to-point network between R1 and R2. Notice in the output that the router has designated the network type as BROADCAST.
 
 This is because ;
 OSPF forms a **full adjacency** directly between the two routers without needing a central coordinator (DR/BDR).
