@@ -110,7 +110,7 @@ show ip protocols
 --------------------------------------------------------------------------
 ## Network Point-to-Point 
 
-In a **point-to-point OSPF network** like **R1 ↔ R2 ↔ R3 ↔ R4**, a Designated Router (DR) and Backup Designated Router (BDR) are not required.
+By default, Cisco routers elect a DR and BDR on Ethernet interfaces, even if there is only one other device on the link. You can verify this with the **show ip ospf interface** command
 
 This is because ;
 OSPF forms a **full adjacency** directly between the two routers without needing a central coordinator (DR/BDR).
