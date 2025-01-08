@@ -34,6 +34,18 @@ To maintain routing information, OSPF routers complete a generic link-state rout
 4. Execute the SPF Algorithm
 5. Choose the Best Route
 
+
+| State    | Description                                                                                                                                           |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Down     | No hello packets received. Router sends hello packets and transitions into Init state.                                                                |
+| Init     | Received hello packets with the router id of the sender then transition into 2 way state.                                                             |
+| 2 way    | Bidirectional communication. If on multiaccess link, elect DR and BDR then transition to Exstart state.                                               |
+| Exstart  | On p2p networks, the 2 routers decide who will decide who send the DBD packet first and then compare the DBD sequence number.                         |
+| Exchange | Routers exchange DBD packets. If need additional info, transition to Loading otherwise transition to Full state.                                      |
+| Loading  | LSRs and LSUs are used to gain additional information like a link change. Routes are processed using the SPF algorithm then transition to Full state. |
+| Full     | Link state database(LSDB) fully synchronized.                                                                                                         |
+
+
 ### OSPF/Link State Packets
 Link-state packets are the tools used by OSPF to help determine the fastest available route for a packet.
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1733379753000p3sd8a.png)
@@ -51,7 +63,7 @@ The Type 4 LSU packet is used to reply to an LSR packet.
 
 A Type 5 packet is used to acknowledge the receipt of a Type 4 LSU.
 
-LSUs are also used to forward OSPF routing updates, such as link changes. Specifically, an LSU packet can contain 11 different types of OSPFv2 LSAs, with some of the more common ones shown in the figure. OSPFv3 renamed several of these LSAs and also contains two additional LSAs.
+LSUs are also used to forward OSPF routing updates, such as link changes. Specifically, an LSU packet can contain 11 different types of OSPFv2 LSAs. OSPFv3 renamed several of these LSAs and also contains two additional LSAs.
 
 **Note:** The difference between the LSU and LSA terms can sometimes be confusing because these terms are often used interchangeably. However, an LSU contains one or more LSAs.
 ### Multi Area OSPF
