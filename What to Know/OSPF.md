@@ -128,5 +128,16 @@ A DR/BDR is unnecessary in point-to-point networks because:
 - OSPF communication is direct, not multicast.
 - The topology inherently prevents adjacency overload.
 
-Note to self: Do refrain from configuring point to point ospf because it can cause some issues with advertising the ospf routes to the other areas.
+Note to self: Refrain from configuring point to point ospf because it can cause issues with advertising the ospf routes to the other areas. Only configure if you have 2 routers.
+
+##### Loopback and P2P
+We use loopbacks to provide additional interfaces for a variety of purposes. In this case, we are using loopbacks to simulate more networks than the equipment can support. By default, loopback interfaces are advertised as /32 host routes. For example, R1 would advertise the 10.10.1.0/24 network as 10.10.1.1/32 to R2 and R3.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17363056720004yctro.png)
+
+--------------------------------------------------------------------------
+## Multiaccess network
+
+Routers can be connected to the same switch to form a multiaccess network, as shown in the figure. Ethernet LANs are the most common example of broadcast multiaccess networks. In broadcast networks, all devices on the network see all broadcast and multicast frames.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736309495000iymoji.png)
 
