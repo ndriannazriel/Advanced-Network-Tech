@@ -76,6 +76,10 @@ For instance, any time a router receives new information about a topology change
 --------------------------------------------------------------------------
 ## OSPF Configuration
 
+Some things to note:
+A 32-bit host route would not get advertised as a route to other OSPF routers.
+When configuring ospf, make sure to choose either using the network command or the ip ospf command to avoid overlap or unnecessary redundancy.
+
 OSPFv2
 ```
 router ospf 1
