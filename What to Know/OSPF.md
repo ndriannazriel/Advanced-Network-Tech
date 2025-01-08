@@ -64,16 +64,13 @@ For instance, any time a router receives new information about a topology change
 --------------------------------------------------------------------------
 ## OSPF Configuration
 
-Ipv4
+OSPFv2
 ```
 router ospf 1
 router-id 1.1.1.1
 passive-interface
 
 int g0/1
-ip add
-no shut
-
 ip ospf 1 area 0
 ```
 
@@ -81,16 +78,14 @@ OSPFv3
 ```
 ipv6 unicast-routing
 
-interface GigabitEthernet0/1
-ipv6 address 2001:db8:1::1/64   
-no shutdown                     
-ipv6 ospf 1 area 0
-
-router ospfv3 1
+ipv6 router ospf 1
 router-id 1.1.1.1
 passive-interface
-```
 
+interface GigabitEthernet0/1                     
+ipv6 ospf 1 area 0
+
+```
 
 --------------------------------------------------------------------------
 ## Network Point-to-Point 
@@ -99,8 +94,8 @@ In a **point-to-point OSPF network** like **R1 ↔ R2 ↔ R3 ↔ R4**, a Designa
 
 This is because ;
 OSPF forms a **full adjacency** directly between the two routers without needing a central coordinator (DR/BDR).
-A DR/BDR is used in **multi-access networks** (e.g., Ethernet LAN) to reduce OSPF overhead by limiting the number of adjacencies.
-DR/BDR functionality is critical for managing OSPF communication over **broadcast** networks, where routers communicate via multicast.
+A DR/BDR is used in **multi-access networks** (e.g., Ethernet LAN) to reduce OSPF overhead by limiting the number of LSAs being advertised to the other neighbors.
+DR/BDR functionality is critical for managing OSPF communication over **broadcast** networks, where routers communicate via multicast 224.0.0.5.
 In a point-to-point link, OSPF packets are sent directly to the neighbor, bypassing the need for multicast coordination by a DR.
 
 A DR/BDR is unnecessary in point-to-point networks because:
@@ -108,4 +103,6 @@ A DR/BDR is unnecessary in point-to-point networks because:
 - OSPF adjacency is limited to two routers per link.
 - OSPF communication is direct, not multicast.
 - The topology inherently prevents adjacency overload.
+
+Note to self: Do refrain from configuring point to point ospf because it can cause some issues with advertising the ospf routes to the other areas.
 
