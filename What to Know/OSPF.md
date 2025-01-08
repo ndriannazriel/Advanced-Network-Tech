@@ -119,7 +119,7 @@ The DR/ BDR election process is unnecessary as there can only be two routers on 
 This is because ;
 OSPF forms a **full adjacency** directly between the two routers without needing a central coordinator (DR/BDR).
 A DR/BDR is used in **multi-access networks** (e.g., Ethernet LAN) to reduce OSPF overhead by limiting the number of LSAs being advertised to the other neighbors.
-DR/BDR functionality is critical for managing OSPF communication over **broadcast** networks, where routers communicate via multicast 224.0.0.5.
+DR/BDR functionality is critical for managing OSPF communication over **broadcast** networks, where routers communicate via multicast 224.0.0.5(meant for all ospf routers)
 In a point-to-point link, OSPF packets are sent directly to the neighbor, bypassing the need for multicast coordination by a DR.
 
 A DR/BDR is unnecessary in point-to-point networks because:
