@@ -150,3 +150,38 @@ In the multiaccess topology shown in the figure, there are three routers interco
 Because the routers are connected over a common multiaccess network, OSPF has automatically elected a DR and BDR. In this example, R3 has been elected as the DR because its router ID is 3.3.3.3, which is the highest in this network. R2 is the BDR because it has the second highest router ID in the network.
 
 To check if the router is a DROTHER,DR or a BDR, use the command `sh ip ospf int g0/0/0`
+
+To verify the OSPFv2 adjacencies, use the **show ip ospf neighbor** command, as shown in the example for R1. The state of neighbors in multiaccess networks can be as follows:
+
+- **FULL/DROTHER** - This is a DR or BDR router that is fully adjacent with a non-DR or BDR router. These two neighbors can exchange Hello packets, updates, queries, replies, and acknowledgments.
+- **FULL/DR** - The router is fully adjacent with the indicated DR neighbor. These two neighbors can exchange Hello packets, updates, queries, replies, and acknowledgments.
+- **FULL/BDR** - The router is fully adjacent with the indicated BDR neighbor. These two neighbors can exchange Hello packets, updates, queries, replies, and acknowledgments.
+- **2-WAY/DROTHER** - The non-DR or BDR router has a neighbor relationship with another non-DR or BDR router. These two neighbors exchange Hello packets.
+
+The normal state for an OSPF router is usually FULL. If a router is stuck in another state, it is an indication that there are problems in forming adjacencies. The only exception to this is the 2-WAY state, which is normal in a multiaccess broadcast network. For examples, DROTHERs will form a 2-WAY neighbor adjacency with any DROTHERs that join the network. When this happens, the neighbor state displays as 2-WAY/DROTHER.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736310406000o0981e.png)
+
+## Configuring OSPF priority
+
+In the topology, the **ip ospf priority** command will be used to change the DR and BDR as follows:
+
+- R1 should be the DR and will be configured with a priority of 255.
+- R2 should be the BDR and will be left with the default priority of 1.
+- R3 should never be a DR or BDR and will be configured with a priority of 0.
+
+##### R1,R2,R3
+```
+int
+ip ospf priority 
+end
+```
+
+After setting the priority on the interface of each router, use the command below
+
+##### R1,R2,R3
+```
+clear ip ospf process
+Reset ALL OSPF processes? [no]:y
+```
+
