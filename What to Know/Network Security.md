@@ -122,3 +122,30 @@ It's like pretending to be someone else in a group chat so messages are sent to 
 What's the difference between ARP Cache Poisoning and ARP Spoofing?
 ARP Cache Poisoning is the outcome of ARP spoofing and ARP spoofing is the process that leads to poisoning.
 
+### DNS Attacks
+
+Securing DNS is often overlooked. However, it is crucial to the operation of a network and should be secured accordingly.
+
+DNS attacks include the following:
+- DNS open resolver attacks
+- DNS stealth attacks
+- DNS domain shadowing attacks
+- DNS tunneling attacks
+
+=> Add more info here when you're free.
+### DNS Tunneling
+
+Threat actors who use DNS tunneling place non-DNS traffic within DNS traffic. This method often circumvents security solutions when a threat actor wishes to communicate with bots inside a protected network, or exfiltrate data from the organization, such as a password database. When the threat actor uses DNS tunneling, the different types of DNS records are altered. This is how DNS tunneling works for CnC commands sent to a botnet:
+
+1. The command data is split into multiple encoded chunks.
+2. Each chunk is placed into a lower level domain name label of the DNS query.
+3. Because there is no response from the local or networked DNS for the query, the request is sent to the ISP’s recursive DNS servers.
+4. The recursive DNS service will forward the query to the threat actor’s authoritative name server.
+5. The process is repeated until all the queries containing the chunks of are sent.
+6. When the threat actor’s authoritative name server receives the DNS queries from the infected devices, it sends responses for each DNS query, which contain the encapsulated, encoded CnC commands.
+7. The malware on the compromised host recombines the chunks and executes the commands hidden within the DNS record.
+
+To stop DNS tunneling, the network administrator must use a filter that inspects DNS traffic. Pay close attention to DNS queries that are longer than average, or those that have a suspicious domain name. DNS solutions, like Cisco OpenDNS, block much of the DNS tunneling traffic by identifying suspicious domains.
+
+### DHCP Attacks
+
