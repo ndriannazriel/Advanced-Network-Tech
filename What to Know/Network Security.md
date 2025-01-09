@@ -94,3 +94,31 @@ You are more likely to see a UDP flood attack. In a UDP flood attack, all the re
 
 ## IP Services
 
+Earlier in this module you learned about vulnerabilities with IP, TCP and UDP. The TCP/IP protocol suite was never built for security. Therefore, the services that IP uses for addressing functions such as ARP, DNS, and DHCP, are also not secure, as you will learn in this topic.
+
+Any client can send an unsolicited ARP Reply called a “gratuitous ARP.” This is often done when a device first boots up to inform all other devices on the local network of the new device’s MAC address. When a host sends a gratuitous ARP, other hosts on the subnet store the MAC address and IP address contained in the gratuitous ARP in their ARP tables.
+
+This feature of ARP also means that any host can claim to be the owner of any IP or MAC. A threat actor can poison the ARP cache of devices on the local network, creating an MITM attack to redirect traffic. The goal is to target a victim host, and have it change its default gateway to the threat actor’s device. This positions the threat actor in between the victim and all other systems outside of the local subnet.
+
+### ARP Cache Poisoning
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736413231000fnlih6.png)
+
+In the figure, the threat actor sends two spoofed gratuitous ARP Replies using its own MAC address for the indicated destination IP addresses. PC-A updates its ARP cache with its default gateway which is now pointing to the threat actor’s host MAC address. R1 also updates its ARP cache with the IP address of PC-A pointing to the threat actor’s MAC address.
+
+The threat actor’s host is executing an ARP poisoning attack. The ARP poisoning attack can be passive or active. Passive ARP poisoning is where threat actors steal confidential information. Active ARP poisoning is where threat actors modify data in transit, or inject malicious data.
+
+### ARP Spoofing
+
+- **Goal:** Trick devices on a network to send data to the attacker instead of the intended destination.
+- **How it Works:**
+    1. The attacker sends **fake ARP replies** to devices on the network.
+    2. These replies link the attacker's MAC address to the target's IP address.
+    3. Devices update their ARP table with the wrong MAC address.
+    4. Data meant for the target goes to the attacker, who can read, modify, or forward it.
+
+It's like pretending to be someone else in a group chat so messages are sent to you instead of them.
+
+What's the difference between ARP Cache Poisoning and ARP Spoofing?
+ARP Cache Poisoning is the outcome of ARP spoofing and ARP spoofing is the process that leads to poisoning.
+
