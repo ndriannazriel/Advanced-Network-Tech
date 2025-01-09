@@ -149,3 +149,5 @@ To stop DNS tunneling, the network administrator must use a filter that inspects
 
 ### DHCP Attacks
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736414136000ni1tec.png)
+Recall this is how normal DHCP works.
