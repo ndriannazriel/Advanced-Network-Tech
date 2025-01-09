@@ -29,7 +29,14 @@ Other Access attacks include:
 ## IP Vulnerabilities and Threats
 
 ### Amplification and Reflection Attacks
-1. Send a packet to all devices in a network and the source ip being the targeted host.
+1. Send a packet to all devices in a network and the source ip being the targeted host(Spoofed IP address)
 2. When ICMP reply, the ping will come back to the targeted host from all the devices.
 3. DoS attack happens.
 
+### Address Spoofing Attacks
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17364005430003omtar.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736400654000u6bsfw.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736400667000jibqtr.png)
