@@ -188,7 +188,7 @@ These are the four elements of secure communications:
 
 Cryptography can be used almost anywhere that there is data communication. In fact, the trend is toward all communication being encrypted.
 
-### Data Integrity
+### Data Integrity(Hash)
 Hash functions are used to ensure the integrity of a message. They guarantee that message data has not changed accidentally.
 
 The hash algorithm works as follows:
@@ -202,7 +202,23 @@ The hash algorithm works as follows:
 3. **SHA-2**
 4. **SHA-3**
 
-### Origin Authentication
+### Origin Authentication(HMAC)
+To add authentication to integrity assurance, use a keyed-hash message authentication code (HMAC). HMAC uses an additional secret key as input to the hash function.
+
+### Data Confidentiality(Encryption)
+There are two classes of encryption used to provide data confidentiality. These two classes differ in how they use keys.
+
+Symmetric encryption algorithms such as Data Encryption Standard (DES), 3DES, and Advanced Encryption Standard (AES) are based on the premise that each communicating party knows the pre-shared key. Data confidentiality can also be ensured using asymmetric algorithms, including Rivest, Shamir, and Adleman (RSA) and the public key infrastructure (PKI).
+
+**Note:** DES is a legacy algorithm and should not be used. 3DES should be avoided if possible.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736417744000jx2x84.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736417773000n080ld.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17364177950004z3snm.png)
+
+### Diffie-Hellman
 
 
 
