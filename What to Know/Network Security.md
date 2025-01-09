@@ -148,6 +148,61 @@ Threat actors who use DNS tunneling place non-DNS traffic within DNS traffic. Th
 To stop DNS tunneling, the network administrator must use a filter that inspects DNS traffic. Pay close attention to DNS queries that are longer than average, or those that have a suspicious domain name. DNS solutions, like Cisco OpenDNS, block much of the DNS tunneling traffic by identifying suspicious domains.
 
 ### DHCP Attacks
-
-![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736414136000ni1tec.png)
 Recall this is how normal DHCP works.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736414136000ni1tec.png)
+In the figure, a client broadcasts a DHCP discover message. The DHCP server responds with a unicast offer that includes addressing information the client can use. The client broadcasts a DHCP request to tell the server that the client accepts the offer. The server responds with a unicast acknowledgment accepting the request
+
+A DHCP spoofing attack occurs when a rogue DHCP server is connected to the network and provides false IP configuration parameters to legitimate clients. A rogue server can provide a variety of misleading information:
+
+- **Wrong default gateway** - Threat actor provides an invalid gateway, or the IP address of its host to create a MITM attack. This may go entirely undetected as the intruder intercepts the data flow through the network.
+- **Wrong DNS server** - Threat actor provides an incorrect DNS server address pointing the user to a malicious website.
+- **Wrong IP address** - Threat actor provides an invalid IP address, invalid default gateway IP address, or both. The threat actor then creates a DoS attack on the DHCP client.
+
+**How it Works:**
+
+1. The attacker sets up a fake DHCP server on the network.
+2. When a device requests an IP address, the fake server responds faster than the real one.
+3. The device receives a malicious IP configuration (e.g., wrong gateway or DNS).
+4. The attacker can intercept, redirect, or manipulate the device's traffic.
+
+## Network Security Best Practices
+
+Know what these things are:
+1. VPN
+2. ASA Firewall
+3. IPS
+4. ESA/WSA
+5. AAA Server
+
+## Cryptography
+
+### Securing Communications
+Organizations must provide support to secure the data as it travels across links. This may include internal traffic, but it is even more important to protect the data that travels outside of the organization to branch sites, telecommuter sites, and partner sites.
+
+These are the four elements of secure communications:
+
+- **Data Integrity** - Guarantees that the message was not altered. Any changes to data in transit will be detected. Integrity is ensured by implementing either of the Secure Hash Algorithms (SHA-2 or SHA-3). The MD5 message digest algorithm is still widely in use but it is inherently insecure and creates vulnerabilities in a network. The use of MD5 should be avoided.
+- **Origin Authentication** - Guarantees that the message is not a forgery and does actually come from whom it states. Many modern networks ensure authentication with protocols, such as hash message authentication code (HMAC).
+- **Data Confidentiality** - Guarantees that only authorized users can read the message. If the message is intercepted, it cannot be deciphered within a reasonable amount of time. Data confidentiality is implemented using symmetric and asymmetric encryption algorithms.
+- **Data Non-Repudiation** - Guarantees that the sender cannot repudiate, or refute, the validity of a message sent. Nonrepudiation relies on the fact that only the sender has the unique characteristics or signature for how that message is treated.
+
+Cryptography can be used almost anywhere that there is data communication. In fact, the trend is toward all communication being encrypted.
+
+### Data Integrity
+Hash functions are used to ensure the integrity of a message. They guarantee that message data has not changed accidentally.
+
+The hash algorithm works as follows:
+1. The sending device inputs the message into a hashing algorithm and computes its fixed-length hash of **4ehiDx67NMop9**.
+2. This hash is then attached to the message and sent to the receiver. Both the message and the hash are in plaintext.
+3. The receiving device removes the hash from the message and inputs the message into the same hashing algorithm. If the computed hash is equal to the one that is attached to the message, the message has not been altered during transit. If the hashes are not equal, as shown in the figure, then the integrity of the message can no longer be trusted.
+
+4 Well known Hash functions
+1. **MD5 with 128-bit Digest**
+2. **SHA Hashing Algorithm**
+3. **SHA-2**
+4. **SHA-3**
+
+### Origin Authentication
+
+
+

@@ -1,3 +1,4 @@
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17364141920005ux50o.png)
 ## Configuring DCHP for VLANs
 Because the L3 switch that I'm using is a legacy device then, you need to manually enable dhcp on it by using "service dhcp"
 
