@@ -219,6 +219,29 @@ Symmetric encryption algorithms such as Data Encryption Standard (DES), 3DES, an
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17364177950004z3snm.png)
 
 ### Diffie-Hellman
+Diffie-Hellman (DH) is an asymmetric mathematical algorithm where two computers generate an identical shared secret key without having communicated before. The new shared key is never actually exchanged between the sender and receiver. However, because both parties know it, the key can be used by an encryption algorithm to encrypt traffic between the two systems.
+
+Here are three examples of instances when DH is commonly used:
+
+- Data is exchanged using an IPsec VPN.
+- Used when data is exchanged using an SSL or TLS VPN.
+- SSH data is exchanged.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17364188100000vrgr9.png)
+
+The colors in the figure will be used instead of complex long numbers to simplify the DH key agreement process. The DH key exchange begins with Alice and Bob agreeing on an arbitrary common color that does not need to be kept secret. The agreed-on color in our example is yellow.
+
+Next, Alice and Bob will each select a secret color. Alice chose red while Bob chose blue. These secret colors will never be shared with anyone. The secret color represents the chosen secret private key of each party.
+
+Alice and Bob now mix the shared common color (yellow) with their respective secret color to produce a public color. Therefore, Alice will mix the yellow with her red color to produce a public color of orange. Bob will mix the yellow and the blue to produce a public color of green.
+
+Alice sends her public color (orange) to Bob and Bob sends his public color (green) to Alice.
+
+Alice and Bob each mix the color they received with their own, original secret color (Red for Alice and blue for Bob.). The result is a final brown color mixture that is identical to the partner’s final color mixture. The brown color represents the resulting shared secret key between Bob and Alice.
+
+The security of DH is based on the fact that it uses very large numbers in its calculations. For example, a DH 1024-bit number is roughly equal to a decimal number of 309 digits. Considering that a billion is 10 decimal digits (1,000,000,000), one can easily imagine the complexity of working with not one, but multiple 309 digit decimal numbers.
+
+Unfortunately, asymmetric key systems are extremely slow for any sort of bulk encryption. This is why it is common to encrypt the bulk of the traffic using a symmetric algorithm, such as 3DES or AES and use the DH algorithm to create keys that will be used by the encryption algorithm.
 
 
 
