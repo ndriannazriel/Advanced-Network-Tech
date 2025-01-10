@@ -109,3 +109,5 @@ Without LLQ, CBWFQ provides WFQ based on defined classes with no strict priority
 LLQ allows delay-sensitive packets such as voice to be sent first (before packets in other queues), giving delay-sensitive packets preferential treatment over other traffic. Although it is possible to classify various types of real-time traffic to the strict priority queue, Cisco recommends that only voice traffic be directed to the priority queue.
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736519160000v3qsxy.png)
+
+## QoS Models
