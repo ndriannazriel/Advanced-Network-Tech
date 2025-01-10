@@ -156,4 +156,99 @@ Specifically, DiffServ divides network traffic into classes based on business re
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736519965000qgp234.png)
 
+## QoS Implementation Techniques
+
+### Avoiding Packet Loss
+ Packet loss is usually the result of congestion on an interface. Most applications that use TCP experience slowdown because TCP automatically adjusts to network congestion. Dropped TCP segments cause TCP sessions to reduce their window sizes. Some applications do not use TCP and cannot handle drops (fragile flows).
+
+The following approaches can prevent drops in sensitive applications:
+
+- Increase link capacity to ease or prevent congestion.
+- Guarantee enough bandwidth and increase buffer space to accommodate bursts of traffic from fragile flows. WFQ, CBWFQ, and LLQ can guarantee bandwidth and provide prioritized forwarding to drop-sensitive applications.
+- Drop lower-priority packets before congestion occurs. Cisco IOS QoS provides queuing mechanisms, such as weighted random early detection (WRED), that start dropping lower-priority packets before congestion occurs.
+
+### QoS Tools
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736521576000cis59p.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736521604000inie6b.png)
+
+### Classification and Marking
+Before a packet can have a QoS policy applied to it, the packet has to be classified. Classification and marking allows us to identify or “mark” types of packets. Classification determines the class of traffic to which packets or frames belong. Only after traffic is marked can policies be applied to it.
+
+How a packet is classified depends on the QoS implementation. Methods of classifying traffic flows at Layer 2 and 3 include using interfaces, ACLs, and class maps. Traffic can also be classified at Layers 4 to 7 using Network Based Application Recognition (NBAR).
+
+**Note:** NBAR is a classification and protocol discovery feature of Cisco IOS software that works with QoS features. NBAR is out of scope for this course.
+
+Marking means that we are adding a value to the packet header. Devices receiving the packet look at the marked field to see if it matches a defined policy. Marking should be done as close to the source device as possible. This establishes the trust boundary.
+
+How traffic is marked usually depends on the technology. The table in the figure describes some the marking fields used in various technologies. The decision of whether to mark traffic at Layers 2 or 3 (or both) is not trivial and should be made after consideration of the following points:
+
+- Layer 2 marking of frames can be performed for non-IP traffic.
+- Layer 2 marking of frames is the only QoS option available for switches that are not “IP aware”.
+- Layer 3 marking will carry the QoS information end-to-end.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17365216730000yt873.png)
+
+### Marking at Layer 2
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736521762000w0jjzs.png)
+
+### Marking at Layer 3
+IPv4 and IPv6 specify an 8-bit field in their packet headers to mark packets. As shown in the figure, both IPv4 and IPv6 support an 8-bit field for marking: the Type of Service (ToS) field for IPv4 and the Traffic Class field for IPv6.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736521853000r8xh23.png)
+
+### Type of Service and Traffic Class Field
+The Type of Service (IPv4) and Traffic Class (IPv6) carry the packet marking as assigned by the QoS classification tools. The field is then referred to by receiving devices which forward the packets based on the appropriate assigned QoS policy.
+
+The figure displays the contents of the 8-bit field. In RFC 791, the original IP standard specified the IP Precedence (IPP) field to be used for QoS markings. However, in practice, these three bits did not provide enough granularity to implement QoS.
+
+RFC 2474 supersedes RFC 791 and redefines the ToS field by renaming and extending the IPP field. The new field, as shown in the figure, has 6-bits allocated for QoS. Called the Differentiated Services Code Point (DSCP) field, these six bits offer a maximum of 64 possible classes of service. The remaining two IP Explicit Congestion Notification (ECN) bits can be used by ECN-aware routers to mark packets instead of dropping them. The ECN marking informs downstream routers that there is congestion in the packet flow.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736521913000an4wrq.png)
+
+### DSCP Values
+The 64 DSCP values are organized into three categories:
+
+- **Best-Effort (BE)** - This is the default for all IP packets. The DSCP value is 0. The per-hop behavior is normal routing. When a router experiences congestion, these packets will be dropped. No QoS plan is implemented.
+- **Expedited Forwarding (EF)** - RFC 3246 defines EF as the DSCP decimal value 46 (binary 101110). The first 3 bits (101) map directly to the Layer 2 CoS value 5 used for voice traffic. At Layer 3, Cisco recommends that EF only be used to mark voice packets.
+- **Assured Forwarding (AF)** - RFC 2597 defines AF to use the 5 most significant DSCP bits to indicate queues and drop preference. The definition of AF is illustrated in the figure.
+
+##### Assured Forwarding Values
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17365219740000zajn9.png)
+
+The **AFxy** formula is specified as follows:
+
+- The first 3 most significant bits are used to designate the class. Class 4 is the best queue and Class 1 is the worst queue.
+- The 4th and 5th most significant bits are used to designate the drop preference.
+- The 6th most significant bit is set to zero.
+
+For example, AF32 belongs to class 3 (binary 011) and has a medium drop preference (binary 10). The full DSCP value is 28 because you include the 6th 0 bit (binary 011100).
+
+### Class Selector Bits
+Because the first 3 most significant bits of the DSCP field indicate the class, these bits are also called the Class Selector (CS) bits. These 3 bits map directly to the 3 bits of the CoS field and the IPP field to maintain compatibility with 802.1p and RFC 791, as shown in the figure.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736522053000h2pjac.png)
+
+The table in the figure shows how the CoS values map to the Class Selectors and the corresponding DSCP 6-bit value. This same table can be used to map IPP values to the Class Selectors.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17365220860006tkaep.png)
+
+### Trust Boundaries
+Where should markings occur? Traffic should be classified and marked as close to its source as technically and administratively feasible. This defines the trust boundary, as shown in the figure.
+
+1. Trusted endpoints have the capabilities and intelligence to mark application traffic to the appropriate Layer 2 CoS and/or Layer 3 DSCP values. Examples of trusted endpoints include IP phones, wireless access points, videoconferencing gateways and systems, IP conferencing stations, and more.
+2. Secure endpoints can have traffic marked at the Layer 2 switch.
+3. Traffic can also be marked at Layer 3 switches / routers.
+
+Re-marking traffic, for example, re-marking CoS values to IP Precedent or DSCP values, is typically necessary.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17365221360004i3b3f.png)
+
+### Congestion Avoidance
+Congestion management includes queuing and scheduling methods where excess traffic is buffered or queued (and sometimes dropped) while it waits to be sent out an egress interface. Congestion avoidance tools are simpler. They monitor network traffic loads in an effort to anticipate and avoid congestion at common network and internetwork bottlenecks before congestion becomes a problem. These tools can monitor the average depth of the queue, as represented in the figure. When the queue is below the minimum threshold, there are no drops. As the queue fills up to the maximum threshold, a small percentage of packets are dropped. When the maximum threshold is passed, all packets are dropped.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736522171000wfujqh.png)
+
+Some congestion avoidance techniques provide preferential treatment for which packets will get dropped. For example, Cisco IOS QoS includes weighted random early detection (WRED) as a possible congestion avoidance solution. The WRED algorithm allows for congestion avoidance on network interfaces by providing buffer management and allowing TCP traffic to decrease, or throttle back, before buffers are exhausted. Using WRED helps avoid tail drops and maximizes network use and TCP-based application performance. There is no congestion avoidance for User Datagram Protocol (UDP)-based traffic, such as voice traffic. In case of UDP-based traffic, methods such as queuing and compression techniques help to reduce and even prevent UDP packet loss.
+
 
