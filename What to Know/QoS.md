@@ -251,4 +251,28 @@ Congestion management includes queuing and scheduling methods where excess traff
 
 Some congestion avoidance techniques provide preferential treatment for which packets will get dropped. For example, Cisco IOS QoS includes weighted random early detection (WRED) as a possible congestion avoidance solution. The WRED algorithm allows for congestion avoidance on network interfaces by providing buffer management and allowing TCP traffic to decrease, or throttle back, before buffers are exhausted. Using WRED helps avoid tail drops and maximizes network use and TCP-based application performance. There is no congestion avoidance for User Datagram Protocol (UDP)-based traffic, such as voice traffic. In case of UDP-based traffic, methods such as queuing and compression techniques help to reduce and even prevent UDP packet loss.
 
+### Traffic Policing and Shaping
+Traffic shaping and traffic policing are two mechanisms provided by Cisco IOS QoS software to prevent congestion.
 
+Traffic shaping retains excess packets in a queue and then schedules the excess for later transmission over increments of time. The result of traffic shaping is a smoothed packet output rate, as shown in the figure.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736522242000nj2t3b.png)
+
+Shaping implies the existence of a queue and of sufficient memory to buffer delayed packets, while policing does not.
+
+Ensure that you have sufficient memory when enabling shaping. In addition, shaping requires a scheduling function for later transmission of any delayed packets. This scheduling function allows you to organize the shaping queue into different queues. Examples of scheduling functions are CBWFQ and LLQ.
+
+Shaping is an outbound concept; packets going out an interface get queued and can be shaped. In contrast, policing is applied to inbound traffic on an interface. When the traffic rate reaches the configured maximum rate, excess traffic is dropped (or remarked).
+
+Policing is commonly implemented by service providers to enforce a contracted customer information rate (CIR). However, the service provider may also allow bursting over the CIR if the service provider’s network is not currently experiencing congestion.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736522264000lri9ue.png)
+
+### QoS Policy Guidelines
+Your QoS policy must consider the full path from source to destination. If one device in the path is using a different policy than desired, then the entire QoS policy is impacted. For example, the stutter in video playback could be the result of one switch in the path that does not have the CoS value set appropriately.
+
+A few guidelines that help ensure the best experience for end users includes the following:
+
+- Enable queuing at every device in the path between source and destination.
+- Classify and mark traffic as close the source as possible.
+- Shape and police traffic flows as close to their sources as possible.
