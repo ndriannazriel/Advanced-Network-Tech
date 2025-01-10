@@ -44,3 +44,18 @@ UDP ports such as 554, are used for the Real-Time Streaming Protocol (RSTP) and 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736513323000xeaktq.png)
 
 ### Data Traffic 
+Most applications use either TCP or UDP. Unlike UDP, TCP performs error recovery. Data applications that have no tolerance for data loss, such as email and web pages, use TCP to ensure that, if packets are lost in transit, they will be resent. Data traffic can be smooth or bursty. Network control traffic is usually smooth and predictable. When there is a topology change, the network control traffic may burst for a few seconds. But the capacity of today’s networks can easily handle the increase in network control traffic as the network converges.
+
+However, some TCP applications can consume a large portion of network capacity. FTP will consume as much bandwidth as it can get when you download a large file, such as a movie or game. The table summarizes data traffic characteristics.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736513400000r9vk2j.png)
+
+Although data traffic is relatively insensitive to drops and delays compared to voice and video, a network administrator still needs to consider the quality of the user experience, sometimes referred to as Quality of Experience or QoE. There are two main factors that a network administrator needs to ask about the flow of data traffic:
+
+- Does the data come from an interactive application?
+- Is the data mission critical?
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736513438000plpmqn.png)
+
+## Queuing Algorithms
+
