@@ -238,5 +238,39 @@ How it works?
 1. SNMP management station sends request to Agent with the community string (get 192.168.1.10 2#B7!9)
 2. Agent checks if the community string matches and the ip address matches then sends back the statistics.
 
+### MIB Object ID
+The MIB organizes variables hierarchically. MIB variables enable the management software to monitor and control the network device. Formally, the MIB defines each variable as an object ID (OID). OIDs uniquely identify managed objects in the MIB hierarchy. The MIB organizes the OIDs based on RFC standards into a hierarchy of OIDs, usually shown as a tree.
+
+The MIB tree for any given device includes some branches with variables common to many networking devices and some branches with variables specific to that device or vendor.
+
+RFCs define some common public variables. Most devices implement these MIB variables. In addition, networking equipment vendors, like Cisco, can define their own private branches of the tree to accommodate new variables specific to their devices.
+
+The figure shows portions of the MIB structure defined by Cisco. Note how the OID can be described in words or numbers to help locate a particular variable in the tree. OIDs belonging to Cisco, are numbered as follows: .iso (1).org (3).dod (6).internet (1).private (4).enterprises (1).cisco (9). Therefore, the OID is 1.3.6.1.4.1.9.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17365824230002ogyx6.png)
+
+### SNMP Polling Scenario
+SNMP can be used is to observe CPU utilization over a period of time by polling devices. CPU statistics can then be compiled on the NMS and graphed. This creates a baseline for the network administrator. Threshold values can then be set relative to this baseline. When CPU utilization exceeds this threshold, notifications are sent. The figure illustrates 5-minute samples of router CPU utilization over the period of a few weeks.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736582489000z9byrs.png)
+
+The data is retrieved via the snmpget utility, issued on the NMS. Using the snmpget utility, you can manually retrieve real-time data, or have the NMS run a report. This report would give you a period of time that you could use the data to get the average. The snmpget utility requires that the SNMP version, the correct community, the IP address of the network device to query, and the OID number are set. The figure demonstrates the use of the freeware snmpget utility, which allows quick retrieval of information from the MIB.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736582549000r0tkxo.png)
+
+The snmpget utility command has several parameters, including:
+
+- -v2c - This is the version of SNMP.
+- -c community - This is the SNMP password, called a community string.
+- 10.250.250.14 - This is the IP address of the monitored device.
+- 1.3.6.1.4.1.9.2.1.58.0 - This is the OID of MIB variable.
+
+The last line shows the response. The output shows a shortened version of the MIB variable. It then lists the actual value in the MIB location. In this case, the 5-minute moving average of the CPU busy percentage is 11 percent.
+
+### SNMP Object Navigator
+The snmpget utility gives some insight into the basic mechanics of how SNMP works. However, working with long MIB variable names like 1.3.6.1.4.1.9.2.1.58.0 can be problematic for the average user. More commonly, the network operations staff uses a network management product with an easy-to-use GUI, which makes the entire MIB data variable naming transparent to the user.
+
+Search for “Cisco SNMP Object Navigator tool” to find the Cisco tool that allows a network administrator to research details about a particular OID. The figure displays an example of using the navigator to research the OID information for the **whyReload** object.
+
 
 
