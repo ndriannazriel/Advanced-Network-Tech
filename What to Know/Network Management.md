@@ -332,4 +332,4 @@ Use the command **service timestamps log datetime** to force logged events to 
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736583812000m0y04q.png)
 
-## Router and Switch File Maintanence
+## Router and Switch File Maintainence
