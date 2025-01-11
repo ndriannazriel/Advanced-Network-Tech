@@ -120,7 +120,7 @@ Time source is user configuration
 ```
 
 The **ntp server** _ip-address_ command is issued in global configuration mode to configure 209.165.200.225 as the NTP server for R1. To verify the time source is set to NTP, use the **show clock detail** command. Notice that now the time source is NTP.
-
+##### R1
 ```
 ntp server 209.165.200.225
 end
@@ -143,3 +143,16 @@ sh ntp associations
 ```
 
 Output from the **show ntp associations** command verifies that the clock on S1 is now synchronized with R1 at 192.168.1.1 via NTP. R1 is a stratum 2 device and NTP server to S1. Now S1 is a stratum 3 device that can provide NTP service to other devices in the network, such as end devices.
+
+### Configuring as NTP Master
+##### Router(Master)
+```
+ntp master 3
+ntp logging
+```
+
+##### Other Routers
+```
+ntp server <ip address of the ntp master>
+```
+## SNMP
