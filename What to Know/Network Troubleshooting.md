@@ -97,3 +97,44 @@ Application layer problems prevent services from being provided to application p
 Another type of problem at the application layer occurs when the physical, data link, network, and transport layers are functional, but the data transfer and requests for network services from a single network service or application do not meet the normal expectations of a user.
 
 A problem at the application layer may cause users to complain that the network or an application that they are working with is sluggish or slower than usual when transferring data or requesting network services.
+
+## Troubleshoot IP Connectivity
+
+### Verify Physical Layer
+
+```
+sh interfaces <>
+```
+
+### Check Duplex Mismatches
+Duplex configuration guidelines include the following:
+
+- Autonegotiation of speed and duplex is recommended.
+- If autonegotiation fails, manually set the speed and duplex on interconnecting ends.
+- Point-to-point Ethernet links should always run in full-duplex mode.
+- Half-duplex is uncommon and typically encountered only when legacy hubs are used.
+
+### Verify Addressing on Local Network
+When troubleshooting end-to-end connectivity, it is useful to verify mappings between destination IP addresses and Layer 2 Ethernet addresses on individual segments. In IPv4, this functionality is provided by ARP. In IPv6, the ARP functionality is replaced by the neighbor discovery process and ICMPv6. The neighbor table caches IPv6 addresses and their resolved Ethernet physical (MAC) addresses.
+
+##### Windows ARP table
+```
+arp -a
+```
+
+##### Windows IPv6 Neighbor Table
+```
+netsh interface ipv6 show neighbor
+```
+
+##### IOS IPv6 Neighbor Table
+```
+sh ipv6 neighbors
+```
+
+##### Switch MAC address table
+```
+show mac address-table
+```
+
+
