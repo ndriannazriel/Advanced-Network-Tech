@@ -49,3 +49,28 @@ sh cdp neighbors detail
 ```
 
 ## Link Layer Discovery Protocol (LLDP)
+The Link Layer Discovery Protocol (LLDP) does the same thing as CDP, but it is not specific to Cisco devices. As a bonus, you can still use it if you have Cisco devices. One way or another, you will get your network map.
+
+LLDP is a vendor-neutral neighbor discovery protocol similar to CDP. LLDP works with network devices, such as routers, switches, and wireless LAN access points. This protocol advertises its identity and capabilities to other devices and receives the information from a physically-connected Layer 2 device.
+
+### Configure LLDP
+Depending on the device, LLDP may be enabled by default. To enable LLDP globally on a Cisco network device, enter the **lldp run** command in the global configuration mode. To disable LLDP, enter the **no lldp run** command in the global configuration mode.
+
+Similar to CDP, LLDP can be configured on specific interfaces. However, LLDP must be configured separately to transmit and receive LLDP packets.
+
+1. To disable the sending of LLDP messages on an interface enter no lldp transmit
+2. To disable the receiving of LLDP messages on the interface enter no lldp receive
+
+```
+lldp run
+int 
+lldp transmit
+lldp receive
+end
+
+sh lldp
+sh lldp neighbors
+sh lldp neighbors detail
+```
+
+
