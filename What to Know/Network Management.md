@@ -156,3 +156,25 @@ ntp logging
 ntp server <ip address of the ntp master>
 ```
 ## SNMP
+Now that your network is mapped and all of your components are using the same clock, it is time to look at how you can manage your network by using Simple Network Management Protocol (SNMP).
+
+SNMP was developed to allow administrators to manage nodes such as servers, workstations, routers, switches, and security appliances, on an IP network. It enables network administrators to monitor and manage network performance, find and solve network problems, and plan for network growth.
+
+SNMP is an application layer protocol that provides a message format for communication between managers and agents. The SNMP system consists of three elements:
+
+- SNMP manager
+- SNMP agents (managed node)
+- Management Information Base (MIB)
+
+To configure SNMP on a networking device, it is first necessary to define the relationship between the manager and the agent.
+
+The SNMP manager is part of a network management system (NMS). The SNMP manager runs SNMP management software. As shown in the figure, the SNMP manager can collect information from an SNMP agent by using the “get” action and can change configurations on an agent by using the “set” action. In addition, SNMP agents can forward information directly to a network manager by using “traps”.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736580510000n32gxb.png)
+
+The SNMP agent and MIB reside on SNMP client devices. Network devices that must be managed, such as switches, routers, servers, firewalls, and workstations, are equipped with an SNMP agent software module. MIBs store data about the device and operational statistics and are meant to be available to authenticated remote users. The SNMP agent is responsible for providing access to the local MIB.
+
+SNMP defines how management information is exchanged between network management applications and management agents. The SNMP manager polls the agents and queries the MIB for SNMP agents on UDP port 161. SNMP agents send any SNMP traps to the SNMP manager on UDP port 162.
+
+### SNMP Operation
+
