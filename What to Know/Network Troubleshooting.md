@@ -62,3 +62,38 @@ The figure displays a more detailed seven-step troubleshooting process. Notice h
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173659511700016w418.png)
 
+## Symptoms and Causes of Network Problems
+### Physical Layer 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602239000mnuxxr.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602329000arzy0q.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images173660234200057cco9.png)
+
+### Data Link Layer
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602280000kn9m8s.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17366023760007elc9c.png)
+
+### Network Layer
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602414000lj5b35.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602435000ouvlts.png)
+
+### Transport Layer(ACL)
+Network problems can arise from transport layer problems on the router, particularly at the edge of the network where traffic is examined and modified. For instance, both access control lists (ACLs) and Network Address Translation (NAT) operate at the network layer and may involve operations at the transport layer, as shown in the figure.
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602496000hhbvdn.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17366025140006f3waj.png)
+
+### Transport Layer (NAT)
+There are several problems with NAT, such as not interacting with services like DHCP and tunneling. These can include misconfigured NAT inside, NAT outside, or ACLs. Other issues include interoperability with other network technologies, especially those that contain or derive information from host network addressing in the packet.
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602629000cksqfo.png)
+
+### Application Layer
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736602693000p57sov.png)
+The types of symptoms and causes depend upon the actual application itself.
+
+Application layer problems prevent services from being provided to application programs. A problem at the application layer can result in unreachable or unusable resources when the physical, data link, network, and transport layers are functional. It is possible to have full network connectivity, but the application simply cannot provide data.
+
+Another type of problem at the application layer occurs when the physical, data link, network, and transport layers are functional, but the data transfer and requests for network services from a single network service or application do not meet the normal expectations of a user.
+
+A problem at the application layer may cause users to complain that the network or an application that they are working with is sluggish or slower than usual when transferring data or requesting network services.
