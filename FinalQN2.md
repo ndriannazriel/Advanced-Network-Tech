@@ -6,3 +6,5 @@
 6. Create a VPN tunnel at the default gateway(R2). Make sure static routes exist between R2 and R1.
 7. Configure NTP for all devices. Make R1 as NTP master.
 8. Configure PRTG on lab PC with SNMPv3 to monitor traffic.
+
+## Enable SSH on all routers
