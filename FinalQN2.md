@@ -22,3 +22,10 @@ line vty 0 4
 access-class 10 in
 transport input ssh
 ```
+
+## Create Private Network on R3 and Configure NAT
+
+##### R3
+```
+
+```
