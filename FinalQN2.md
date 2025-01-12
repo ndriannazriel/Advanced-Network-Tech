@@ -27,5 +27,14 @@ transport input ssh
 
 ##### R3
 ```
+access-list 1 permit 192.168.99.0 0.0.0.255
+ip nat inside source list 1 interface <outside interface> overload
 
+int
+ip nat inside
+
+int 
+ip nat outside
 ```
+
+Make sure to configure the static routing properly.
