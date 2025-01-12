@@ -147,3 +147,21 @@ crypto map CRYPTOMAP
 
 ## Configure NTP for all devices
 
+##### R1
+```
+ntp master 3
+ntp logging
+```
+
+##### R2,R3
+```
+ntp server 133.99.1.6
+```
+
+##### Verify
+```
+sh clock detail
+sh ntp status
+sh run ntp
+sh ntp association
+```
