@@ -38,3 +38,14 @@ ip nat outside
 ```
 
 Make sure to configure the static routing properly.
+
+## Create GRE tunnel on R3
+
+##### R3
+```
+int tunnel 1
+ip add 172.16.0.1 255.255.255.252
+tunnel source 133.99.1.1
+tunnel dest 133.95.1.1
+```
+
