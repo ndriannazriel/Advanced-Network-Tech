@@ -1,21 +1,11 @@
 NOTE : REDO THIS EXERCISE USING THE OTHER WAY
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734969217000ircczm.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736594637000us29r4.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736594695000r6m7d5.png)
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736594741000zgmf2b.png)
 
-| Device Name  | Interface | Ipv4           | SubMask         | Ipv6                    | DG  | DG Ipv6 | VLAN |
-| ------------ | --------- | -------------- | --------------- | ----------------------- | --- | ------- | ---- |
-| R3           | loopback  | 133.99.99.99   | 255.255.255.255 | 2001:133:99:99::99/128  |     |         |      |
-|              | g1/0      | 133.99.1.1     | 255.255.255.252 | 2001:133:99:1::0/127    |     |         |      |
-|              |           |                |                 |                         |     |         |      |
-|              |           |                |                 |                         |     |         |      |
-|              |           |                |                 |                         |     |         |      |
-|              |           |                |                 |                         |     |         |      |
-| R2           | g1/0      | 133.9.1.2      | 255.255.255.252 | 2001:133:99:1::1/127    |     |         |      |
-|              | g2/0      | 133.99.1.5     | 255.255.255.252 | 2001:133:99:2::0/127    |     |         |      |
-|              |           |                |                 |                         |     |         |      |
-| R1(Physical) | g0/1      | 133.99.1.6     | 255.255.255.252 | 2001:133:99:2::1/127    |     |         |      |
-|              | l0        | 133.99.99.100  | 255.255.255.255 |                         |     |         |      |
-|              | g0/2      | 101.100.133.99 | 255.255.255.0   | 2001:101:100:133::99/64 |     |         |      |
-|              |           |                |                 |                         |     |         |      |
+
+
 
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1734401545000n5d73y.png)
