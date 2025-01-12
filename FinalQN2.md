@@ -51,10 +51,10 @@ tunnel dest 133.95.1.1
 
 ## Create VPN Tunnel
 
+##### R1
 ```
-ip access-list extended RGW->DMZ
-permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 
-permit ip 142.99.4.0 0.0.0.63 142.70.0.0 0.0.1.255
+ip access-list extended R1->R4
+permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
 
 crypto isakmp policy 1
 encryption aes
@@ -68,6 +68,25 @@ crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 crypto map CRYPTOMAP 10 ipsec-isakmp
 set peer 100.100.70.1
 set transform-set mytset
-match address RGW->DMZ
+match address R1->R4
 ```
 
+##### R4
+```
+ip access-list extended R4->R1
+permit ip 192.168.95.0 0.0.0.255 192.168.99.0 0.0.0.255
+
+crypto isakmp policy 1
+encryption aes
+hash sha256
+authentication pre-share
+group 2
+
+crypto isakmp key 0 mypass address 100.100.70.1
+crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+
+crypto map CRYPTOMAP 10 ipsec-isakmp
+set peer 100.100.70.1
+set transform-set mytset
+match address R4->R1
+```
