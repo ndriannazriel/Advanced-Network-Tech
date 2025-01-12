@@ -30,10 +30,10 @@ transport input ssh
 access-list 1 permit 192.168.99.0 0.0.0.255
 ip nat inside source list 1 interface <outside interface> overload
 
-int
+int g2/0
 ip nat inside
 
-int 
+int g1/0
 ip nat outside
 ```
 
@@ -47,5 +47,27 @@ int tunnel 1
 ip add 172.16.0.1 255.255.255.252
 tunnel source 133.99.1.1
 tunnel dest 133.95.1.1
+```
+
+## Create VPN Tunnel
+
+```
+ip access-list extended RGW->DMZ
+permit ip 142.99.0.0 0.0.1.255 142.70.4.0 0.0.0.63 
+permit ip 142.99.4.0 0.0.0.63 142.70.0.0 0.0.1.255
+
+crypto isakmp policy 1
+encryption aes
+hash sha256
+authentication pre-share
+group 2
+
+crypto isakmp key 0 mypass address 100.100.70.1
+crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+
+crypto map CRYPTOMAP 10 ipsec-isakmp
+set peer 100.100.70.1
+set transform-set mytset
+match address RGW->DMZ
 ```
 
