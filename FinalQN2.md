@@ -47,6 +47,11 @@ int tunnel 1
 ip add 172.16.0.1 255.255.255.252
 tunnel source 133.99.1.1
 tunnel dest 133.95.1.1
+
+int tunnel 2
+ip add 172.16.1.1 255.255.255.252
+tunnel source l0
+tunnel dest 133.95.99.99
 ```
 
 ##### R6
@@ -55,6 +60,11 @@ int tunnel 1
 ip add 172.16.0.2 255.255.255.252
 tunnel source 133.95.1.1
 tunnel dest 133.99.1.1
+
+int tunnel 2
+ip add 172.16.1.2 255.255.255.252
+tunnel source l0
+tunnel dest 133.99.99.99
 ```
 
 ## Create VPN Tunnel
@@ -134,4 +144,6 @@ match address R5->R2
 int g2/0
 crypto map CRYPTOMAP
 ```
+
+## Configure NTP for all devices
 
