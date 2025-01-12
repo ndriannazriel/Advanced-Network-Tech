@@ -69,6 +69,9 @@ crypto map CRYPTOMAP 10 ipsec-isakmp
 set peer 100.100.70.1
 set transform-set mytset
 match address R1->R4
+
+int g3/0
+crypto map CRYPTOMAP
 ```
 
 ##### R4
@@ -89,4 +92,7 @@ crypto map CRYPTOMAP 10 ipsec-isakmp
 set peer 100.100.70.1
 set transform-set mytset
 match address R4->R1
+
+int g3/0
+crypto map CRYPTOMAP
 ```
