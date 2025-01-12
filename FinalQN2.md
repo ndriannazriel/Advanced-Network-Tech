@@ -8,3 +8,17 @@
 8. Configure PRTG on lab PC with SNMPv3 to monitor traffic.
 
 ## Enable SSH on all routers
+```
+username ANDRIAN secret mypass
+ip domain-name andrian.com
+crypto key generate rsa
+How many bits in the modulus [512]: 2048
+
+ip ssh version 2
+
+access-list 10 permit host <x.x.x.x>
+
+line vty 0 4
+access-class 10 in
+transport input ssh
+```
