@@ -51,7 +51,7 @@ tunnel dest 133.95.1.1
 
 ## Create VPN Tunnel
 
-##### R1
+##### R1 IPV4
 ```
 ip access-list extended R1->R4
 permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
@@ -75,6 +75,29 @@ int g3/0
 crypto map CRYPTOMAP
 ```
 
+##### R1 IPV6
+```
+ipv6 access-list R1->R4-IPV6
+permit ip 
+
+crypto isakmp policy 1
+encryption aes
+hash sha
+authentication pre-share
+group 2
+
+crypto isakmp key 0 mypass address ipv6 
+crypto ipsec transform-set mytsetIPV6 esp-aes esp-sha-hmac
+
+crypto map ipv6 IPV6-CM 10 ipsec-isakmp
+set peer
+set transform-set mytsetIPV6
+match address R1->R4-IPV6
+
+int g3/0
+ipv6 enable
+ipv6 crypto map IPV6-CM
+```
 ##### R4
 ```
 ip access-list extended R4->R1
