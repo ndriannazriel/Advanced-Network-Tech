@@ -58,15 +58,16 @@ permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
 
 crypto isakmp policy 1
 encryption aes
-hash sha256
+hash sha
 authentication pre-share
 group 2
 
 crypto isakmp key 0 mypass address 101.100.133.95
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
-set peer 100.100.70.1
+set peer 101.100.133.95
 set transform-set mytset
 match address R1->R4
 
@@ -81,15 +82,16 @@ permit ip 192.168.95.0 0.0.0.255 192.168.99.0 0.0.0.255
 
 crypto isakmp policy 1
 encryption aes
-hash sha256
+hash sha
 authentication pre-share
 group 2
 
 crypto isakmp key 0 mypass address 101.100.133.99
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
-set peer 100.100.70.1
+set peer 101.100.133.99
 set transform-set mytset
 match address R4->R1
 
