@@ -49,6 +49,14 @@ tunnel source 133.99.1.1
 tunnel dest 133.95.1.1
 ```
 
+##### R6
+```
+int tunnel 1
+ip add 172.16.0.2 255.255.255.252
+tunnel source 133.95.1.1
+tunnel dest 133.99.1.1
+```
+
 ## Create VPN Tunnel
 
 ##### R2 IPV4
@@ -110,7 +118,7 @@ permit ip 192.168.95.0 0.0.0.255 192.168.99.0 0.0.0.255
 crypto isakmp policy 1
 encryption aes
 hash sha
-authentication pre-shareg
+authentication pre-share
 group 2
 
 crypto isakmp key 0 mypass address 133.99.1.5
