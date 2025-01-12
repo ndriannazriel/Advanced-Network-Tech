@@ -62,7 +62,7 @@ hash sha256
 authentication pre-share
 group 2
 
-crypto isakmp key 0 mypass address 100.100.70.1
+crypto isakmp key 0 mypass address 101.100.133.95
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
@@ -85,7 +85,7 @@ hash sha256
 authentication pre-share
 group 2
 
-crypto isakmp key 0 mypass address 100.100.70.1
+crypto isakmp key 0 mypass address 101.100.133.99
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
@@ -96,3 +96,4 @@ match address R4->R1
 int g3/0
 crypto map CRYPTOMAP
 ```
+
