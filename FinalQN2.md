@@ -64,6 +64,7 @@ group 2
 
 crypto isakmp key 0 mypass address 101.100.133.95
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+mode tunnel
 exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
@@ -88,6 +89,7 @@ group 2
 
 crypto isakmp key 0 mypass address ipv6 
 crypto ipsec transform-set mytsetIPV6 esp-aes esp-sha-hmac
+mode tunnel
 
 crypto map ipv6 IPV6-CM 10 ipsec-isakmp
 set peer
@@ -111,6 +113,7 @@ group 2
 
 crypto isakmp key 0 mypass address 101.100.133.99
 crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+mode tunnel
 exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
