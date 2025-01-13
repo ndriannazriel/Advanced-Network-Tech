@@ -108,24 +108,25 @@ tunnel dest 133.99.99.99
 
 ##### R2 IPV4
 ```
-ip access-list extended R2->R5
+ip access-list extended R1->R4
 permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
+permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
 
 crypto isakmp policy 1
 encryption aes
-hash sha
+hash md5
 authentication pre-share
 group 2
 
-crypto isakmp key 0 mypass address 133.95.1.5
-crypto ipsec transform-set mytset esp-aes esp-sha-hmac
+crypto isakmp key MYPASSWORD address 101.100.133.95
+crypto ipsec transform-set MYTRANSFORMSET esp-aes esp-sha-hmac
 mode tunnel
 exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
-set peer 133.95.1.5
-set transform-set mytset
-match address R2->R5
+set peer 101.100.133.95
+set transform-set MYTRANSFORMSET
+match address R1->R4
 
 int g2/0
 crypto map CRYPTOMAP
