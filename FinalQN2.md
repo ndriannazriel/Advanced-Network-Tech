@@ -217,8 +217,9 @@ snmp-server group SNMP-GROUP v3 priv
 snmp-server user SNMP-USER SNMP-GROUP v3 auth md5 CISCO12345 priv aes 128 CISCO12345
 snmp-server host 133.99.4.2 version 3 priv host-user
 
-logging host <PC lab ip>
+logging host 133.99.4.2
 logging trap informational
 logging source lo 0
+logging on
 ```
 
