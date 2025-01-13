@@ -165,3 +165,17 @@ sh ntp status
 sh run ntp
 sh ntp association
 ```
+
+## Configure SNMPv3
+
+##### R1
+``` 
+snmp-server group SNMP-GROUP v3 priv
+snmp-server user SNMP-USER SNMP-GROUP v3 auth md5 CISCO12345 priv aes 128 CISCO12345
+snmp-server host <PC lab ip> version 3 priv host-user
+
+logging host <PC lab ip>
+logging trap informational
+logging source lo 0
+```
+
