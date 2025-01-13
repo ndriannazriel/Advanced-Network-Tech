@@ -11,14 +11,15 @@
 
 ## Enable SSH on all routers
 ```
-username ANDRIAN secret mypass
+aaa new-model
+username ANDRIAN password 0 cisco
 ip domain-name andrian.com
 crypto key generate rsa
 How many bits in the modulus [512]: 2048
 
 ip ssh version 2
 
-access-list 10 permit host <x.x.x.x>
+access-list 10 permit 133.99.0.0 0.0.255.255
 
 line vty 0 4
 access-class 10 in
