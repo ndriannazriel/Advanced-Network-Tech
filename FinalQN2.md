@@ -49,7 +49,6 @@ ip add 133.99.99.100 255.255.255.255
 ip route 133.99.99.99 255.255.255.255 133.99.1.5
 ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
 
-!---Might not need this
 ip route 133.99.1.0 255.255.255.252 133.99.1.5
 ipv6 route 2001:133:99:1::/127 2001:133:99:2::
 
@@ -62,11 +61,10 @@ neighbor 101.100.133.95 remote-as 15
 network 133.99.0.0 mask 255.255.0.0
 
 bgp log-neighbor-changes
-neighbor 2001:101:100:133::95 remote-as 159
+neighbor 2001:101:100:133::95 remote-as 15
 address-family ipv6
 neighbor 2001:101:100:133::95 activate
 network 2001:133:99::/48
-
 
 ```
 ## Create Private Network on R3 and Configure NAT
