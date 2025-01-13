@@ -7,6 +7,8 @@
 7. Configure NTP for all devices. Make R1 as NTP master.
 8. Configure PRTG on lab PC with SNMPv3 to monitor traffic.
 
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736768143000kpq2zo.png)
+
 ## Enable SSH on all routers
 ```
 username ANDRIAN secret mypass
