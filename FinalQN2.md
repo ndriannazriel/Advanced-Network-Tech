@@ -74,7 +74,7 @@ network 2001:133:99::/48
 ##### R3
 ```
 access-list 1 permit 192.168.99.0 0.0.0.255
-ip nat inside source list 1 interface <outside interface> overload
+ip nat inside source list 1 interface g1/0 overload
 
 int g2/0
 ip nat inside
