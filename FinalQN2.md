@@ -37,6 +37,10 @@ ip add 101.100.133.99 255.255.255.0
 ipv6 add 2001:101:100:133::99/64
 no sh
 
+int g0/0
+ip add 133.99.4.1 255.255.255.252
+no sh
+
 ip route 133.99.99.99 255.255.255.255 133.99.1.5
 ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
 
@@ -106,13 +110,13 @@ tunnel dest 133.99.99.99
 
 ## Create VPN Tunnel
 
-##### R2 IPV4
+##### R1 IPV4
 ```
 ip access-list extended R1->R4
 permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
 permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
 
-crypto isakmp policy 1
+crypto isakmp policy 10
 encryption aes
 hash md5
 authentication pre-share
@@ -130,27 +134,28 @@ match address R1->R4
 
 int g2/0
 crypto map CRYPTOMAP
+crypto isakmp enable
 ```
 
-##### R2 IPV6
+##### R1 IPV6
 ```
-ipv6 access-list R2->R5-IPV6
-permit ip 
+ipv6 access-list R1->R4-IPV6
+permit ip 2001:133:99::/48 2001:133:95::/48
 
-crypto isakmp policy 1
+crypto isakmp policy 10
 encryption aes
-hash sha
+hash md5
 authentication pre-share
 group 2
 
-crypto isakmp key 0 mypass address ipv6 
-crypto ipsec transform-set mytsetIPV6 esp-aes esp-sha-hmac
+crypto isakmp key secretkey address ipv6 2001:101:100:133::95/64
+crypto ipsec transform-set IPV6-TRANSFORM esp-aes esp-sha-hmac
 mode tunnel
 
 crypto map ipv6 IPV6-CM 10 ipsec-isakmp
-set peer
-set transform-set mytsetIPV6
-match address R2->R5-IPV6
+set peer 2001:101:100:133::95
+set transform-set IPV6-TRANSFORM
+match address R1->R4-IPV6
 
 int g3/0
 ipv6 enable
@@ -210,11 +215,10 @@ sh ntp association
 ``` 
 snmp-server group SNMP-GROUP v3 priv
 snmp-server user SNMP-USER SNMP-GROUP v3 auth md5 CISCO12345 priv aes 128 CISCO12345
-snmp-server host <PC lab ip> version 3 priv host-user
+snmp-server host 133.99.4.2 version 3 priv host-user
 
 logging host <PC lab ip>
 logging trap informational
 logging source lo 0
 ```
 
-s
