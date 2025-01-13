@@ -23,6 +23,43 @@ access-class 10 in
 transport input ssh
 ```
 
+## Configure Basic Settings
+
+##### R1
+```
+int g0/1
+ip add 133.99.1.6 255.255.255.252 
+ipv6 add 2001:133:99:2::1/127
+no sh
+
+int g0/2
+ip add 101.100.133.99 255.255.255.0
+ipv6 add 2001:101:100:133::99/64
+no sh
+
+ip route 133.99.99.99 255.255.255.255 133.99.1.5
+ipv6 route 2001:133:99:99::99/128 2001:133:99:2::
+
+!---Might not need this
+ip route 133.99.1.0 255.255.255.252 133.99.1.5
+ipv6 route 2001:133:99:1::/127 2001:133:99:2::
+
+ip route 133.99.0.0 255.255.0.0 Null0
+ipv6 route 2001:133:99::/48 Null0
+
+router bgp 19
+bgp router-id 1.1.1.1
+neighbor 101.100.133.95 remote-as 15
+network 133.99.0.0 mask 255.255.0.0
+
+bgp log-neighbor-changes
+neighbor 2001:101:100:133::95 remote-as 159
+address-family ipv6
+neighbor 2001:101:100:133::95 activate
+network 2001:133:99::/48
+
+
+```
 ## Create Private Network on R3 and Configure NAT
 
 ##### R3
@@ -179,3 +216,4 @@ logging trap informational
 logging source lo 0
 ```
 
+s
