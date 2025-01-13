@@ -89,13 +89,10 @@ Make sure to configure the static routing properly.
 ```
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
-tunnel source 133.99.1.1
-tunnel dest 133.95.1.1
-
-int tunnel 2
-ip add 172.16.1.1 255.255.255.252
-tunnel source l0
+tunnel source 133.99.99.99
 tunnel dest 133.95.99.99
+
+ip route 133.95.99.99 255.255.255.255 172.16.0.2
 ```
 
 ##### R6
@@ -105,10 +102,6 @@ ip add 172.16.0.2 255.255.255.252
 tunnel source 133.95.1.1
 tunnel dest 133.99.1.1
 
-int tunnel 2
-ip add 172.16.1.2 255.255.255.252
-tunnel source l0
-tunnel dest 133.99.99.99
 ```
 
 ## Create VPN Tunnel
@@ -116,7 +109,6 @@ tunnel dest 133.99.99.99
 ##### R1 IPV4
 ```
 ip access-list extended R1->R4
-permit ip 192.168.99.0 0.0.0.255 192.168.95.0 0.0.0.255
 permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
 
 crypto isakmp policy 10
@@ -135,7 +127,7 @@ set peer 101.100.133.95
 set transform-set MYTRANSFORMSET
 match address R1->R4
 
-int g2/0
+int g0/2
 crypto map CRYPTOMAP
 crypto isakmp enable
 ```
@@ -154,13 +146,14 @@ group 2
 crypto isakmp key secretkey address ipv6 2001:101:100:133::95/64
 crypto ipsec transform-set IPV6-TRANSFORM esp-aes esp-sha-hmac
 mode tunnel
+exit
 
 crypto map ipv6 IPV6-CM 10 ipsec-isakmp
 set peer 2001:101:100:133::95
 set transform-set IPV6-TRANSFORM
 match address R1->R4-IPV6
 
-int g3/0
+int g0/2
 ipv6 enable
 ipv6 crypto map IPV6-CM
 ```
