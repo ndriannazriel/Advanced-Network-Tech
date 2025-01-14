@@ -117,9 +117,9 @@ tunnel dest 133.99.1.1
 
 ## Create VPN Tunnel
 
-##### R1 IPV4
+##### R2 IPV4
 ```
-ip access-list extended R1->R4
+ip access-list extended R2->R5
 permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
 
 crypto isakmp policy 10
@@ -128,24 +128,24 @@ hash md5
 authentication pre-share
 group 2
 
-crypto isakmp key MYPASSWORD address 101.100.133.95
+crypto isakmp key MYPASSWORD address 133.95.2.1
 crypto ipsec transform-set MYTRANSFORMSET esp-aes esp-sha-hmac
 mode tunnel
 exit
 
 crypto map CRYPTOMAP 10 ipsec-isakmp
-set peer 101.100.133.95
+set peer 133.95.2.1
 set transform-set MYTRANSFORMSET
-match address R1->R4
+match address R2->R5
 
-int g0/2
+int g2/0
 crypto map CRYPTOMAP
 crypto isakmp enable
 ```
 
-##### R1 IPV6
+##### R2 IPV6
 ```
-ipv6 access-list R1->R4-IPV6
+ipv6 access-list R2->R5-IPV6
 permit ip 2001:133:99::/48 2001:133:95::/48
 
 crypto isakmp policy 10
@@ -162,7 +162,7 @@ exit
 crypto map ipv6 IPV6-CM 10 ipsec-isakmp
 set peer 2001:101:100:133::95
 set transform-set IPV6-TRANSFORM
-match address R1->R4-IPV6
+match address R2->R5-IPV6
 
 int g0/2
 ipv6 enable
