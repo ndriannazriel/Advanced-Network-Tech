@@ -45,3 +45,5 @@ Problem : The led port of router is not on. Even after using no shut on the inte
 Cause : Wiring connection problem.
 
 Solution : Check UTP cable is properly connected to the PC.
+
+--------------------------------------------------------------------------
