@@ -238,6 +238,9 @@ int g0/2 or g0/1
 sh
 ```
 
+## Configure TFTP
+1. Ensure TFTP server is downloaded in the PC.
+2. File->Configure->Add network ip address of the link connecting PC to physical router.(133.99.4.0/30)
 ##### R1
 ```
 sh flash
