@@ -236,3 +236,49 @@ Don't disconnect the port that's connected to the lab PC
 int g0/2 or g0/1 
 sh
 ```
+
+### TFTP make sure ada tftp server kat pc
+
+R1# copy running-config tftp
+Remote host []? 133.45.3.2
+Name of the configuration file to write [R1-config]? R1-config
+Write file R1-config to 192.168.10.10? [confirm]
+Writing R1-config !!!!!! [OK]
+
+R1# copy flash tftp
+Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
+Address or name of remote host []? 133.45.3.2
+Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]? 
+
+
+R1# copy tftp running-config
+Address or name of remote host []? 133.45.3.2
+Source filename []? R1-config
+Destination filename [running-config]? 
+
+R1# copy tftp flash
+Address or name of remote host []? 133.45.3.2
+Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
+Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
+
+R2# copy running-config tftp
+Remote host []? 133.45.3.2
+Name of the configuration file to write [R1-config]? R1-config
+Write file R1-config to 133.45.3.2? [confirm]
+Writing R1-config !!!!!! [OK]
+
+R2# copy tftp running-config
+Address or name of remote host []? 133.45.3.2
+Source filename []? R1-config
+Destination filename [running-config]? 
+
+R3# copy running-config tftp
+Remote host []? 133.45.3.2
+Name of the configuration file to write [R1-config]? R1-config
+Write file R1-config to 133.45.3.2? [confirm]
+Writing R1-config !!!!!! [OK]
+
+R3# copy tftp running-config
+Address or name of remote host []? 133.45.3.2
+Source filename []? R1-config
+Destination filename [running-config]?
