@@ -121,7 +121,6 @@ tunnel dest 133.99.1.1
 ```
 ip access-list extended R2->R5
 permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
-permit ip 133.95.0.0 0.0.255.255 133.99.0.0 0.0.255.255
 
 crypto isakmp policy 10
 encryption aes
