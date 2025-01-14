@@ -257,10 +257,10 @@ copy running-config tftp
 Address or name of remote host []? <IP of TFTP Server>
 Destination filename [r2-config]? <name of file>
 
-R1# copy tftp flash
-Address or name of remote host []? 133.99.4.2
-Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
-Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
+copy tftp flash
+Address or name of remote host []? <IP of TFTP Server>
+Source filename []? <bin file>
+Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]? <name of file>
 ```
 
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17368429680003tpas9.png)
@@ -275,48 +275,3 @@ Destination filename [r2-config]? <name of file>
 ```
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17368420450004jgvyl.png)
 
-### TFTP make sure ada tftp server kat pc
-
-R1# copy running-config tftp
-Remote host []? 133.45.3.2
-Name of the configuration file to write [R1-config]? R1-config
-Write file R1-config to 192.168.10.10? [confirm]
-Writing R1-config !!!!!! [OK]
-
-R1# copy flash tftp
-Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
-Address or name of remote host []? 133.45.3.2
-Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]? 
-
-
-R1# copy tftp running-config
-Address or name of remote host []? 133.45.3.2
-Source filename []? R1-config
-Destination filename [running-config]? 
-
-R1# copy tftp flash
-Address or name of remote host []? 133.45.3.2
-Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
-Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
-
-R2# copy running-config tftp
-Remote host []? 133.45.3.2
-Name of the configuration file to write [R1-config]? R1-config
-Write file R1-config to 133.45.3.2? [confirm]
-Writing R1-config !!!!!! [OK]
-
-R2# copy tftp running-config
-Address or name of remote host []? 133.45.3.2
-Source filename []? R1-config
-Destination filename [running-config]? 
-
-R3# copy running-config tftp
-Remote host []? 133.45.3.2
-Name of the configuration file to write [R1-config]? R1-config
-Write file R1-config to 133.45.3.2? [confirm]
-Writing R1-config !!!!!! [OK]
-
-R3# copy tftp running-config
-Address or name of remote host []? 133.45.3.2
-Source filename []? R1-config
-Destination filename [running-config]?
