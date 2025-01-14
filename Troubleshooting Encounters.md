@@ -17,7 +17,7 @@ ip nat pool PAT-POOL1 142.99.5.1 142.99.5.1 netmask 255.255.255.252
 
 --------------------------------------------------------------------------
 ![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17348476650004okyrv.png)
-Even after doing no shut, protocol is still labeled as down.
+Problem : Even after doing no shut, protocol is still labeled as down.
 
 Cause : Gns3 retarded
 Solution : Shut no shut
@@ -38,3 +38,10 @@ Solution : Remove network point-to-point. Also just in case check the passive in
 Problem : "Local server not available"
 
 Solution : Gns3 retarded. Just keep restarting the app or even restart your laptop if you have to.
+
+--------------------------------------------------------------------------
+Problem : The led port of router is not on. Even after using no shut on the interface, the port led is still not on.
+
+Cause : Wiring connection problem.
+
+Solution : Check UTP cable is properly connected to the PC.
