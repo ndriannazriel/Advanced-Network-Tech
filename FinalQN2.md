@@ -230,3 +230,9 @@ logging source lo 0
 logging on
 ```
 
+#### Verify syslog
+Don't disconnect the port that's connected to the lab PC
+```
+int g0/2 or g0/1 
+sh
+```
