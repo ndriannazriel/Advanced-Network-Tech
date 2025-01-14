@@ -86,12 +86,22 @@ Make sure to configure the static routing properly.
 
 ## Create GRE tunnel on R3
 
-##### R3
+##### R3(Salah)
 ```
 int tunnel 1
 ip add 172.16.0.1 255.255.255.252
 tunnel source 133.99.99.99
 tunnel dest 133.95.99.99
+
+ip route 133.95.99.99 255.255.255.255 172.16.0.2
+```
+
+##### R2(Pakai ni)
+```
+int tunnel 1
+ip add 172.16.0.1 255.255.255.252
+tunnel source 133.99.1.5
+tunnel dest 133.95.2.1
 
 ip route 133.95.99.99 255.255.255.255 172.16.0.2
 ```
@@ -208,7 +218,7 @@ sh ntp association
 
 ## Configure SNMPv3
 
-##### R1
+##### R1 - 133.99.4.2 is PC Lab
 ``` 
 snmp-server group SNMP-GROUP v3 priv
 snmp-server user SNMP-USER SNMP-GROUP v3 auth md5 CISCO12345 priv aes 128 CISCO12345
