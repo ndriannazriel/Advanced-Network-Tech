@@ -121,6 +121,7 @@ tunnel dest 133.99.1.1
 ```
 ip access-list extended R2->R5
 permit ip 133.99.0.0 0.0.255.255 133.95.0.0 0.0.255.255
+permit ip 133.95.0.0 0.0.255.255 133.99.0.0 0.0.255.255
 
 crypto isakmp policy 10
 encryption aes
@@ -236,6 +237,28 @@ Don't disconnect the port that's connected to the lab PC
 int g0/2 or g0/1 
 sh
 ```
+
+##### R1
+```
+sh flash
+
+copy running-config tftp
+Address or name of remote host []? <IP of TFTP Server>
+Destination filename [r2-config]? <name of file>
+
+R1# copy tftp flash
+Address or name of remote host []? 133.45.3.2
+Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
+Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
+```
+
+##### R2,R3
+```
+copy running-config tftp
+Address or name of remote host []? <IP of TFTP Server>
+Destination filename [r2-config]? <name of file>
+```
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17368420450004jgvyl.png)
 
 ### TFTP make sure ada tftp server kat pc
 
