@@ -171,6 +171,7 @@ ipv6 crypto map IPV6-CM
 ```
 
 --------------------------------------------------------------------------
+Below is just for clarification on how the other side of the VPN tunnel should be configured.
 ##### R5
 ```
 ip access-list extended R5->R2
@@ -244,13 +245,13 @@ int g0/2 or g0/1
 sh
 ```
 
-## Configure TFTP
+## Configure TFTP for file transfer
 1. Ensure TFTP server is downloaded in the PC.
 2. File->Configure->Add network ip address of the link connecting PC to physical router.(133.99.4.0/30)
 ##### R1
 ```
-!---Do this command and scroll down until you see the ios file.
-sh flash
+!---Do this command and scroll down until you see the ios file.(Line 405)
+sh flash:
 
 copy running-config tftp
 Address or name of remote host []? <IP of TFTP Server>
@@ -261,6 +262,10 @@ Address or name of remote host []? 133.99.4.2
 Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
 Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
 ```
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images17368429680003tpas9.png)
+
+![gh](https://raw.githubusercontent.com/ndriannazriel04/Advanced-Network-Tech/main/obsidian/images1736842916000zkmjfu.png)
 
 ##### R2,R3
 ```
