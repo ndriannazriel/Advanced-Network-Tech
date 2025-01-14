@@ -218,6 +218,12 @@ sh ntp association
 ```
 
 ## Configure SNMPv3
+1. Configure PC with an IP address that's on the same network as the router.
+2. Open PRTG->Add device->Put in the ip address of any address on R1(Using l0 is recommended)
+3. Change the SNMP credentials for username, md5 and aes.
+4. Create the device.
+5. Add sensors->SNMP/syslog
+6. Monitor the traffic.
 
 ##### R1 - 133.99.4.2 is PC Lab
 ``` 
@@ -243,6 +249,7 @@ sh
 2. File->Configure->Add network ip address of the link connecting PC to physical router.(133.99.4.0/30)
 ##### R1
 ```
+!---Do this command and scroll down until you see the ios file.
 sh flash
 
 copy running-config tftp
@@ -250,7 +257,7 @@ Address or name of remote host []? <IP of TFTP Server>
 Destination filename [r2-config]? <name of file>
 
 R1# copy tftp flash
-Address or name of remote host []? 133.45.3.2
+Address or name of remote host []? 133.99.4.2
 Source filename []? c1900-universalk9-mz.SPA.152-4.M6.bin
 Destination filename [c1900-universalk9-mz.SPA.152-4.M6.bin]?
 ```
